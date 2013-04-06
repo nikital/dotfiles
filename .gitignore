@@ -1,0 +1,11 @@
+# Make gitignore whitelist 
+/*
+!.gitignore
+
+# Git
+!.gitconfig
+
+# Vim
+!.vim
+.vim/.netrwhist*
+!.vimrc
