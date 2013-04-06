@@ -1,6 +1,7 @@
 # Make gitignore whitelist 
 /*
 !.gitignore
+!.gitmodules
 
 # Git
 !.gitconfig
@@ -9,3 +10,6 @@
 !.vim
 .vim/.netrwhist*
 !.vimrc
+
+# Still ignore these
+*.DS_Store

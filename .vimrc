@@ -1,3 +1,7 @@
+" Load pathogen
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect()
+
 " Make Vim more useful
 set nocompatible
 
@@ -42,7 +46,7 @@ set ruler
 set number
 
 set guifont=Courier:h13
-colorscheme desert
+colorscheme badwolf
 
 " Hebrew
 noremap <F2> :setlocal invrightleft<CR>
