@@ -56,6 +56,9 @@ inoremap <F2> <Esc>:setlocal invrightleft<CR>a
 noremap <C-j> 3<C-e>
 noremap <C-k> 3<C-y>
 
+" NERDCommenter
+let g:NERDSpaceDelims = 1
+
 " Strip all whitespaces
 function! StripWhitespace()
 	let save_cursor = getpos(".")
