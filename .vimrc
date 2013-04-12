@@ -45,7 +45,7 @@ set laststatus=2
 set ruler
 set number
 
-set guifont=Courier:h13
+set guifont=Menlo:h13
 colorscheme badwolf
 
 " Hebrew
