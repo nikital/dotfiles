@@ -5,6 +5,9 @@ call pathogen#infect()
 " Make Vim more useful
 set nocompatible
 
+" Load cool plugins
+filetype plugin indent on
+
 " Syntax highlighting
 syntax on
 
