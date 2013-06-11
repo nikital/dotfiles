@@ -47,9 +47,12 @@ set cursorline
 set laststatus=2
 set ruler
 set number
-
 set guifont=Menlo:h13
 colorscheme badwolf
+
+" Editing
+set backspace=indent,eol,start
+noremap <C-e> <End>
 
 " Hebrew
 noremap <F2> :setlocal invrightleft<CR>
@@ -59,16 +62,14 @@ inoremap <F2> <Esc>:setlocal invrightleft<CR>a
 noremap <C-j> 3<C-e>
 noremap <C-k> 3<C-y>
 
+" Tags
+noremap g] g<C-]>
+
 " NERDCommenter
 let g:NERDSpaceDelims = 1
 
 " Strip all whitespaces
-function! StripWhitespace()
-	let save_cursor = getpos(".")
-	let old_query = getreg('/')
-	:%s/\s\+$//e
-	call setpos('.', save_cursor)
-	call setreg('/', old_query)
-endfunction
-noremap <leader>ss :call StripWhitespace()<CR>
+noremap <F12> :%s/\s\+$//<CR>``
 
+" Easier access to netrw
+noremap - :E<CR>
