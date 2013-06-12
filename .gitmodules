@@ -28,3 +28,6 @@
 [submodule ".vim/bundle/vim-neatstatus"]
 	path = .vim/bundle/vim-neatstatus
 	url = https://github.com/maciakl/vim-neatstatus.git
+[submodule ".vim/bundle/vim-javascript"]
+	path = .vim/bundle/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git
