@@ -52,7 +52,7 @@ colorscheme badwolf
 
 " Editing
 set backspace=indent,eol,start
-noremap <C-e> <End>
+inoremap <C-e> <End>
 
 " Hebrew
 noremap <F2> :setlocal invrightleft<CR>
@@ -64,6 +64,9 @@ noremap <C-k> 3<C-y>
 
 " Tags
 noremap g] g<C-]>
+
+" Omnicomplete
+set completeopt-=preview
 
 " NERDCommenter
 let g:NERDSpaceDelims = 1
