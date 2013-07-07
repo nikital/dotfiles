@@ -50,7 +50,7 @@ set ruler
 set number
 set showcmd
 set guifont=Menlo:h13
-colorscheme badwolf
+colorscheme molokai
 
 " Editing
 set backspace=indent,eol,start
