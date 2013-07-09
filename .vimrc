@@ -52,6 +52,10 @@ set showcmd
 set guifont=Menlo:h13
 colorscheme molokai
 
+" Ex-mode completion
+set wildmode=longest:full,full
+set wildmenu
+
 " Editing
 set backspace=indent,eol,start
 inoremap <C-e> <End>
@@ -78,3 +82,7 @@ noremap <F12> :%s/\s\+$//<CR>``
 
 " Easier access to netrw
 noremap - :E<CR>
+
+" Replace current word
+noremap <leader>s :%s/<c-r><c-w>/
+noremap <leader>S :%s/<c-r><c-a>/
