@@ -38,6 +38,9 @@ set autoindent
 set smartindent
 set cindent
 
+" Windows
+set splitright
+
 " Searching
 set incsearch
 set nohlsearch
@@ -48,6 +51,7 @@ set cursorline
 set laststatus=2
 set ruler
 set relativenumber
+set number
 set showcmd
 set guifont=Menlo:h13
 colorscheme molokai
