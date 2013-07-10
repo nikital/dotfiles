@@ -47,7 +47,7 @@ set ignorecase smartcase
 set cursorline
 set laststatus=2
 set ruler
-set number
+set relativenumber
 set showcmd
 set guifont=Menlo:h13
 colorscheme molokai
