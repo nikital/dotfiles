@@ -15,19 +15,9 @@ syntax on
 set hidden
 
 " Temporary stuff
-if !isdirectory("/tmp/.vimtmp")
-	call mkdir("/tmp/.vimtmp")
-endif
-if !isdirectory("/tmp/.vimtmp/swap")
-	call mkdir("/tmp/.vimtmp/swap")
-endif
-if !isdirectory("/tmp/.vimtmp/backup")
-	call mkdir("/tmp/.vimtmp/backup")
-endif
-set backup
+set nobackup
 set writebackup
-set directory=/tmp/.vimtmp/swap
-set backupdir=/tmp/.vimtmp/backup
+set noswapfile
 
 " Tabbing
 set tabstop=4
