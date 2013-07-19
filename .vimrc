@@ -41,10 +41,12 @@ set cursorline
 set laststatus=2
 set ruler
 set relativenumber
-set number
+" set number
 set showcmd
 set guifont=Menlo:h13
+let g:rehash256 = 1
 colorscheme molokai
+set background=dark
 
 " Ex-mode completion
 set wildmode=longest:full,full
