@@ -64,6 +64,11 @@ inoremap <F2> <Esc>:setlocal invrightleft<CR>a
 noremap <C-j> 3<C-e>
 noremap <C-k> 3<C-y>
 
+" Disable escape timout in terminal
+set ttimeout
+set ttimeoutlen=20
+set notimeout
+
 " Tags
 noremap g] g<C-]>
 

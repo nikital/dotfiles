@@ -1,0 +1,10 @@
+# Unix
+alias mkdir='mkdir -p'
+alias ll='ls -l'
+alias la='ls -al'
+
+# Git
+alias g='git status'
+
+# Include custom aliases
+[[ -f .aliases.local ]] && source ~/.aliases.local
