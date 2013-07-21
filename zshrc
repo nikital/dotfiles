@@ -11,21 +11,12 @@ setopt auto_cd
 export VISUAL=vim
 export EDITOR=$VISUAL
 
-# vi mode
-bindkey -v
-
 # use incremental search
 bindkey "^R" history-incremental-search-backward
 
-# add some readline keys back
-bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
-
 # handy keybindings
-bindkey "^P" history-search-backward
-bindkey "^Y" accept-and-hold
 bindkey "^N" insert-last-word
-bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
+bindkey -s "^T" "^asudo ^e" # "t" for "toughguy"
 
 # expand functions in the prompt
 setopt prompt_subst
