@@ -2,6 +2,11 @@
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
+" Load poweline, if installed
+if exists("$POWERLINE_ROOT")
+    set runtimepath+=$POWERLINE_ROOT/powerline/bindings/vim
+endif
+
 " Make Vim more useful
 set nocompatible
 
