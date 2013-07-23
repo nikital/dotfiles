@@ -4,7 +4,7 @@ call pathogen#infect()
 
 " Load poweline, if installed
 if exists("$POWERLINE_ROOT")
-    set runtimepath+=$POWERLINE_ROOT/powerline/bindings/vim
+    set runtimepath+=$POWERLINE_ROOT/bindings/vim
 endif
 
 " Make Vim more useful
