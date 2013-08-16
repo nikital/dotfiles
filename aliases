@@ -6,5 +6,8 @@ alias la='ls -al'
 # Git
 alias g='git status'
 
+# Tmux
+alias tmux='EDITOR= VISUAL= tmux'
+
 # Include custom aliases
 [[ -f .aliases.local ]] && source ~/.aliases.local
