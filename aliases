@@ -3,6 +3,9 @@ alias mkdir='mkdir -p'
 alias ll='ls -l'
 alias la='ls -al'
 
+# Vim
+alias vi='vim'
+
 # Git
 alias g='git status'
 

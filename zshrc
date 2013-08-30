@@ -29,10 +29,20 @@ setopt histignoredups
 
 # keep TONS of history
 export HISTSIZE=4096
+export HISTFILE="$HOME/.history"
+export SAVEHIST=$HISTSIZE
+
+# Colors
+export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
+export GREP_OPTIONS="--color"
 
 # automatically pushd
 setopt auto_pushd
 export dirstacksize=5
+
+# zsh considers many characters part of a word (e.g., _ and -).
+# Narrow that down to allow easier skipping through words.
+export WORDCHARS='*?[]~&;!$%^<>'
 
 # awesome cd movements from zshkit
 setopt AUTOCD
