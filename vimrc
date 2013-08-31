@@ -94,8 +94,8 @@ noremap g] g<c-]>
 " Omnicomplete
 set completeopt-=preview
 
-" NERDCommenter
-let g:NERDSpaceDelims = 1
+" AutoPairs config
+let g:AutoPairs = {'{':'}'}
 
 " Easier access to netrw
 noremap - :E<cr>
