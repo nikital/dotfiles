@@ -97,6 +97,9 @@ set completeopt-=preview
 " AutoPairs config
 let g:AutoPairs = {'{':'}'}
 
+" Easier access to tagbar
+noremap <F8> :TagbarToggle<cr>
+
 " Easier access to netrw
 noremap - :E<cr>
 
