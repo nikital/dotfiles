@@ -5,11 +5,6 @@ autocmd!
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
-" Load poweline, if installed
-if exists("$POWERLINE_ROOT")
-    set runtimepath+=$POWERLINE_ROOT/bindings/vim
-endif
-
 " Make Vim more useful
 set nocompatible
 
@@ -69,7 +64,19 @@ set ruler
 set relativenumber
 set number
 set showcmd
-set guifont=Menlo:h13
+
+" Status line
+set statusline=
+set statusline+=%<\ 
+set statusline+=%2*[%n%H%R%W]%*\ 
+set statusline+=%f\ %m\ 
+set statusline+=%=%1*[
+set statusline+=%{strlen(&ft)?&ft:'none'},\ 
+set statusline+=%{strlen(&fenc)?&fenc:&enc},\ 
+set statusline+=%{&fileformat}
+set statusline+=]%*%*\ 
+set statusline+=%10((%l/%L,%c)%)\ 
+set statusline+=%P\ 
 
 " Color scheme
 let g:rehash256 = 1
