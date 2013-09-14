@@ -132,7 +132,7 @@ augroup vimrc
     " Clear all commands in the group
     autocmd!
 
-    autocmd FileType text setlocal textwidth=78
+    autocmd FileType text,markdown setlocal textwidth=78
     autocmd FileType help setlocal number relativenumber
 
     " Recognize scons
@@ -141,6 +141,8 @@ augroup vimrc
     " Unmap CR in command window
     autocmd! CmdwinEnter * :unmap <cr>
     autocmd! CmdwinLeave * :call MapCR()
+
+    autocmd BufWritePost $MYVIMRC source %
 augroup END
 
 " Edit files in current directory
@@ -156,4 +158,4 @@ if a:new_name != '' && a:new_name != old_name
     redraw!
 endif
 endfunction
-command -complete=file -nargs=1 Rename call RenameFile(<q-args>)
+command! -complete=file -nargs=1 Rename call RenameFile(<q-args>)

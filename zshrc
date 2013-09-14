@@ -21,6 +21,9 @@ bindkey -s "^T" "^asudo ^e" # "t" for "toughguy"
 # expand functions in the prompt
 setopt prompt_subst
 
+# disable "no match found"
+unsetopt nomatch
+
 # prompt
 export PS1='[${SSH_CONNECTION+"%n@%m:"}%~] '
 
