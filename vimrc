@@ -38,6 +38,7 @@ set backspace=indent,eol,start
 inoremap <c-e> <end>
 inoremap <c-u> <c-g>u<c-u>
 set formatoptions+=j
+set nojoinspaces
 
 " Windows
 set splitright
