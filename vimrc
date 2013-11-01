@@ -107,15 +107,6 @@ noremap g] g<c-]>
 " Omnicomplete
 set completeopt-=preview
 
-" AutoPairs config
-let g:AutoPairs = {'{':'}'}
-
-" Easier access to tagbar
-noremap <F8> :TagbarToggle<cr>
-
-" Easier access to netrw
-noremap - :E<cr>
-
 " Replace current word
 noremap <leader>s :%s/<c-r><c-w>/
 noremap <leader>S :%s/<c-r><c-a>/
@@ -125,6 +116,23 @@ map <leader>y "+y
 map <leader>Y "+Y
 map <leader>p "+p
 map <leader>P "+P
+
+"""""""""""""""""""""""""""""""
+" Plugin config
+"""""""""""""""""""""""""""""""
+
+" AutoPairs config
+let g:AutoPairs = {'{':'}'}
+
+" Easier access to tagbar
+noremap <F8> :TagbarToggle<cr>
+
+" Emmet
+let g:user_emmet_leader_key = '<c-h>'
+let g:user_emmet_install_global = 0
+
+" Easier access to netrw
+noremap - :E<cr>
 
 """""""""""""""""""""""""""""""
 " Autocommands
@@ -142,6 +150,9 @@ augroup vimrc
     " Unmap CR in command window
     autocmd! CmdwinEnter * :unmap <cr>
     autocmd! CmdwinLeave * :call MapCR()
+
+    " Load emmet in HTML only
+    autocmd FileType html,css EmmetInstall
 
     autocmd BufWritePost $MYVIMRC source %
 augroup END
