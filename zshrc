@@ -2,6 +2,8 @@
 autoload -U compinit
 compinit
 # good completion menu
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
+    'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' menu select
 
 # automatically enter directories without cd
