@@ -7,7 +7,17 @@ alias la='ls -al'
 alias vi='vim'
 
 # Git
-alias g='git status'
+# No arguments: `git status`
+# With arguments: acts like `git`
+g() {
+  if [[ $# > 0 ]]; then
+    git $@
+  else
+    git status
+  fi
+}
+# Complete g like git
+compdef g=git
 
 # Tmux
 alias tmux='EDITOR= VISUAL= tmux'
