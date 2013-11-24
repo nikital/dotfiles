@@ -132,7 +132,7 @@ let g:user_emmet_leader_key = '<c-h>'
 let g:user_emmet_install_global = 0
 
 " Easier access to netrw
-noremap - :E<cr>
+noremap - :Explore<cr>
 
 """""""""""""""""""""""""""""""
 " Autocommands

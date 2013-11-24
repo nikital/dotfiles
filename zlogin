@@ -20,4 +20,7 @@ setopt prompt_subst
 export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
 
 # load our custom scripts
-export PATH="$HOME/.bin:$PATH"
+path=(
+    "$HOME/.bin"
+    $path
+)
