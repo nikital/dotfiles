@@ -1,3 +1,5 @@
+set nocompatible
+
 " Clear all autocommands
 autocmd!
 
@@ -5,26 +7,16 @@ autocmd!
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
-" Make Vim more useful
-set nocompatible
-
-" Load filetype plugins
+" General
 filetype plugin indent on
-
-" Syntax highlighting
 syntax on
-
-" Allow unsaved background buffers
 set hidden
+set autoread
 
 " Temporary files stuff
 set nobackup
 set writebackup
 set noswapfile
-
-" Terminal stuff
-set mouse=a
-set ttymouse=xterm2 " Makes mouse work under tmux
 
 " Tabbing
 set tabstop=4
@@ -46,19 +38,17 @@ set noequalalways
 
 " Searching
 set incsearch
-set hlsearch
 set ignorecase smartcase
-function! MapCR()
-  nnoremap <cr> :nohlsearch<cr>
-endfunction
-call MapCR()
 
 " Movement
 " Remember long moves to jumplist
 nnoremap <silent> k :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
 nnoremap <silent> j :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'j'<CR>
+" Scrolling
+noremap <c-j> 3<c-e>
+noremap <c-k> 3<c-y>
 
-" Theming
+" Visual
 set cursorline
 set laststatus=2
 set ruler
@@ -66,40 +56,14 @@ set relativenumber
 set number
 set showcmd
 
-" Status line
-set statusline=
-set statusline+=%<\ 
-set statusline+=%2*[%n%H%R%W]%*\ 
-set statusline+=%f\ %m\ 
-set statusline+=%=%1*[
-set statusline+=%{strlen(&ft)?&ft:'none'},\ 
-set statusline+=%{strlen(&fenc)?&fenc:&enc},\ 
-set statusline+=%{&fileformat}
-set statusline+=]%*%*\ 
-set statusline+=%10((%l/%L,%c)%)\ 
-set statusline+=%P\ 
-
 " Color scheme
 let g:rehash256 = 1
 colorscheme molokai
 set background=dark
 
-" Ex-mode completion
-set wildmode=longest:full,full
-set wildmenu
-
 " Hebrew/RTL
 noremap <F2> :setlocal invrightleft<cr>
 inoremap <F2> <esc>:setlocal invrightleft<cr>a
-
-" Scrolling of the screen
-noremap <c-j> 3<c-e>
-noremap <c-k> 3<c-y>
-
-" Disable escape timout in terminal
-set ttimeout
-set ttimeoutlen=20
-set notimeout
 
 " Tags
 noremap g] g<c-]>
@@ -118,23 +82,6 @@ map <leader>p "+p
 map <leader>P "+P
 
 """""""""""""""""""""""""""""""
-" Plugin config
-"""""""""""""""""""""""""""""""
-
-" AutoPairs config
-let g:AutoPairs = {'{':'}'}
-
-" Easier access to tagbar
-noremap <F8> :TagbarToggle<cr>
-
-" Emmet
-let g:user_emmet_leader_key = '<c-h>'
-let g:user_emmet_install_global = 0
-
-" Easier access to netrw
-noremap - :Explore<cr>
-
-"""""""""""""""""""""""""""""""
 " Autocommands
 """""""""""""""""""""""""""""""
 augroup vimrc
@@ -144,16 +91,6 @@ augroup vimrc
     autocmd FileType text,markdown setlocal textwidth=78
     autocmd FileType help setlocal number relativenumber
 
-    " Recognize scons
-    autocmd BufRead,BufNewFile SCons{cript,truct} setfiletype python
-
-    " Unmap CR in command window
-    autocmd! CmdwinEnter * :unmap <cr>
-    autocmd! CmdwinLeave * :call MapCR()
-
-    " Load emmet in HTML only
-    autocmd FileType html,css EmmetInstall
-
     autocmd BufWritePost $MYVIMRC source %
 augroup END
 
@@ -161,13 +98,5 @@ augroup END
 cnoremap %% <c-r>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 
-" Rename file
-function! RenameFile(new_name)
-let old_name = expand('%')
-if a:new_name != '' && a:new_name != old_name
-    exec ':saveas ' . a:new_name
-    exec ':silent !rm ' . old_name
-    redraw!
-endif
-endfunction
-command! -complete=file -nargs=1 Rename call RenameFile(<q-args>)
+" Load custom settings
+source ~/.vim/settings.vim
