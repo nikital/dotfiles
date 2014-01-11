@@ -1,2 +1,2 @@
 " Easier access to netrw
-noremap - :Explore<cr>
+noremap - m`:Explore<cr>

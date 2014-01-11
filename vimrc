@@ -27,14 +27,13 @@ set autoindent
 
 " Editing
 set backspace=indent,eol,start
-inoremap <c-e> <end>
+inoremap <expr> <c-e> pumvisible() ? '<c-e>' : '<end>'
 inoremap <c-u> <c-g>u<c-u>
 set formatoptions+=j
 set nojoinspaces
 
 " Windows
 set splitright
-set noequalalways
 
 " Searching
 set incsearch
@@ -47,6 +46,9 @@ nnoremap <silent> j :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') 
 " Scrolling
 noremap <c-j> 3<c-e>
 noremap <c-k> 3<c-y>
+
+" Faster save
+noremap <Leader>w :write<cr>
 
 " Visual
 set cursorline
