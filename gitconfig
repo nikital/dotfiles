@@ -8,3 +8,5 @@
 [alias]
     a = add -A
     ci = commit
+    d = diff
+    dc = diff --cached
