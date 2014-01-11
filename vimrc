@@ -59,9 +59,9 @@ set number
 set showcmd
 
 " Color scheme
-let g:rehash256 = 1
-colorscheme molokai
+set t_Co=256
 set background=dark
+colorscheme molokai
 
 " Hebrew/RTL
 noremap <F2> :setlocal invrightleft<cr>
