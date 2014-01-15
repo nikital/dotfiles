@@ -73,6 +73,9 @@ noremap g] g<c-]>
 " Omnicomplete
 set completeopt-=preview
 
+" Encryption
+set cryptmethod=blowfish
+
 " Replace current word
 noremap <leader>s :%s/<c-r><c-w>/
 noremap <leader>S :%s/<c-r><c-a>/

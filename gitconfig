@@ -10,3 +10,4 @@
     ci = commit
     d = diff
     dc = diff --cached
+    pom = push origin master
