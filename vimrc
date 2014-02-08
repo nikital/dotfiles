@@ -65,7 +65,7 @@ colorscheme molokai
 
 " Hebrew/RTL
 noremap <F2> :setlocal invrightleft<cr>
-inoremap <F2> <esc>:setlocal invrightleft<cr>a
+inoremap <F2> <c-o>:setlocal invrightleft<cr>
 
 " Tags
 noremap g] g<c-]>
