@@ -76,15 +76,15 @@ set completeopt-=preview
 " Encryption
 set cryptmethod=blowfish
 
-" Replace current word
-noremap <leader>s :%s/<c-r><c-w>/
-noremap <leader>S :%s/<c-r><c-a>/
+" Global substitute
+nnoremap gs :%s/<c-r><c-w>/
+nnoremap gS :%s/<c-r><c-a>/
 
 " System clipboard stuff
-map <leader>y "+y
-map <leader>Y "+Y
-map <leader>p "+p
-map <leader>P "+P
+map zy "+y
+map zY "+Y
+map zp "+p
+map zP "+P
 
 """""""""""""""""""""""""""""""
 " Autocommands
