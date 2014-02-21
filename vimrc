@@ -99,6 +99,8 @@ augroup vimrc
     autocmd BufWritePost $MYVIMRC source %
 augroup END
 
+nnoremap <leader>V :tabe $MYVIMRC<cr>
+
 " Edit files in current directory
 cnoremap %% <c-r>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
