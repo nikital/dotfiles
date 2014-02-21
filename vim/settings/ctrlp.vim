@@ -7,3 +7,6 @@ let g:ctrlp_user_command = {
             \ },
             \ 'fallback': 'find %s -type f'
             \ }
+
+nnoremap <leader>] :CtrlPTag<cr>
+nnoremap <leader>o :CtrlPMRUFiles<cr>
