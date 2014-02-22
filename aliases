@@ -21,6 +21,7 @@ compdef g=git
 
 # Tmux
 alias tmux='EDITOR= VISUAL= tmux'
+alias tat='tmux attach'
 
 # Include custom aliases
 [[ -f .aliases.local ]] && source ~/.aliases.local
