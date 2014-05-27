@@ -2,6 +2,7 @@
 alias mkdir='mkdir -p'
 alias ll='ls -l'
 alias la='ls -al'
+alias findfile='find . -iname'
 
 # Vim
 alias vi='vim'
