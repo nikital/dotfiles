@@ -1,67 +1,74 @@
-# completion
+##### COMPLETION #####
+
 autoload -U compinit
 compinit
-# good completion menu
+# completion menu style
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
     'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' menu select
 
-# automatically enter directories without cd
-setopt auto_cd
+##### ZSH OPTIONS #####
 
-# use vim as the visual editor
+setopt auto_cd
+setopt AUTOCD
+setopt AUTOPUSHD PUSHDMINUS PUSHDSILENT PUSHDTOHOME
+setopt cdablevars
+setopt CORRECT CORRECT_ALL
+setopt EXTENDED_GLOB
+setopt prompt_subst
+unsetopt nomatch
+setopt histignoredups
+setopt auto_pushd
+export dirstacksize=5
+
+##### COLORS #####
+
+autoload -U colors
+colors
+
+export CLICOLOR=1 # enable colored output from ls, etc
+export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
+export GREP_OPTIONS="--color"
+
+
+##### EDITOR #####
+
 export VISUAL=vim
 export EDITOR=$VISUAL
 
-# use incremental search
-bindkey "^R" history-incremental-search-backward
+##### BINDINGS #####
 
-# handy keybindings
+bindkey "^R" history-incremental-search-backward
 bindkey "^N" insert-last-word
 bindkey -s "^T" "^asudo ^e" # "t" for "toughguy"
 
-# expand functions in the prompt
-setopt prompt_subst
 
-# disable "no match found"
-unsetopt nomatch
+##### PROMPT #####
 
-# prompt
-export PS1='[${SSH_CONNECTION+"%n@%m:"}%~] '
+# adds the current branch name in green
+git_prompt_info() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null)
+  if [[ -n $ref ]]; then
+    echo "[%{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}]"
+  fi
+}
+export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
 
-# ignore duplicate history entries
-setopt histignoredups
+##### HISTORY #####
 
-# keep TONS of history
 export HISTSIZE=4096
 export HISTFILE="$HOME/.history"
 export SAVEHIST=$HISTSIZE
 
-# Colors
-export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
-export GREP_OPTIONS="--color"
+##### COMMAND EDITING #####
 
-# automatically pushd
-setopt auto_pushd
-export dirstacksize=5
-
-# zsh considers many characters part of a word (e.g., _ and -).
-# Narrow that down to allow easier skipping through words.
 export WORDCHARS='*?[]~&;!$%^<>'
 
-# awesome cd movements from zshkit
-setopt AUTOCD
-setopt AUTOPUSHD PUSHDMINUS PUSHDSILENT PUSHDTOHOME
-setopt cdablevars
+##### EXTENTIONS #####
 
-# Try to correct command line spelling
-setopt CORRECT CORRECT_ALL
-
-# Enable extended globbing
-setopt EXTENDED_GLOB
-
-# aliases
+path=(
+    "$HOME/.bin"
+    $path
+)
 [[ -f ~/.aliases ]] && source ~/.aliases
-
-# Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
