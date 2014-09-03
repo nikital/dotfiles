@@ -1,0 +1,23 @@
+# Includes
+
+snippet Inc "#include <>" b
+#include <${1:stdio.h}>
+endsnippet
+
+snippet inc "#include local header"
+#include "${1:`!p snip.rv = snip.basename + '.h'`}"
+endsnippet
+
+snippet once "#pragma once" b
+#pragma once
+endsnippet
+
+# Useful functions
+
+snippet main "int main()" b
+int main(${1:const int argc, const char * const argv[]})
+{
+	${0}
+	return 0;
+}
+endsnippet

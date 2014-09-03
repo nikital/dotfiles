@@ -1,0 +1,28 @@
+extends c
+priority 1
+
+snippet inc "#include local header"
+#include "${1:`!p snip.rv = snip.basename + '.hpp'`}"
+endsnippet
+
+snippet cl "class" b
+class ${1:`!p snip.rv = snip.basename.capitalize()`}
+{
+public:
+	$1(${2});
+	~$1();
+
+private:${0}
+
+private:
+	$1(const $1&) = delete;
+	$1& operator=(const $1&) = delete;
+};
+endsnippet
+
+snippet ns "namespace" b
+namespace ${1:`!p snip.rv = snip.basename.capitalize()`}
+{
+	${0:${VISUAL}}
+}
+endsnippet

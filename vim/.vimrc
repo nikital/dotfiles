@@ -50,6 +50,7 @@ noremap <c-k> 3<c-y>
 
 " Faster save
 noremap <Leader>w :write<cr>
+noremap <Leader>W :wall<cr>
 
 " Visual
 set cursorline
@@ -86,6 +87,9 @@ map zy "+y
 map zY "+Y
 map zp "+p
 map zP "+P
+
+" Highlight current word
+nnoremap <silent> <space> :let @/ = expand("<cword>")<cr>:set hls<cr>
 
 """""""""""""""""""""""""""""""
 " Autocommands
