@@ -55,3 +55,6 @@
 [submodule "vim/.vim/bundle/actionscript3"]
 	path = vim/.vim/bundle/actionscript3
 	url = https://github.com/nikital/vim-actionscript3.git
+[submodule "vim/.vim/bundle/delimitMate"]
+	path = vim/.vim/bundle/delimitMate
+	url = https://github.com/Raimondi/delimitMate.git
