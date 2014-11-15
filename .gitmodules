@@ -55,6 +55,3 @@
 [submodule "vim/.vim/bundle/actionscript3"]
 	path = vim/.vim/bundle/actionscript3
 	url = https://github.com/nikital/vim-actionscript3.git
-[submodule "vim/.vim/bundle/lexima"]
-	path = vim/.vim/bundle/lexima
-	url = https://github.com/cohama/lexima.vim.git
