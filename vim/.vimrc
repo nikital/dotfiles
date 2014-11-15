@@ -89,7 +89,7 @@ map zp "+p
 map zP "+P
 
 " Highlight current word
-nnoremap <silent> <space> :let @/ = expand("<cword>")<cr>:set hls<cr>
+nnoremap <silent> <space> :let @/ = "\\<".expand("<cword>")."\\>"<cr>:set hls<cr>
 
 """""""""""""""""""""""""""""""
 " Autocommands
@@ -109,6 +109,3 @@ nnoremap <leader>V :tabe $MYVIMRC<cr>
 " Edit files in current directory
 cnoremap %% <c-r>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
-
-" Load custom settings
-source ~/.vim/settings.vim
