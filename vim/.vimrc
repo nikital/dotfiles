@@ -48,10 +48,6 @@ nnoremap <silent> j :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') 
 noremap <c-j> 3<c-e>
 noremap <c-k> 3<c-y>
 
-" Faster save
-noremap <Leader>w :write<cr>
-noremap <Leader>W :wall<cr>
-
 " Visual
 set cursorline
 set laststatus=2
