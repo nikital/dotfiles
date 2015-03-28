@@ -1,5 +1,6 @@
 ##### COMPLETION #####
 
+fpath=('/usr/local/share/zsh/site-functions' $fpath)
 autoload -U compinit
 compinit
 # completion menu style
@@ -52,7 +53,7 @@ git_prompt_info() {
     echo "[%{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}]"
   fi
 }
-export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
+export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%2~%{$reset_color%}] '
 
 ##### HISTORY #####
 

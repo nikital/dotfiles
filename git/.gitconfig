@@ -1,12 +1,13 @@
 [user]
     name = Nikita Leshenko
-    email = nikita.leshenko@gmail.com
+    email = nikita@leshenko.net
 [color]
     branch = auto
     diff = auto
     status = auto
 [alias]
     a = add -A
+    ai = add -i
     ci = commit
     d = diff
     dc = diff --cached
