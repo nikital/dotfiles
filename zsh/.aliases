@@ -22,7 +22,7 @@ compdef g=git
 
 # Tmux
 alias tmux='EDITOR= VISUAL= tmux'
-alias tnew='tmux new -s $(basename $(pwd))'
+alias tnew='tmux new -s "$(basename $(pwd))"'
 alias tat='tmux attach'
 
 # Include custom aliases
