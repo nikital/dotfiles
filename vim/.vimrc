@@ -102,6 +102,9 @@ augroup END
 
 nnoremap <leader>V :tabe $MYVIMRC<cr>
 
+" Faster macro invocation
+noremap <leader>q @q
+
 " Edit files in current directory
 cnoremap %% <c-r>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
