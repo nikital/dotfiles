@@ -28,7 +28,7 @@ set shiftround
 
 " Editing
 set backspace=indent,eol,start
-inoremap <expr> <c-e> pumvisible() ? '<c-e>' : '<end>'
+inoremap <c-e> <end>
 inoremap <c-u> <c-g>u<c-u>
 set formatoptions+=j
 set nojoinspaces

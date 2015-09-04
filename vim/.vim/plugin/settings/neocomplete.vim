@@ -9,6 +9,4 @@ endif
 let g:neocomplete#same_filetypes._ = "_"
 
 inoremap <expr><tab>  pumvisible() ? "\<c-n>" : "\<tab>"
-" imap <expr><tab> neosnippet#expandable_or_jumpable() ? "\<plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<c-n>" : "\<tab>"
-" imap <c-k>     <plug>(neosnippet_expand_or_jump)
-" smap <c-k>     <plug>(neosnippet_expand_or_jump)
+inoremap <expr> <c-l> neocomplete#close_popup()
