@@ -4,8 +4,8 @@ alias ll='ls -l'
 alias la='ls -al'
 alias findfile='find . -iname'
 
-# Vim
-alias vi='vim'
+# emacs
+alias vi=$EDITOR
 
 # Git
 # No arguments: `git status`

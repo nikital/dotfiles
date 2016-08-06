@@ -34,7 +34,7 @@ export GREP_OPTIONS="--color"
 
 ##### EDITOR #####
 
-export VISUAL=vim
+export VISUAL="emacsclient -nw"
 export EDITOR=$VISUAL
 
 ##### BINDINGS #####
@@ -67,9 +67,5 @@ export WORDCHARS='*?[]~&;!$%^<>'
 
 ##### EXTENTIONS #####
 
-path=(
-    "$HOME/.bin"
-    $path
-)
 [[ -f ~/.aliases ]] && source ~/.aliases
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
