@@ -12,7 +12,7 @@ zstyle ':completion:*' menu select
 setopt auto_cd
 setopt AUTOCD
 setopt AUTOPUSHD PUSHDMINUS PUSHDSILENT PUSHDTOHOME
-setopt cdablevars
+#setopt cdablevars
 setopt CORRECT CORRECT_ALL
 setopt EXTENDED_GLOB
 setopt prompt_subst
