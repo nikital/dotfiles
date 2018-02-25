@@ -20,7 +20,7 @@ unsetopt nomatch
 setopt histignoredups
 setopt auto_pushd
 export dirstacksize=5
-setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY
 
 ##### COLORS #####
 
