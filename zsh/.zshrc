@@ -28,8 +28,6 @@ colors
 
 export CLICOLOR=1 # enable colored output from ls, etc
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
-export GREP_OPTIONS="--color"
-
 
 ##### EDITOR #####
 
