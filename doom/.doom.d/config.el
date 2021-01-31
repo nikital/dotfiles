@@ -145,3 +145,7 @@
   (map! :map evil-org-mode-map
         :n "RET" nil
         :n "<return>"))
+
+;;; Dired
+(after! dired-x
+  (remove-hook 'dired-mode-hook #'dired-omit-mode))
