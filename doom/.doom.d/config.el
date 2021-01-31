@@ -108,12 +108,10 @@
 ;;; Company
 (after! company
   (map! :map company-active-map
-        "C-w" nil
         "C-j" nil
-        "C-k" nil)
-  (company-tng-configure-default))
-(after! (:and company evil)
-  (add-hook 'evil-insert-state-exit-hook #'company-cancel))
+        "C-k" nil
+        "<up>" nil
+        "<down>" nil))
 
 ;;; Magit
 (after! magit
