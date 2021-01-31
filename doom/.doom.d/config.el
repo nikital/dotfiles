@@ -120,3 +120,9 @@
   (map! :map magit-mode-map
         :n "C-j" nil
         :n "C-k" nil))
+
+;;; org
+(after! evil-org
+  (map! :map evil-org-mode-map
+        :n "RET" nil
+        :n "<return>"))
