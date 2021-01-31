@@ -74,12 +74,33 @@
   (interactive)
   (evil-scroll-line-down 5))
 
+; TODO evil-last-paste is broken when count > 1
+(defun +evil/paste-below (count)
+  "Paste below current line."
+  (interactive "p")
+  (evil-with-single-undo
+    (dotimes (_ count)
+      (evil-insert-newline-below)
+      (evil-paste-after 1 evil-this-register)
+      )))
+
+(defun +evil/paste-above (count)
+  "Paste above current line."
+  (interactive "p")
+  (evil-with-single-undo
+    (dotimes (_ count)
+      (evil-insert-newline-above)
+      (evil-paste-after 1 evil-this-register)
+      )))
+
 (map! :i "C-e" #'end-of-line
       :n "RET" #'save-some-buffers-no-confirm
       :m "C-j" #'nik/evil-scroll-down
       :m "C-k" #'nik/evil-scroll-up
       :n "C-e" #'counsel-switch-buffer
-      :n "M-e" #'counsel-switch-buffer-other-window)
+      :n "M-e" #'counsel-switch-buffer-other-window
+      :n "]p" #'+evil/paste-below
+      :n "[p" #'+evil/paste-above)
 
 (after! evil
   (setq evil-want-C-u-scroll nil)

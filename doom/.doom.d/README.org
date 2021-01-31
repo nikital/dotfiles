@@ -1,7 +1,6 @@
 #+STARTUP: indent nofold
 
 * Wishlist
-- ]p
 - Show hidden files in dired
 - Show hidden file in find-file
 
