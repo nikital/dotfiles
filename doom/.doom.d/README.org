@@ -2,6 +2,11 @@
 
 * Wishlist
 - Show hidden file in find-file
+- C-w o is weird
+- Words aren't divided properly (like_this is two words in Python)
+- s for Surround doesnt work in visual, taken over by snipe
+- C-u is strange in company
+- TAB in company-tng first completes common
 
 * For later
 - Evaluate Snipe usage
