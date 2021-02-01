@@ -132,7 +132,9 @@
         "C-j" nil
         "C-k" nil
         "<up>" nil
-        "<down>" nil))
+        "<down>" nil
+        "C-u" nil
+        "C-d" nil))
 
 ;;; Magit
 (after! magit
