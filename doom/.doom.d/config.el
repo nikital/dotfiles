@@ -134,7 +134,10 @@
         "<up>" nil
         "<down>" nil
         "C-u" nil
-        "C-d" nil))
+        "C-d" nil
+
+        "TAB" #'company-select-next
+        [tab] #'company-select-next))
 
 ;;; Magit
 (after! magit

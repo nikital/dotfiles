@@ -5,7 +5,8 @@
 - C-w o is weird
 - Words aren't divided properly (like_this is two words in Python)
 - s for Surround doesnt work in visual, taken over by snipe
-- TAB in company-tng first completes common
+- Company doesn't complete in fundamental mode
+
 
 * For later
 - Evaluate Snipe usage
