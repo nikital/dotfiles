@@ -2,7 +2,6 @@
 
 * Wishlist
 - Show hidden file in find-file
-- C-w o is weird
 - Words aren't divided properly (like_this is two words in Python)
 - Company doesn't complete in fundamental mode
 

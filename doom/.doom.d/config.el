@@ -100,7 +100,8 @@
       :n "C-e" #'counsel-switch-buffer
       :n "M-e" #'counsel-switch-buffer-other-window
       :n "]p" #'+evil/paste-below
-      :n "[p" #'+evil/paste-above)
+      :n "[p" #'+evil/paste-above
+      :m "C-w o" #'doom/window-maximize-buffer)
 
 (after! evil
   (setq evil-want-C-u-scroll nil)
