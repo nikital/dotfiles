@@ -116,6 +116,12 @@
 ;; I'm not sure about snipe...
 (after! evil-snipe
   (setq evil-snipe-scope 'visible)
+
+  ;; I want my surround back :)
+  (map! :map evil-snipe-mode-map
+        :m "s" #'evil-surround-region
+        :m "S" #'evil-Surround-region)
+
   ; Get used to snipe's repeating f
   (map! :m ";" nil
         :m "," nil
