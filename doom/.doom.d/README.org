@@ -4,7 +4,12 @@
 - Show hidden file in find-file
 - Words aren't divided properly (like_this is two words in Python)
 - Company doesn't complete in fundamental mode
-
+- org
+  + Leave some gap when minimizing org (like spacemacs)
+  + tags to the right? org-tags-colum
+  + C-c C-c should add tag rather than edit tag
+  + Ctrl-enter vs alt-enter
+- Wiki
 
 * For later
 - Evaluate Snipe usage
