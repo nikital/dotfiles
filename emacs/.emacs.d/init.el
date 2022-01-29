@@ -186,6 +186,13 @@ NAME and ARGS are as in `use-package'."
   :config
   (setq dired-dwim-target t))
 
+(use-feature display-line-numbers
+  :demand t
+  :config
+  (setq display-line-numbers-type 'relative
+	display-line-numbers-current-absolute nil)
+  (global-display-line-numbers-mode +1))
+
 ;; Should be last
 (use-package gcmh
   :demand t
