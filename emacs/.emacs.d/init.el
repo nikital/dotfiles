@@ -56,6 +56,11 @@ NAME and ARGS are as in `use-package'."
 (use-package general
   :demand t)
 
+(defun nik/test ()
+  "Used when testing keybindings"
+  (interactive)
+  (message "Test command %s" (format-time-string "%FT%T")))
+
 (use-package evil
   :demand t
   :init
@@ -105,6 +110,18 @@ NAME and ARGS are as in `use-package'."
         )
 
   (evil-mode +1))
+
+;; Create leader SPC keymap
+(define-prefix-command 'nik/spc)
+(general-define-key
+ :states '(normal visual motion)
+ :keymaps 'override
+ "SPC" nik/spc)
+
+(general-define-key
+ :keymaps 'nik/spc
+ "b" #'nik/test
+ )
 
 (use-package undo-tree
   :hook (evil-local-mode . turn-on-undo-tree-mode))
