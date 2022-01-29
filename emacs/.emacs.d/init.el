@@ -152,6 +152,24 @@ NAME and ARGS are as in `use-package'."
 (use-package undo-tree
   :hook (evil-local-mode . turn-on-undo-tree-mode))
 
+(use-package magit
+  :general
+  (:keymaps 'nik/spc
+   :prefix "g"
+   "g" #'magit-status
+   "d" #'magit-dispatch
+   "b" #'magit-blame-addition
+   "f" #'magit-file-dispatch)
+  (:keymaps 'magit-diff-section-base-map
+   "C-<return>" #'magit-diff-visit-worktree-file-other-window)
+  :init
+  (setq magit-define-global-key-bindings nil)
+  :config
+  (setq transient-levels-file (nik/cache "transient_levels.el"))
+  (setq transient-values-file (nik/cache "transient_values.el"))
+  (setq transient-history-file (nik/cache "transient_history.el"))
+  (setq magit-diff-refine-hunk 'all))
+
 ;; Don't create backup, autosave and lock files
 (setq make-backup-files nil)
 (setq auto-save-default nil)
