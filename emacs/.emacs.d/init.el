@@ -56,6 +56,13 @@ NAME and ARGS are as in `use-package'."
 (use-package general
   :demand t)
 
+;; Create leader SPC keymap
+(define-prefix-command 'nik/spc)
+(general-define-key
+ :states '(normal visual motion)
+ :keymaps 'override
+ "SPC" nik/spc)
+
 (defun nik/test ()
   "Used when testing keybindings"
   (interactive)
@@ -110,13 +117,6 @@ NAME and ARGS are as in `use-package'."
         )
 
   (evil-mode +1))
-
-;; Create leader SPC keymap
-(define-prefix-command 'nik/spc)
-(general-define-key
- :states '(normal visual motion)
- :keymaps 'override
- "SPC" nik/spc)
 
 (defun nik/copy-file-path ()
   "Copy the full path of the current buffer's file."
