@@ -158,6 +158,16 @@ NAME and ARGS are as in `use-package'."
 (use-package undo-tree
   :hook (evil-local-mode . turn-on-undo-tree-mode))
 
+(use-package evil-surround
+  :general
+  (:states 'visual
+   "s" #'evil-surround-region)
+  ;; Specify operator as well to support lazy loading
+  (:states 'operator
+   "s" #'evil-surround-edit)
+  :config
+  (global-evil-surround-mode +1))
+
 (use-package magit
   :general
   (:keymaps 'nik/spc
