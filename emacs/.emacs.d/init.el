@@ -123,6 +123,12 @@ NAME and ARGS are as in `use-package'."
  "b" #'nik/test
  )
 
+(use-package evil-collection
+  :demand t
+  :after evil
+  :config
+  (evil-collection-init))
+
 (use-package undo-tree
   :hook (evil-local-mode . turn-on-undo-tree-mode))
 
