@@ -168,6 +168,15 @@ NAME and ARGS are as in `use-package'."
   :config
   (global-evil-surround-mode +1))
 
+;; Show additional search match info
+(use-package anzu
+  :demand t
+  :config
+  (global-anzu-mode +1))
+(use-package evil-anzu
+  :demand t
+  :after evil)
+
 (use-package magit
   :general
   (:keymaps 'nik/spc
