@@ -206,12 +206,29 @@ NAME and ARGS are as in `use-package'."
   :config
   (setq dired-dwim-target t))
 
+(add-to-list 'default-frame-alist '(font . "M PLUS 1 Code-11"))
+
+(use-package doom-themes
+  :demand t
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  ;; Set brighter comments
+  (setq doom-gruvbox-brighter-comments t)
+  (load-theme 'doom-gruvbox t))
+
 (use-feature display-line-numbers
   :demand t
   :config
   (setq display-line-numbers-type 'relative
 	display-line-numbers-current-absolute nil)
   (global-display-line-numbers-mode +1))
+
+(setq inhibit-startup-screen t)
+
+;; Cleanup the frame UI
+(tool-bar-mode -1)
+(toggle-scroll-bar -1)
 
 ;; Should be last
 (use-package gcmh
