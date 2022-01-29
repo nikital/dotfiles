@@ -7,6 +7,12 @@
 (defun nik/cache (path)
   (concat (file-name-as-directory nik/cache) path))
 
+;; Don't create backup, autosave and lock files
+(setq make-backup-files nil
+      auto-save-default nil
+      auto-save-list-file-prefix nil
+      create-lockfiles nil)
+
 ;; straight
 (setq straight-base-dir nik/cache)
 (defvar bootstrap-version)
@@ -169,11 +175,6 @@ NAME and ARGS are as in `use-package'."
   (setq transient-values-file (nik/cache "transient_values.el"))
   (setq transient-history-file (nik/cache "transient_history.el"))
   (setq magit-diff-refine-hunk 'all))
-
-;; Don't create backup, autosave and lock files
-(setq make-backup-files nil
-      auto-save-default nil
-      create-lockfiles nil)
 
 ;; Nicer scrolling
 (setq scroll-step 1
