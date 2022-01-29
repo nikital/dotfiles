@@ -94,7 +94,6 @@ NAME and ARGS are as in `use-package'."
         ;; Only do highlighting in selected window so that Emacs has less work
         ;; to do highlighting them all.
         evil-ex-interactive-search-highlight 'selected-window
-        ;; It's infuriating that innocuous "beginning of line" or "end of line"
         ;; End/beginning of line is not an error
         evil-kbd-macro-suppress-motion-error t
         ;; TODO Emacs 28 changes stuff?
@@ -114,6 +113,9 @@ NAME and ARGS are as in `use-package'."
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq create-lockfiles nil)
+
+;; Disable bell
+(setq ring-bell-function #'ignore)
 
 (use-feature dired
   :config
