@@ -118,9 +118,29 @@ NAME and ARGS are as in `use-package'."
  :keymaps 'override
  "SPC" nik/spc)
 
+(defun nik/copy-file-path ()
+  "Copy the full path of the current buffer's file."
+  (interactive)
+  (let ((filepath (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filepath
+      (kill-new filepath)
+      (message "%s" filepath))))
+
 (general-define-key
  :keymaps 'nik/spc
- "b" #'nik/test
+ "f" #'find-file
+ "F" #'find-file-other-window
+ "e" #'switch-to-buffer
+ "E" #'switch-to-buffer-other-window
+ )
+
+(general-define-key
+ :keymaps 'nik/spc
+ :prefix "b"
+ "r" #'revert-buffer
+ "c" #'nik/copy-file-path
  )
 
 (use-package evil-collection
