@@ -171,9 +171,13 @@ NAME and ARGS are as in `use-package'."
   (setq magit-diff-refine-hunk 'all))
 
 ;; Don't create backup, autosave and lock files
-(setq make-backup-files nil)
-(setq auto-save-default nil)
-(setq create-lockfiles nil)
+(setq make-backup-files nil
+      auto-save-default nil
+      create-lockfiles nil)
+
+;; Nicer scrolling
+(setq scroll-step 1
+      scroll-conservatively 101)
 
 ;; Disable bell
 (setq ring-bell-function #'ignore)
