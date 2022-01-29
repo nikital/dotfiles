@@ -22,12 +22,36 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+(straight-use-package 'el-patch)
+
 ;; use-package
 (setq use-package-always-defer t
       use-package-enable-imenu-support t
       straight-use-package-by-default t
       )
+;; Include `use-feature' in `imenu'
+(el-patch-defcustom use-package-form-regexp-eval
+  `(concat ,(eval-when-compile
+              (concat "^\\s-*("
+                      (regexp-opt '("use-package" (el-patch-add "use-feature") "require") t)
+                      "\\s-+\\("))
+           (or (bound-and-true-p lisp-mode-symbol-regexp)
+               "\\(?:\\sw\\|\\s_\\|\\\\.\\)+") "\\)")
+  "Sexp providing regexp for finding use-package forms in user files.
+This is used by `use-package-jump-to-package-form' and
+`use-package-enable-imenu-support'."
+  :type 'sexp
+  :group 'use-package)
 (straight-use-package 'use-package)
+
+;; Inspired by github.com/raxod502/radian
+(defmacro use-feature (name &rest args)
+  "Like `use-package', but without straight.el integration.
+NAME and ARGS are as in `use-package'."
+  (declare (indent defun))
+  `(use-package ,name
+     :straight nil
+     ,@args))
 
 (use-package general
   :demand t)
@@ -90,6 +114,10 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq create-lockfiles nil)
+
+(use-feature dired
+  :config
+  (setq dired-dwim-target t))
 
 ;; Should be last
 (use-package gcmh
