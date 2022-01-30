@@ -185,6 +185,10 @@ NAME and ARGS are as in `use-package'."
 
 (use-package company
   :demand t
+  :general
+  (:keymaps 'company-active-map
+   "C-w" nil
+   "C-d" nil)
   :config
   (global-company-mode +1)
   (company-tng-mode +1))
@@ -306,6 +310,11 @@ NAME and ARGS are as in `use-package'."
 
 ;; Maximize on startup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+;; Don't split vertically
+(setq split-height-threshold nil)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 (server-start)
 
