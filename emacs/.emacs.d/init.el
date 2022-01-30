@@ -175,6 +175,15 @@ NAME and ARGS are as in `use-package'."
   :config
   (global-evil-surround-mode +1))
 
+(use-package company
+  :demand t
+  :config
+  (global-company-mode +1)
+  (company-tng-mode +1))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+
 ;; Show additional search match info
 (use-package anzu
   :demand t
