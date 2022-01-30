@@ -302,6 +302,12 @@ NAME and ARGS are as in `use-package'."
   (setq doom-gruvbox-brighter-comments t)
   (load-theme 'doom-gruvbox t))
 
+;; Collapses widely used minor modes
+(use-package minions
+  :demand t
+  :config
+  (minions-mode +1))
+
 (use-feature display-line-numbers
   :demand t
   :config
