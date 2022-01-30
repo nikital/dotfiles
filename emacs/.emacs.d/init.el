@@ -163,6 +163,7 @@ NAME and ARGS are as in `use-package'."
  :keymaps 'nik/spc
  :prefix "j"
  "i" #'imenu
+ "m" #'bookmark-jump
  )
 
 (use-package evil-collection
@@ -284,6 +285,9 @@ NAME and ARGS are as in `use-package'."
    [remap switch-to-buffer-other-frame]  #'consult-buffer-other-frame
    [remap yank-pop]                      #'consult-yank-pop
    [remap isearch-forward]               #'consult-line)
+  (:keymaps 'nik/spc
+   :prefix "s"
+   "d" #'consult-ripgrep
   :config
   (setq consult-narrow-key ">"))
 
