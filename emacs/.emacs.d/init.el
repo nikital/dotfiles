@@ -144,7 +144,8 @@ NAME and ARGS are as in `use-package'."
 (defun nik/find-init ()
   (interactive)
   (find-file
-   (expand-file-name "init.el" user-emacs-directory)))
+   (expand-file-name "init.el" user-emacs-directory))
+  (consult-imenu))
 
 (general-define-key
  :keymaps 'nik/spc
