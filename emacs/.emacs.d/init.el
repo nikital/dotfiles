@@ -134,6 +134,7 @@ NAME and ARGS are as in `use-package'."
       (kill-new filepath)
       (message "%s" filepath))))
 
+;; General shortcuts
 (general-define-key
  :keymaps 'nik/spc
  "f" #'find-file
@@ -142,11 +143,18 @@ NAME and ARGS are as in `use-package'."
  "E" #'switch-to-buffer-other-window
  )
 
+(defun nik/find-init ()
+  (interactive)
+  (find-file
+   (expand-file-name "init.el" user-emacs-directory)))
+
 (general-define-key
  :keymaps 'nik/spc
  :prefix "b"
  "r" #'revert-buffer
  "c" #'nik/copy-file-path
+ "i" #'nik/find-init
+ "k" #'kill-buffer
  )
 
 (use-package evil-collection
