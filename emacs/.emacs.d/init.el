@@ -301,9 +301,11 @@ NAME and ARGS are as in `use-package'."
 	display-line-numbers-current-absolute nil)
   (global-display-line-numbers-mode +1))
 
-(setq inhibit-startup-screen t)
 
 ;;; frame config
+
+(setq inhibit-startup-screen t)
+
 ;; Cleanup the frame UI
 (tool-bar-mode -1)
 (toggle-scroll-bar -1)
