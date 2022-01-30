@@ -301,6 +301,22 @@ NAME and ARGS are as in `use-package'."
 	display-line-numbers-current-absolute nil)
   (global-display-line-numbers-mode +1))
 
+(use-feature savehist
+  :demand t
+  :config
+  (setq savehist-file (nik/cache "history"))
+  (savehist-mode +1))
+
+(use-feature recentf
+  :demand t
+  :config
+  (setq recentf-save-file (nik/cache "recentf")
+        recentf-max-saved-items 10000)
+  (recentf-mode +1))
+
+(use-feature bookmark
+  :config
+  (setq bookmark-file (nik/cache "bookmarks")))
 
 ;;; frame config
 
