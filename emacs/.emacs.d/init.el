@@ -1,4 +1,4 @@
-;;; early-init.el -*- mode: lisp-interaction; lexical-binding: t; -*-
+;; early-init.el -*- mode: lisp-interaction; lexical-binding: t; -*-
 
 ;; TODO Deal with native compilation once Emacs 28 is out.
 
@@ -13,7 +13,7 @@
       auto-save-list-file-prefix nil
       create-lockfiles nil)
 
-;; straight
+;;; straight
 (setq straight-base-dir nik/cache)
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -30,7 +30,7 @@
 
 (straight-use-package 'el-patch)
 
-;; use-package
+;;; use-package
 (setq use-package-always-defer t
       use-package-enable-imenu-support t
       straight-use-package-by-default t
@@ -134,7 +134,7 @@ NAME and ARGS are as in `use-package'."
       (kill-new filepath)
       (message "%s" filepath))))
 
-;; General shortcuts
+;;; General shortcuts
 (general-define-key
  :keymaps 'nik/spc
  "f" #'find-file
@@ -206,12 +206,18 @@ NAME and ARGS are as in `use-package'."
 	transient-values-file (nik/cache "transient/values.el")
 	transient-history-file (nik/cache "transient/history.el")))
 
-;; Nicer scrolling
+;;; Nicer scrolling
 (setq scroll-step 1
       scroll-conservatively 101)
 
-;; Disable bell
+;;; Disable bell
 (setq ring-bell-function #'ignore)
+
+(use-feature imenu
+  :init
+  (with-eval-after-load 'lisp-mode
+    (add-to-list 'lisp-imenu-generic-expression
+		 (list "Packages" "^;;;\\s-*\\(.*\\)" 1))))
 
 (use-feature dired
   :config
@@ -237,6 +243,7 @@ NAME and ARGS are as in `use-package'."
 
 (setq inhibit-startup-screen t)
 
+;;; frame config
 ;; Cleanup the frame UI
 (tool-bar-mode -1)
 (toggle-scroll-bar -1)
