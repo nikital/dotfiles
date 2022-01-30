@@ -198,10 +198,13 @@ NAME and ARGS are as in `use-package'."
   :init
   (setq magit-define-global-key-bindings nil)
   :config
-  (setq transient-levels-file (nik/cache "transient_levels.el"))
-  (setq transient-values-file (nik/cache "transient_values.el"))
-  (setq transient-history-file (nik/cache "transient_history.el"))
-  (setq magit-diff-refine-hunk 'all))
+  (setq magit-diff-refine-hunk t))
+
+(use-package transient
+  :init
+  (setq transient-levels-file (nik/cache "transient/levels.el")
+	transient-values-file (nik/cache "transient/values.el")
+	transient-history-file (nik/cache "transient/history.el")))
 
 ;; Nicer scrolling
 (setq scroll-step 1
