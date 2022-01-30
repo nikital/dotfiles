@@ -240,7 +240,15 @@ NAME and ARGS are as in `use-package'."
 		 (list "Packages" "^;;;\\s-*\\(.*\\)" 1))))
 
 (use-package vertico
+  :straight (:files (:defaults "extensions/*.el"))
   :demand t
+  :general
+  (:keymaps 'vertico-map
+   "C-h" #'vertico-directory-delete-word
+   "C-j" #'vertico-next
+   "C-k" #'vertico-previous
+   "C-l" #'vertico-insert
+   "M-h" help-map)
   :config
   (setq vertico-count 20)
   (vertico-mode +1))
