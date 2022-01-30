@@ -134,11 +134,13 @@ NAME and ARGS are as in `use-package'."
       (kill-new filepath)
       (message "%s" filepath))))
 
-;;; General shortcuts
+;;; General shortcuts/keymaps
 (general-define-key
  :keymaps 'nik/spc
  "f" #'find-file
  "F" #'find-file-other-window
+ "e" #'switch-to-buffer
+ "E" #'switch-to-buffer-other-window
  )
 
 (defun nik/find-init ()
@@ -154,6 +156,12 @@ NAME and ARGS are as in `use-package'."
  "c" #'nik/copy-file-path
  "i" #'nik/find-init
  "k" #'kill-buffer
+ )
+
+(general-define-key
+ :keymaps 'nik/spc
+ :prefix "j"
+ "i" #'imenu
  )
 
 (use-package evil-collection
@@ -243,14 +251,22 @@ NAME and ARGS are as in `use-package'."
 (use-package consult
   :demand t
   :general
-  ("C-s" #'consult-line)
-  (:keymaps
-   'nik/spc
-   "e" #'consult-buffer
-   "E" #'consult-buffer-other-window)
-  (:keymaps 'nik/spc
-   :prefix "j"
-   "i" #'consult-imenu)
+  ([remap apropos]                       #'consult-apropos
+   [remap bookmark-jump]                 #'consult-bookmark
+   [remap evil-show-marks]               #'consult-mark
+   [remap evil-show-jumps]               #'evil-collection-consult-jump-list
+   [remap evil-show-registers]           #'consult-register
+   [remap goto-line]                     #'consult-goto-line
+   [remap imenu]                         #'consult-imenu
+   [remap locate]                        #'consult-locate
+   [remap load-theme]                    #'consult-theme
+   [remap man]                           #'consult-man
+   [remap recentf-open-files]            #'consult-recent-file
+   [remap switch-to-buffer]              #'consult-buffer
+   [remap switch-to-buffer-other-window] #'consult-buffer-other-window
+   [remap switch-to-buffer-other-frame]  #'consult-buffer-other-frame
+   [remap yank-pop]                      #'consult-yank-pop
+   [remap isearch-forward]               #'consult-line)
   :config
   (setq consult-narrow-key ">"))
 
