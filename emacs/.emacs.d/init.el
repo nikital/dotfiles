@@ -205,6 +205,82 @@ NAME and ARGS are as in `use-package'."
 (use-package company-box
   :hook (company-mode . company-box-mode))
 
+(use-package lsp-mode
+  :general
+  ;; Set the lsp prefix key
+  (:keymaps 'lsp-mode-map
+   "C-c l" '(:keymap lsp-command-map :which-key "lsp"))
+  (:keymaps 'nik/spc
+   :prefix "c"
+   "a" #'lsp-execute-code-action
+   "r" #'lsp-rename
+   "R" #'lsp-workspace-restart
+   "I" #'lsp-ui-imenu
+   "o" #'lsp-clangd-find-other-file)
+  (:keymaps 'nik/spc
+   "\"" #'lsp-find-implementation)
+  :init
+  ;; Set a high read output max value for handling large language server responses
+  (setq read-process-output-max (* 10 1024 1024))
+  ;; Set a short delay for refreshing state after moving the cursor
+  (setq lsp-idle-delay 0.2)
+  ;; Enable which-key help on the lsp prefix key
+  (setq lsp-keymap-prefix "C-c l")
+  ;; Enable for the following modes
+  (setq nik/lsp-enable-for-modes '(c-mode
+                                  c++-mode
+                                  objc-mode
+                                  haskell-mode
+                                  haskell-literate-mode
+                                  go-mode
+                                  csharp-mode
+                                  java-mode
+                                  (python-mode (lambda () (require 'lsp-pyright)))
+                                  js2-mode
+                                  typescript-mode
+                                  groovy-mode
+                                  web-mode
+                                  json-mode
+                                  yaml-mode
+                                  dockerfile-mode
+                                  terraform-mode
+                                  cmake-mode
+                                  sh-mode))
+
+  (defun nik/maybe-enable-lsp (lsp-config)
+    "If mode in LSP-CONFIG is equal to the current major-mode,
+run the attached function (if exists) and enable lsp"
+    (pcase lsp-config
+      (`(,(pred (equal major-mode)) ,func) (funcall func) (lsp) t)
+      ((pred (equal major-mode)) (lsp) t)))
+
+  ;; Kill language server after the last associated buffer was closed
+  (setq lsp-keep-workspace-alive nil)
+  (setq lsp-session-file (nik/cache "lsp-session-v1"))
+  (setq lsp-eslint-library-choices-file (nik/cache ".lsp-eslint-choices"))
+  ;; Force lsp mode to forget the workspace folders for multi root servers
+  ;; so the folders are added on demand
+  (advice-add 'lsp :before
+              (lambda (&rest _args)
+                (eval
+                 '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
+  ;; Enable semantic token highlighting
+  (setq lsp-semantic-tokens-enable t)
+  ;; Set clangd default parameters
+  (setq lsp-clients-clangd-args '("--header-insertion-decorators=0"
+                                  "--completion-style=detailed"))
+  :hook
+  ;; Postpone lsp load for after dir local vars are read
+  ;; Do not load lsp if dir local vars are not enabled (e.g. on preview)
+  (hack-local-variables . (lambda ()
+                            (when enable-dir-local-variables
+                              (seq-find #'nik/maybe-enable-lsp
+                                        nik/lsp-enable-for-modes))))
+
+  ;; Enable which-key integration
+  (lsp-mode . lsp-enable-which-key-integration)
+  :commands lsp)
+
 ;; Show additional search match info
 (use-package anzu
   :demand t
@@ -415,3 +491,16 @@ NAME and ARGS are as in `use-package'."
   :demand t
   :config
   (gcmh-mode +1))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values
+   '((lsp-clients-clangd-args "-query-driver=/usr/bin/avr-gcc"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
