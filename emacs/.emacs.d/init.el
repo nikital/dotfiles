@@ -297,7 +297,13 @@ NAME and ARGS are as in `use-package'."
    "d" #'consult-ripgrep
    "f" #'consult-fd)
   :config
-  (setq consult-narrow-key ">")
+  (setq consult-narrow-key ">"
+	consult-preview-key (kbd "C-."))
+
+  ;; Preview in-buffer stuff
+  (consult-customize
+   consult-line consult-imenu
+   :preview-key 'any)
 
   ;; Based on code from consult wiki:
   ;; https://github.com/minad/consult/wiki#find-files-using-fd
