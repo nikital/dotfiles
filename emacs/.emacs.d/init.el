@@ -62,6 +62,13 @@ NAME and ARGS are as in `use-package'."
 (use-package general
   :demand t)
 
+(use-package which-key
+  :demand t
+  :config
+  (setq which-key-idle-delay 0.5)
+  (setq which-key-add-column-padding 8)
+  (which-key-mode +1))
+
 ;; Create leader SPC keymap
 (define-prefix-command 'nik/spc)
 (general-define-key
