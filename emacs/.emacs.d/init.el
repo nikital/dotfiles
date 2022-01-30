@@ -141,6 +141,7 @@ NAME and ARGS are as in `use-package'."
  "F" #'find-file-other-window
  "e" #'switch-to-buffer
  "E" #'switch-to-buffer-other-window
+ "h" help-map
  )
 
 (defun nik/find-init ()
@@ -290,6 +291,16 @@ NAME and ARGS are as in `use-package'."
 (use-feature dired
   :config
   (setq dired-dwim-target t))
+
+(use-package helpful
+  :general
+  ([remap describe-function] #'helpful-callable
+   [remap describe-variable] #'helpful-variable
+   [remap describe-key]      #'helpful-key
+   [remap describe-symbol]   #'helpful-symbol)
+  (:keymaps 'nik/spc
+   :prefix "h"
+   "h" #'helpful-at-point))
 
 (add-to-list 'default-frame-alist '(font . "M PLUS 1 Code-11"))
 
