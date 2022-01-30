@@ -227,6 +227,10 @@ NAME and ARGS are as in `use-package'."
 	transient-values-file (nik/cache "transient/values.el")
 	transient-history-file (nik/cache "transient/history.el")))
 
+(use-feature vc-hooks
+  :config
+  (setq vc-follow-symlinks t))
+
 ;;; Nicer scrolling
 (setq scroll-step 1
       scroll-conservatively 101)
