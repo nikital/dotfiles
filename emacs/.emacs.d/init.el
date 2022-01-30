@@ -139,8 +139,6 @@ NAME and ARGS are as in `use-package'."
  :keymaps 'nik/spc
  "f" #'find-file
  "F" #'find-file-other-window
- "e" #'switch-to-buffer
- "E" #'switch-to-buffer-other-window
  )
 
 (defun nik/find-init ()
@@ -218,6 +216,38 @@ NAME and ARGS are as in `use-package'."
   (with-eval-after-load 'lisp-mode
     (add-to-list 'lisp-imenu-generic-expression
 		 (list "Packages" "^;;;\\s-*\\(.*\\)" 1))))
+
+(use-package vertico
+  :demand t
+  :config
+  (setq vertico-count 20)
+  (vertico-mode +1))
+
+(use-package orderless
+  :demand t
+  :config
+  (setq orderless-matching-styles '(orderless-regexp orderless-literal)
+	orderless-component-separator #'orderless-escapable-split-on-space
+	completion-styles '(orderless)))
+
+(use-package consult
+  :demand t
+  :general
+  ("C-s" #'consult-line)
+  (:keymaps
+   'nik/spc
+   "e" #'consult-buffer
+   "E" #'consult-buffer-other-window)
+  (:keymaps 'nik/spc
+   :prefix "j"
+   "i" #'consult-imenu)
+  :config
+  (setq consult-narrow-key ">"))
+
+(use-package marginalia
+  :demand t
+  :config
+  (marginalia-mode))
 
 (use-feature dired
   :config
