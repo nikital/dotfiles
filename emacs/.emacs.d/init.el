@@ -121,7 +121,7 @@ NAME and ARGS are as in `use-package'."
         evil-search-module 'evil-search
         evil-want-visual-char-semi-exclusive t
         )
-
+  (defalias #'forward-evil-word #'forward-evil-symbol)
   (evil-mode +1))
 
 (defun nik/copy-file-path ()
