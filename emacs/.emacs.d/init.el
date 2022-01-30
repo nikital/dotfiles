@@ -241,6 +241,11 @@ NAME and ARGS are as in `use-package'."
 (tool-bar-mode -1)
 (toggle-scroll-bar -1)
 
+;; Maximize on startup
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+(server-start)
+
 ;; Should be last
 (use-package gcmh
   :demand t
