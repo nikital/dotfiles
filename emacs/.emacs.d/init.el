@@ -448,8 +448,6 @@ run the attached function (if exists) and enable lsp"
    :prefix "h"
    "h" #'helpful-at-point))
 
-(add-to-list 'default-frame-alist '(font . "M PLUS 1 Code-11"))
-
 (use-package doom-themes
   :demand t
   :config
@@ -490,6 +488,8 @@ run the attached function (if exists) and enable lsp"
   (setq bookmark-file (nik/cache "bookmarks")))
 
 ;;; frame config
+
+(add-to-list 'default-frame-alist '(font . "M PLUS 1 Code-11"))
 
 (setq inhibit-startup-screen t)
 
