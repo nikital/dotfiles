@@ -381,6 +381,11 @@ run the attached function (if exists) and enable lsp"
    consult-line consult-imenu
    :preview-key 'any)
 
+  (setq consult-project-root-function
+        (lambda ()
+          (when-let (project (project-current))
+            (car (project-roots project)))))
+
   ;; Based on code from consult wiki:
   ;; https://github.com/minad/consult/wiki#find-files-using-fd
   (defvar consult--fd-command nil)
@@ -412,6 +417,22 @@ run the attached function (if exists) and enable lsp"
   :demand t
   :config
   (marginalia-mode))
+
+(use-package project
+  :demand t
+  :general
+  (:keymaps 'nik/spc
+   :prefix "p"
+   "w" #'nik/project-save
+   "d" #'project-dired
+   "k" #'project-kill-buffers
+   "p" #'project-switch-project)
+  :config
+  (defun nik/project-save ()
+    "Save the current project to the persistent project list."
+    (interactive)
+    (message "Project saved: %s" (cdr (project-current t))))
+  (setq project-list-file (nik/cache "projects")))
 
 (use-feature dired
   :config
