@@ -131,16 +131,6 @@ NAME and ARGS are as in `use-package'."
   (defalias #'forward-evil-word #'forward-evil-symbol)
   (evil-mode +1))
 
-(defun nik/copy-file-path ()
-  "Copy the full path of the current buffer's file."
-  (interactive)
-  (let ((filepath (if (equal major-mode 'dired-mode)
-                      default-directory
-                    (buffer-file-name))))
-    (when filepath
-      (kill-new filepath)
-      (message "%s" filepath))))
-
 ;;; General shortcuts/keymaps
 (general-define-key
  :keymaps 'nik/spc
@@ -157,11 +147,34 @@ NAME and ARGS are as in `use-package'."
    (expand-file-name "init.el" user-emacs-directory))
   (consult-imenu))
 
+(defun nik/copy-file-path ()
+  "Copy the full path of the current buffer's file."
+  (interactive)
+  (let ((filepath (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filepath
+      (kill-new filepath)
+      (message "%s" filepath))))
+
+(defun nik/copy-file-path-and-line ()
+  "Copy the full path of the current buffer's file."
+  (interactive)
+  (let* ((filepath (if (equal major-mode 'dired-mode)
+		       default-directory
+		     (buffer-file-name)))
+	 (line (number-to-string (line-number-at-pos)))
+	 (out (concat filepath ":" line)))
+    (when filepath
+      (kill-new out)
+      (message "%s" out))))
+
 (general-define-key
  :keymaps 'nik/spc
  :prefix "b"
  "r" #'revert-buffer
  "c" #'nik/copy-file-path
+ "l" #'nik/copy-file-path-and-line
  "i" #'nik/find-init
  "k" #'kill-buffer
  )
