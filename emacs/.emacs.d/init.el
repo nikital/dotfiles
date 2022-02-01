@@ -303,7 +303,9 @@ run the attached function (if exists) and enable lsp"
   :init
   (setq magit-define-global-key-bindings nil)
   :config
-  (setq magit-diff-refine-hunk t))
+  (setq magit-diff-refine-hunk t
+	;; Buggy implementation in magit-extras. Check later if it's fixed.
+	magit-bind-magit-project-status nil))
 
 (use-package transient
   :init
