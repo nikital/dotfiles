@@ -472,6 +472,12 @@ run the attached function (if exists) and enable lsp"
   (setq doom-gruvbox-brighter-comments t)
   (load-theme 'doom-gruvbox t))
 
+(use-feature paren
+  :demand t
+  :config
+  (setq show-paren-delay 0)
+  (show-paren-mode +1))
+
 ;; Collapses widely used minor modes
 (use-package minions
   :demand t
