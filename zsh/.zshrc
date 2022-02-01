@@ -39,6 +39,7 @@ export EDITOR=$VISUAL
 bindkey "^R" history-incremental-search-backward
 bindkey "^N" insert-last-word
 bindkey -s "^T" "^asudo ^e" # "t" for "toughguy"
+bindkey "^[[3~" delete-char
 
 
 ##### PROMPT #####
