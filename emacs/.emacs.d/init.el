@@ -85,7 +85,11 @@ NAME and ARGS are as in `use-package'."
   :demand t
   :init
   ;; Needed for evil-collection
-  (setq evil-want-keybinding nil)
+  (setq evil-want-keybinding nil
+	evil-want-Y-yank-to-eol t
+	evil-want-C-u-delete t
+        ;; TODO Emacs 28 changes stuff?
+        evil-undo-system 'undo-tree)
 
   :general
   (:states 'normal
@@ -121,10 +125,6 @@ NAME and ARGS are as in `use-package'."
         evil-ex-interactive-search-highlight 'selected-window
         ;; End/beginning of line is not an error
         evil-kbd-macro-suppress-motion-error t
-        ;; TODO Emacs 28 changes stuff?
-        evil-undo-system 'undo-tree
-        evil-want-C-u-delete t
-        evil-want-Y-yank-to-eol t
         evil-search-module 'evil-search
         evil-want-visual-char-semi-exclusive t
         )
