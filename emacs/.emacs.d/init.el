@@ -557,6 +557,9 @@ run the attached function (if exists) and enable lsp"
 
 (server-start)
 
+;;; personal settings
+(load (concat (file-name-directory load-file-name) "personal.el") t)
+
 ;; Should be last
 (use-package gcmh
   :demand t
