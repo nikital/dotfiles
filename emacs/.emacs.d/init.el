@@ -433,6 +433,10 @@ run the attached function (if exists) and enable lsp"
     (let* ((prompt-dir (consult--directory-prompt "Fd" dir))
 	   (default-directory (cdr prompt-dir)))
       (find-file (consult--find (car prompt-dir) #'consult--fd-builder initial))))
+  (setq project-switch-commands
+        '((consult-find "Find file" ?f)
+          (consult-ripgrep "Grep dir" ?d)
+	  (magit-status "Git" ?g)))
   )
 
 (use-package marginalia
