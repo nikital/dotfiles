@@ -223,6 +223,9 @@ NAME and ARGS are as in `use-package'."
 (use-package company-box
   :hook (company-mode . company-box-mode))
 
+;;; formatting
+(setq-default indent-tabs-mode nil)
+
 (use-package lsp-mode
   :general
   ;; Set the lsp prefix key
