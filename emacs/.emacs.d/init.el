@@ -205,6 +205,11 @@ NAME and ARGS are as in `use-package'."
   :config
   (global-evil-surround-mode +1))
 
+(use-package evil-nerd-commenter
+  :after evil
+  :general
+  (:states '(normal, visual) "gc" #'evilnc-comment-operator))
+
 (use-package company
   :demand t
   :general
