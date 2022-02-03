@@ -299,6 +299,8 @@ run the attached function (if exists) and enable lsp"
   (lsp-mode . lsp-enable-which-key-integration)
   :commands lsp)
 
+(use-package lsp-pyright)
+
 ;; Show additional search match info
 (use-package anzu
   :demand t
@@ -483,6 +485,8 @@ run the attached function (if exists) and enable lsp"
   (setq org-startup-indented t)
   (setq org-cycle-separator-lines 1)
   (setq org-directory "~/wiki"))
+
+(use-package yaml-mode)
 
 (use-package doom-themes
   :demand t
