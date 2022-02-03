@@ -463,6 +463,22 @@ run the attached function (if exists) and enable lsp"
    :prefix "h"
    "h" #'helpful-at-point))
 
+(use-package org
+  :general
+  (:keymaps 'nik/spc
+   :prefix "n"
+   "l" #'org-insert-link
+   "o" #'org-open-at-point
+   "L" #'org-store-link
+   "a" #'org-agenda)
+  (:keymaps 'org-mode-map
+   :states 'normal
+   "TAB" #'org-cycle)
+  :config
+  (setq org-startup-indented t)
+  (setq org-cycle-separator-lines 1)
+  (setq org-directory "~/wiki"))
+
 (use-package doom-themes
   :demand t
   :config
