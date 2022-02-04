@@ -496,8 +496,6 @@ run the attached function (if exists) and enable lsp"
   (setq org-cycle-separator-lines 1)
   (setq org-directory "~/wiki"))
 
-(use-package yaml-mode)
-
 (use-package doom-themes
   :demand t
   :config
@@ -542,6 +540,16 @@ run the attached function (if exists) and enable lsp"
 (use-feature bookmark
   :config
   (setq bookmark-file (nik/cache "bookmarks")))
+
+(use-package haskell-mode)
+(use-package lsp-haskell
+  :demand t)
+
+(use-package yaml-mode)
+
+(use-package json-mode)
+
+(use-package typescript-mode)
 
 ;;; frame config
 
