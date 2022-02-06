@@ -496,6 +496,24 @@ run the attached function (if exists) and enable lsp"
   (setq org-cycle-separator-lines 1)
   (setq org-directory "~/wiki"))
 
+(use-package org-roam
+  :general
+  (:keymaps 'nik/spc
+   :prefix "n"
+   "b" #'org-roam-buffer-toggle
+   "g" #'org-roam-graph
+   "i" #'org-roam-node-insert
+   "n" #'org-roam-node-find
+   "t" #'org-roam-tag-add)
+  :custom
+  (org-roam-directory
+   (concat (file-name-as-directory org-directory) "org-roam"))
+  :init
+  (setq org-roam-v2-ack t)
+  :config
+  (setq org-roam-db-location (nik/cache "org-roam.db"))
+  (org-roam-db-autosync-mode))
+
 (use-package doom-themes
   :demand t
   :config
