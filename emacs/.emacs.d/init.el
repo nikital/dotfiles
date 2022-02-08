@@ -302,6 +302,14 @@ run the attached function (if exists) and enable lsp"
   (lsp-mode . lsp-enable-which-key-integration)
   :commands lsp)
 
+(use-package xref
+  :general
+  (:states 'normal
+   "M-]" #'xref-find-references)
+  :config
+  (setq xref-prompt-for-identifier nil)
+  )
+
 (use-package lsp-pyright)
 
 ;; Show additional search match info
@@ -443,6 +451,8 @@ run the attached function (if exists) and enable lsp"
         '((consult-find "Find file" ?f)
           (consult-ripgrep "Grep dir" ?d)
 	  (magit-status "Git" ?g)))
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
   )
 
 (use-package marginalia
