@@ -492,6 +492,7 @@ run the attached function (if exists) and enable lsp"
    :states 'normal
    "TAB" #'org-cycle)
   :config
+  (require 'org-tempo)
   (setq org-startup-indented t)
   (setq org-cycle-separator-lines 1)
   (setq org-directory "~/wiki"))
