@@ -570,6 +570,8 @@ run the attached function (if exists) and enable lsp"
 
 (use-package typescript-mode)
 
+(use-package jenkinsfile-mode)
+
 ;;; frame config
 
 (add-to-list 'default-frame-alist '(font . "M PLUS 1 Code-11"))
