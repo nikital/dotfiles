@@ -407,7 +407,9 @@ run the attached function (if exists) and enable lsp"
   (:keymaps 'nik/spc
    :prefix "s"
    "d" #'consult-ripgrep
-   "f" #'consult-fd)
+   "D" (lambda () (interactive) (consult-ripgrep t))
+   "f" #'consult-fd
+   "F" (lambda () (interactive) (consult-fd t)))
   :config
   (setq consult-narrow-key ">"
 	consult-preview-key (kbd "C-;"))
