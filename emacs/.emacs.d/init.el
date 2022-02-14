@@ -410,7 +410,7 @@ run the attached function (if exists) and enable lsp"
    "f" #'consult-fd)
   :config
   (setq consult-narrow-key ">"
-	consult-preview-key (kbd "C-."))
+	consult-preview-key (kbd "C-;"))
 
   ;; Preview in-buffer stuff
   (consult-customize
