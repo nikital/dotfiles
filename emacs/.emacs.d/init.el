@@ -210,6 +210,12 @@ NAME and ARGS are as in `use-package'."
   :general
   (:states '(normal, visual) "gc" #'evilnc-comment-operator))
 
+(use-feature elec-pair
+  :demand t
+  :config
+  (electric-pair-mode +1))
+
+
 (use-package company
   :demand t
   :general
