@@ -356,6 +356,8 @@ run the attached function (if exists) and enable lsp"
 
 ;;; custom
 (setq custom-file (nik/cache "custom.el"))
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 ;;; Nicer scrolling
 (setq scroll-step 1
