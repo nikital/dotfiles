@@ -465,6 +465,12 @@ run the attached function (if exists) and enable lsp"
         xref-show-definitions-function #'consult-xref)
   )
 
+(use-package consult-lsp
+  :general
+  (:keymaps 'nik/spc
+   :prefix "c"
+   "s" #'consult-lsp-symbols))
+
 (use-package marginalia
   :demand t
   :config
