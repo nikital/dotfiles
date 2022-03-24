@@ -27,4 +27,4 @@ alias tnew='tmux new -s "$(basename $(pwd))"'
 alias tat='tmux attach'
 
 # Include custom aliases
-[[ -f .aliases.local ]] && source ~/.aliases.local
+[[ -f ~/.aliases.local ]] && source ~/.aliases.local
