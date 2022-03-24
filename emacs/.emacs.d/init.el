@@ -354,6 +354,13 @@ run the attached function (if exists) and enable lsp"
   :config
   (setq vc-follow-symlinks t))
 
+;; Use "dnf install libvterm-devel"
+(use-package vterm
+  :init
+  ;; Set a low response delay
+  (setq vterm-timer-delay 0.07)
+  (setq vterm-max-scrollback 5000))
+
 ;;; custom
 (setq custom-file (nik/cache "custom.el"))
 (when (file-exists-p custom-file)
