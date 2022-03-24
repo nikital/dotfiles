@@ -618,6 +618,9 @@ run the attached function (if exists) and enable lsp"
 
 (server-start)
 
+;;; Enable disabled commands
+(put 'narrow-to-region 'disabled nil)
+
 ;;; personal settings
 (load (concat (file-name-directory load-file-name) "personal.el") t)
 
