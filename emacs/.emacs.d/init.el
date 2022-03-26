@@ -265,6 +265,7 @@ NAME and ARGS are as in `use-package'."
                                   (python-mode (lambda () (require 'lsp-pyright)))
                                   js2-mode
                                   typescript-mode
+                                  svelte-mode
                                   groovy-mode
                                   web-mode
                                   json-mode
@@ -602,6 +603,8 @@ run the attached function (if exists) and enable lsp"
 (use-package json-mode)
 
 (use-package typescript-mode)
+
+(use-package svelte-mode)
 
 (use-package jenkinsfile-mode)
 
