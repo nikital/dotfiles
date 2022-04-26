@@ -223,6 +223,8 @@ NAME and ARGS are as in `use-package'."
    "C-w" nil
    "C-d" nil)
   :config
+  (setq company-dabbrev-downcase nil
+        company-dabbrev-ignore-case t)
   (global-company-mode +1)
   (company-tng-mode +1))
 
