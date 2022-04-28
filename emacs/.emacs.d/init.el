@@ -531,6 +531,7 @@ run the attached function (if exists) and enable lsp"
   (require 'org-tempo)
   (setq org-startup-indented t)
   (setq org-cycle-separator-lines 1)
+  (setq org-edit-src-content-indentation 0)
   (setq org-directory "~/wiki"))
 
 (use-package org-roam
