@@ -321,6 +321,14 @@ run the attached function (if exists) and enable lsp"
 
 (use-package lsp-pyright)
 
+(use-package yasnippet
+  ;; Needed for typescript mode because language server doesn't
+  ;; respect the fact that snippets are disabled. See
+  ;; https://github.com/typescript-language-server/typescript-language-server/issues/130
+  ;; and
+  ;; https://github.com/emacs-lsp/lsp-mode/blob/6327359f3b5e19aeaa1c9ee6bd9b80b51f95f843/lsp-completion.el#L584
+  :hook (typescript-mode . yas-minor-mode))
+
 ;; Show additional search match info
 (use-package anzu
   :demand t
