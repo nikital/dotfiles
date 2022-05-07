@@ -193,7 +193,9 @@ NAME and ARGS are as in `use-package'."
   (evil-collection-init))
 
 (use-package undo-tree
-  :hook (evil-local-mode . turn-on-undo-tree-mode))
+  :hook (evil-local-mode . turn-on-undo-tree-mode)
+  :config
+  (setq undo-tree-auto-save-history nil))
 
 (use-package evil-surround
   :general
