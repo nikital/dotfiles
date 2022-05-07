@@ -1,4 +1,4 @@
-;; early-init.el -*- mode: lisp-interaction; lexical-binding: t; -*-
+;; init.el -*- mode: lisp-interaction; lexical-binding: t; -*-
 
 ;; TODO Deal with native compilation once Emacs 28 is out.
 
