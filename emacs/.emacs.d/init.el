@@ -265,7 +265,7 @@ NAME and ARGS are as in `use-package'."
                                   haskell-literate-mode
                                   go-mode
                                   csharp-mode
-                                  java-mode
+                                  ;; java-mode
                                   (python-mode (lambda () (require 'lsp-pyright)))
                                   js2-mode
                                   typescript-mode
@@ -621,21 +621,8 @@ run the attached function (if exists) and enable lsp"
 
 (use-package jenkinsfile-mode)
 
-; https://github.com/GoogleChromeLabs/mojom-language-support/blob/main/mojom-lsp/README.md
-(require 'generic)
-(define-generic-mode mojom-mode
-  ;; comments
-  '("//" ("/*" . "*/"))
-  ;; keywords
-  '("module" "import" "struct" "union" "enum" "interface")
-  ;; font-locks
-  nil
-  ;; auto-mode
-  nil
-  ;; hooks
-  nil
-  "Major mode for mojom")
-(add-to-list 'auto-mode-alist '("\\.mojom$" . mojom-mode))
+;;; mojom
+(add-to-list 'auto-mode-alist '("\\.mojom$" . java-mode))
 
 ;;; frame config
 
