@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 emacs.d [emacs-args...]"
+    exit 1
+fi
+
+mkdir -p /tmp/emacs
+rm -f /tmp/emacs/.emacs.d
+ln -s $(realpath "$1") /tmp/emacs/.emacs.d
+shift 1
+exec env HOME=/tmp/emacs emacs "$@"
