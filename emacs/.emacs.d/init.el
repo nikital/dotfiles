@@ -88,8 +88,12 @@ NAME and ARGS are as in `use-package'."
   (setq evil-want-keybinding nil
 	evil-want-Y-yank-to-eol t
 	evil-want-C-u-delete t
+
         ;; TODO Emacs 28 changes stuff?
-        evil-undo-system 'undo-tree)
+        evil-undo-system 'undo-tree
+
+        evil-search-module 'evil-search
+        evil-symbol-word-search t)
 
   :general
   (:states 'normal
@@ -117,7 +121,6 @@ NAME and ARGS are as in `use-package'."
     (evil-scroll-line-down 5))
 
   (setq evil-ex-search-vim-style-regexp t
-        evil-symbol-word-search t
         evil-visual-state-cursor 'hollow
         evil-emacs-state-cursor 'hbar
         ;; Only do highlighting in selected window so that Emacs has less work
@@ -125,7 +128,6 @@ NAME and ARGS are as in `use-package'."
         evil-ex-interactive-search-highlight 'selected-window
         ;; End/beginning of line is not an error
         evil-kbd-macro-suppress-motion-error t
-        evil-search-module 'evil-search
         evil-want-visual-char-semi-exclusive t
         )
   (defalias #'forward-evil-word #'forward-evil-symbol)
