@@ -621,6 +621,22 @@ run the attached function (if exists) and enable lsp"
 
 (use-package jenkinsfile-mode)
 
+; https://github.com/GoogleChromeLabs/mojom-language-support/blob/main/mojom-lsp/README.md
+(require 'generic)
+(define-generic-mode mojom-mode
+  ;; comments
+  '("//" ("/*" . "*/"))
+  ;; keywords
+  '("module" "import" "struct" "union" "enum" "interface")
+  ;; font-locks
+  nil
+  ;; auto-mode
+  nil
+  ;; hooks
+  nil
+  "Major mode for mojom")
+(add-to-list 'auto-mode-alist '("\\.mojom$" . mojom-mode))
+
 ;;; frame config
 
 (add-to-list 'default-frame-alist '(font . "M PLUS 1 Code-11"))
