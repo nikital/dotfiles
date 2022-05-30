@@ -372,10 +372,39 @@ run the attached function (if exists) and enable lsp"
 
 ;; Use "dnf install libvterm-devel"
 (use-package vterm
+  :general
+  ("<f8>" #'nik/vterm-project)
   :init
   ;; Set a low response delay
   (setq vterm-timer-delay 0.07)
-  (setq vterm-max-scrollback 5000))
+  (setq vterm-max-scrollback 5000)
+  :config/el-patch
+  (defun vterm--internal (pop-to-buf-fun &optional arg)
+    (cl-assert vterm-buffer-name)
+    (let ((buf (cond ((numberp arg)
+                      (get-buffer-create (format "%s<%d>"
+                                                 vterm-buffer-name
+                                                 arg)))
+                     ((stringp arg) ((el-patch-swap generate-new-buffer get-buffer-create) arg))
+                     (arg (generate-new-buffer vterm-buffer-name))
+                     (t
+                      (get-buffer-create vterm-buffer-name)))))
+      (cl-assert (and buf (buffer-live-p buf)))
+      (funcall pop-to-buf-fun buf)
+      (with-current-buffer buf
+        (unless (derived-mode-p 'vterm-mode)
+          (vterm-mode)))
+      buf))
+  :config
+  (defun nik/vterm-project (&optional arg)
+    (interactive "P")
+    (let* ((default-directory (nik/project-root))
+           (vterm-name (format "%s[%s]%s"
+                               vterm-buffer-name
+                               default-directory
+                               (if (numberp arg) (format "<%d>" arg) ""))))
+      (vterm vterm-name)))
+  )
 
 ;;; custom
 (setq custom-file (nik/cache "custom.el"))
@@ -514,6 +543,14 @@ run the attached function (if exists) and enable lsp"
     (interactive)
     (message "Project saved: %s" (cdr (project-current t))))
   (setq project-list-file (nik/cache "projects")))
+
+(defun nik/project-root ()
+  "The project root is used if found by project, with the default
+directory as a fall back."
+  (or
+   (when-let ((project (project-current)))
+     (cdr project))
+   default-directory))
 
 (use-feature dired
   :config
