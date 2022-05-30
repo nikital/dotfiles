@@ -28,6 +28,7 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+;;; el-patch
 (straight-use-package 'el-patch)
 
 ;;; use-package
