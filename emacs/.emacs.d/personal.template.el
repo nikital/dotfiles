@@ -1,10 +1,10 @@
 (defun nik/find-XXXXXX ()
   (interactive)
-  (consult-fd ""))
+  (consult-fd "path"))
 
 (defun nik/grep-XXXXXX ()
   (interactive)
-  (consult-ripgrep ""))
+  (consult-ripgrep "path"))
 
 (general-define-key
  :keymaps 'nik/spc
