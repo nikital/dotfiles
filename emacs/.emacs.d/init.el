@@ -458,19 +458,19 @@ run the attached function (if exists) and enable lsp"
   (defun consult--fd-builder (input)
     (unless consult--fd-command
       (setq consult--fd-command
-	    (if (eq 0 (call-process-shell-command "fdfind"))
-		"fdfind"
-	      "fd")))
+            (if (eq 0 (call-process-shell-command "fdfind"))
+                "fdfind"
+              "fd")))
     (pcase-let* ((`(,arg . ,opts) (consult--command-split input))
-		 (`(,re . ,hl) (funcall consult--regexp-compiler
-					arg 'extended)))
+                 (`(,re . ,hl) (funcall consult--regexp-compiler
+                                        arg 'extended)))
       (when re
-	(list :command (append
-			(list consult--fd-command
+        (list :command (append
+                        (list consult--fd-command
                               "--color=never" "-i" "-p" "-H" "-t" "f"
-			      (consult--join-regexps re 'extended))
-			opts)
-	      :highlight hl))))
+                              (consult--join-regexps re 'extended))
+                        opts)
+              :highlight hl))))
 
   (defun consult-fd (&optional dir initial)
     (interactive "P")
