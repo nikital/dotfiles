@@ -531,7 +531,13 @@ run the attached function (if exists) and enable lsp"
 (use-package embark
   :general
   ("M-z" #'embark-act)
+  (:keymaps 'embark-file-map
+   "g" #'nik/embark-magit-status)
   :config
+  (defun nik/embark-magit-status (file)
+    "Run `magit-status` on repo containing the embark target."
+    (interactive "GFile: ")
+    (magit-status (locate-dominating-file file ".git")))
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
