@@ -528,6 +528,22 @@ run the attached function (if exists) and enable lsp"
   :config
   (marginalia-mode))
 
+(use-package embark
+  :general
+  ("M-z" #'embark-act)
+  :config
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+(use-package embark-consult
+  :demand t
+  :after (embark consult)
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
 (use-package project
   :demand t
   :general
