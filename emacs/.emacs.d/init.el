@@ -592,9 +592,8 @@ directory as a fall back."
   :general
   (:keymaps 'nik/spc
    :prefix "n"
-   "l" #'org-insert-link
+   "l" #'org-store-link
    "o" #'org-open-at-point
-   "L" #'org-store-link
    "a" #'org-agenda)
   (:keymaps 'org-mode-map
    :states 'normal
