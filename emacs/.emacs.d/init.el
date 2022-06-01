@@ -688,6 +688,10 @@ directory as a fall back."
 ;;; frame config
 
 (add-to-list 'default-frame-alist '(font . "M PLUS 1 Code-11"))
+(setq frame-title-format
+      '(multiple-frames
+        ("" invocation-name "@" system-name " -- %b")
+        ("" invocation-name "@" system-name)))
 
 (setq inhibit-startup-screen t)
 
