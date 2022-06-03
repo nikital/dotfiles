@@ -13,6 +13,7 @@
  ("emacs-which-key" . "1ab1d0cc88843c9a614ed3226c5a1070e32e4823")
  ("emacsmirror-mirror" . "f5e5fc8fb9c6dd5d9319819ab0161a9f78c2e657")
  ("emacsql" . "373975cbccf7776af771e23f86043b236a330702")
+ ("embark" . "7eab6ea6182581f508c20e9a60c40c106a3539bd")
  ("evil" . "157af04d2cf466e301e82b0e667c5e7203fd96a2")
  ("evil-anzu" . "d3f6ed4773b48767bd5f4708c7f083336a8a8a86")
  ("evil-collection" . "e1bbf13194e06c435cd3328b2b431c9c46fbbf40")
