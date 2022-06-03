@@ -189,6 +189,16 @@ NAME and ARGS are as in `use-package'."
  "m" #'bookmark-jump
  )
 
+;; Since this package overrides the built-in xref, load it early
+(use-package xref
+  :general
+  (:states 'normal
+   "M-]" #'xref-find-references)
+  :commands (xref-find-definitions)
+  :config
+  (setq xref-prompt-for-identifier nil)
+  )
+
 (use-package evil-collection
   :demand t
   :after evil
@@ -315,14 +325,6 @@ run the attached function (if exists) and enable lsp"
   ;; Enable which-key integration
   (lsp-mode . lsp-enable-which-key-integration)
   :commands lsp)
-
-(use-package xref
-  :general
-  (:states 'normal
-   "M-]" #'xref-find-references)
-  :config
-  (setq xref-prompt-for-identifier nil)
-  )
 
 (use-package lsp-pyright)
 
