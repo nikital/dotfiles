@@ -573,7 +573,7 @@ run the attached function (if exists) and enable lsp"
 directory as a fall back."
   (or
    (when-let ((project (project-current)))
-     (car (project-roots project)))
+     (car (last (car (project-roots project)))))
    default-directory))
 
 (use-feature dired
