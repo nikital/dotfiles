@@ -36,6 +36,7 @@
  ("lsp-haskell" . "daa51072e1718ca075987901fccbbc2357bca1fc")
  ("lsp-mode" . "3b11afbd1bca586d05d05d56526ad52ea8c58df6")
  ("lsp-pyright" . "ab7369d96f4d7d058d0e06e743f86fda8ecc191c")
+ ("lsp-ui" . "0a6368d38dc32e52abcbd52b63d1e557e42c66e6")
  ("magit" . "4b8eab3af130c47421482c1d28c1cbcb033106fc")
  ("marginalia" . "26f2bd9ee7b63bcad6604108e2f565b34bc6083b")
  ("markdown-mode" . "4477f381de0068a04b55e198c32614793f67b38a")

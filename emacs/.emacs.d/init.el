@@ -259,7 +259,6 @@ NAME and ARGS are as in `use-package'."
    "a" #'lsp-execute-code-action
    "r" #'lsp-rename
    "R" #'lsp-workspace-restart
-   "I" #'lsp-ui-imenu
    "o" #'lsp-clangd-find-other-file)
   (:keymaps 'nik/spc
    "\"" #'lsp-find-implementation)
@@ -325,6 +324,15 @@ run the attached function (if exists) and enable lsp"
   ;; Enable which-key integration
   (lsp-mode . lsp-enable-which-key-integration)
   :commands lsp)
+
+(use-package lsp-ui
+  :general
+  (:keymaps 'nik/spc
+   :prefix "c"
+   "I" #'lsp-ui-imenu)
+  :config
+  (setq lsp-imenu-index-function #'lsp-imenu-create-categorized-index)
+  )
 
 (use-package lsp-pyright)
 
