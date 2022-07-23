@@ -5,4 +5,5 @@
 !/cache/straight/versions/
 
 /.cache/
+/eln-cache/
 /personal.el
