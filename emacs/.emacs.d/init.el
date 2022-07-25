@@ -1,7 +1,5 @@
 ;; init.el -*- mode: lisp-interaction; lexical-binding: t; -*-
 
-;; TODO Deal with native compilation once Emacs 28 is out.
-
 (defvar nik/cache
   (expand-file-name "cache" user-emacs-directory))
 (defun nik/cache (path)
