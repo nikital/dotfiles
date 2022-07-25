@@ -710,7 +710,7 @@ directory as a fall back."
 
 ;;; frame config
 
-(add-to-list 'default-frame-alist '(font . "M PLUS 1 Code-11"))
+(add-to-list 'default-frame-alist '(font . "M PLUS 1 Code-11:weight=normal"))
 (setq frame-title-format
       '(multiple-frames
         ("" invocation-name "@" system-name " -- %b")
