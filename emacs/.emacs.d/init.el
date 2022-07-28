@@ -311,6 +311,7 @@ run the attached function (if exists) and enable lsp"
   ;; Set clangd default parameters
   (setq lsp-clients-clangd-args '("--header-insertion-decorators=0"
                                   "--completion-style=detailed"))
+  (setq lsp-auto-execute-action nil)
   :hook
   ;; Postpone lsp load for after dir local vars are read
   ;; Do not load lsp if dir local vars are not enabled (e.g. on preview)
@@ -327,8 +328,12 @@ run the attached function (if exists) and enable lsp"
   :general
   (:keymaps 'nik/spc
    :prefix "c"
-   "I" #'lsp-ui-imenu)
+   "I" #'lsp-ui-imenu
+   "d" #'lsp-ui-doc-show)
   :config
+  (setq lsp-ui-doc-show-with-mouse nil)
+  (setq lsp-ui-doc-position 'at-point)
+  (setq lsp-ui-sideline-show-code-actions t)
   (setq lsp-imenu-index-function #'lsp-imenu-create-categorized-index)
   )
 
