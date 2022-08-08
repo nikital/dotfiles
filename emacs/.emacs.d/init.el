@@ -729,6 +729,7 @@ directory as a fall back."
 
 ;; Cleanup the frame UI
 (tool-bar-mode -1)
+(menu-bar-mode -1)
 (toggle-scroll-bar -1)
 
 ;; Maximize on startup
