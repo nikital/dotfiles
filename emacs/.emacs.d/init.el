@@ -736,6 +736,8 @@ directory as a fall back."
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 
+(column-number-mode +1)
+
 ;; Maximize on startup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
