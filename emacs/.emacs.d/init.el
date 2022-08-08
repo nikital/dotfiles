@@ -228,6 +228,13 @@ NAME and ARGS are as in `use-package'."
   :config
   (electric-pair-mode +1))
 
+(use-package avy
+  :general
+  (:states 'motion
+           "C-;" #'avy-goto-char-timer)
+  :config
+  (setq avy-timeout-seconds 0.3))
+
 (use-package company
   :demand t
   :general

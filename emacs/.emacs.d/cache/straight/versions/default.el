@@ -1,5 +1,6 @@
 (("annalist.el" . "134fa3f0fb91a636a1c005c483516d4b64905a6d")
  ("anzu" . "5abb37455ea44fa401d5f4c1bdc58adb2448db67")
+ ("avy" . "ba5f035be33693d1a136a5cbeedb24327f551a92")
  ("company-mode" . "16ffeba5ef96c4c8e0cd39860b5402e25e304601")
  ("compat" . "27728fa9b154610112c59e925aceb39f2f2da0c4")
  ("consult" . "7c5a98a6abe5a42a9005d8c83a7ebef849e33e63")
