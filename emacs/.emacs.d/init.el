@@ -201,6 +201,7 @@ NAME and ARGS are as in `use-package'."
   :demand t
   :after evil
   :config
+  (delete 'diff-mode evil-collection-mode-list)
   (evil-collection-init))
 
 (use-package undo-tree
