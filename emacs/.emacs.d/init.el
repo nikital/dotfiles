@@ -228,7 +228,6 @@ NAME and ARGS are as in `use-package'."
   :config
   (electric-pair-mode +1))
 
-
 (use-package company
   :demand t
   :general
@@ -240,9 +239,6 @@ NAME and ARGS are as in `use-package'."
         company-dabbrev-ignore-case t)
   (global-company-mode +1)
   (company-tng-mode +1))
-
-(use-package company-box
-  :hook (company-mode . company-box-mode))
 
 ;;; formatting
 (setq-default indent-tabs-mode nil)
