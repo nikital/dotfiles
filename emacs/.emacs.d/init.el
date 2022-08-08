@@ -658,7 +658,11 @@ directory as a fall back."
         doom-themes-enable-italic t)
   ;; Set brighter comments
   (setq doom-gruvbox-brighter-comments t)
-  (load-theme 'doom-gruvbox t))
+  (load-theme 'doom-gruvbox t)
+  (set-face-attribute
+   'tab-bar-tab nil
+   :foreground "#fbf1c7" :background "#66542a"
+   :weight 'bold))
 
 (use-feature paren
   :demand t
