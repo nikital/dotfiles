@@ -379,6 +379,20 @@ run the attached function (if exists) and enable lsp"
 	;; Buggy implementation in magit-extras. Check later if it's fixed.
 	magit-bind-magit-project-status nil))
 
+(use-package git-link
+  :general
+  (:keymaps 'nik/spc
+   :prefix "g"
+   "l" #'git-link)
+  :config
+  (defun nik/git-link-chromium (hostname dirname filename branch commit start end)
+    (format "https://source.chromium.org/chromium/chromium/src/+/main:%s;l=%s"
+            filename
+            start))
+  (add-to-list 'git-link-remote-alist
+               '("chromium\\.googlesource\\.com" nik/git-link-chromium))
+  (setq git-link-use-commit t))
+
 (use-package transient
   :init
   (setq transient-levels-file (nik/cache "transient/levels.el")

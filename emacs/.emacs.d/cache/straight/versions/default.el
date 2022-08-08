@@ -24,6 +24,7 @@
  ("flycheck" . "8541a61053bba1f2f31d0791e597cd3c78a21456")
  ("gcmh" . "0089f9c3a6d4e9a310d0791cf6fa8f35642ecfd9")
  ("general.el" . "9651024e7f40a8ac5c3f31f8675d3ebe2b667344")
+ ("git-link" . "fe2e8aa92dd8f1a9fb3f471658701487ff21f22b")
  ("gnu-elpa-mirror" . "465707c1f0dc0bf440200b2f3b41833141f9b0ac")
  ("goto-chg" . "278cd3e6d5107693aa2bb33189ca503f22f227d0")
  ("groovy-emacs-modes" . "c612ac1e9f742856914ad6e8eb9e9dc169f489ab")
