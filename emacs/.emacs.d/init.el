@@ -339,6 +339,8 @@ run the attached function (if exists) and enable lsp"
 
 (use-package lsp-pyright)
 
+(use-package flycheck)
+
 (use-package yasnippet
   ;; Needed for typescript mode because language server doesn't
   ;; respect the fact that snippets are disabled. See
