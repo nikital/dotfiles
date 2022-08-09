@@ -682,6 +682,9 @@ directory as a fall back."
    :foreground "#fbf1c7" :background "#66542a"
    :weight 'bold))
 
+(use-package google-c-style
+  :hook (c-mode-common . google-set-c-style))
+
 (use-feature paren
   :demand t
   :config

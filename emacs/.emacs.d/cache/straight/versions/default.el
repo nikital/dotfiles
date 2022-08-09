@@ -54,6 +54,7 @@
  ("s.el" . "08661efb075d1c6b4fa812184c1e5e90c08795a9")
  ("spinner" . "34905eae12a236753fa88abc831eff1e41e8576e")
  ("straight.el" . "4517e118ee43f849f708025dbb2cf4f281793121")
+ ("styleguide" . "099770e27c0727d3e9489f4c4c5226f5e41affab")
  ("svelte-mode" . "6a1d4274af7f4c0f271f77bd96678c3dd1fa68e1")
  ("themes" . "d79a41f593c69697af1ddaac971c0c47ecc446a8")
  ("transient" . "cc887ebe3fa85a3642d937efe2ff882b356da9c0")
