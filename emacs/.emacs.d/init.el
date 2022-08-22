@@ -766,6 +766,12 @@ directory as a fall back."
 
 (server-start)
 
+;;; Window management
+(defun nik/quit-other-window (&optional kill)
+  (interactive)
+  (quit-window kill (next-window)))
+(general-define-key "<f7>" #'nik/quit-other-window)
+
 ;;; Enable disabled commands
 (put 'narrow-to-region 'disabled nil)
 
