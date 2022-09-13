@@ -377,7 +377,8 @@ run the attached function (if exists) and enable lsp"
   :config
   (setq magit-diff-refine-hunk t
 	;; Buggy implementation in magit-extras. Check later if it's fixed.
-	magit-bind-magit-project-status nil))
+	magit-bind-magit-project-status nil)
+  (delete #'magit-blame-maybe-update-revision-buffer magit-blame-goto-chunk-hook))
 
 (use-package git-link
   :general
