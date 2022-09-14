@@ -34,6 +34,24 @@
     (nik/--gn-refs--get-target (buffer-file-name))
     "'")) )
 
+(defun nik/--close-process-on-success (process event)
+  (when (and
+         (equal event "finished\n")
+         (equal (process-exit-status process) 0))
+    (kill-buffer (process-buffer process))))
+
+(defun nik/gclient-sync ()
+  (interactive)
+  (let ((process (start-process-shell-command
+                  "gclient sync"
+                  "*gclient sync*"
+                  "cd XXXXX && gclient sync")))
+    (with-current-buffer (process-buffer process)
+      (display-buffer (current-buffer))
+      (shell-mode)
+      (set-process-filter process 'comint-output-filter))
+    (set-process-sentinel process #'nik/--close-process-on-success)))
+
 (defun nik/--extract-filename-from-patch ()
   (save-excursion
     (beginning-of-buffer)
