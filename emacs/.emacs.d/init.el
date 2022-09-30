@@ -504,13 +504,20 @@ run the attached function (if exists) and enable lsp"
    "D" (lambda () (interactive) (consult-ripgrep t))
    "f" #'consult-fd
    "F" (lambda () (interactive) (consult-fd t)))
+  (:keymaps 'nik/spc
+   "*" #'nik/consult-line-symbol-at-point)
   :config
   (setq consult-narrow-key ">"
 	consult-preview-key (kbd "C-;"))
 
+  (defun nik/consult-line-symbol-at-point ()
+    (interactive)
+    (consult-line (thing-at-point 'symbol)))
+
   ;; Preview in-buffer stuff
   (consult-customize
    consult-line consult-imenu
+   nik/consult-line-symbol-at-point
    :preview-key 'any)
 
   (setq consult-project-root-function
