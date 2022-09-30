@@ -173,7 +173,7 @@ NAME and ARGS are as in `use-package'."
 (general-define-key
  :keymaps 'nik/spc
  :prefix "b"
- "r" #'revert-buffer
+ "r" #'revert-buffer-quick
  "c" #'nik/copy-file-path
  "l" #'nik/copy-file-path-and-line
  "i" #'nik/find-init
