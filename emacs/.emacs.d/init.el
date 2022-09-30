@@ -730,6 +730,11 @@ directory as a fall back."
   :config
   (setq bookmark-file (nik/cache "bookmarks")))
 
+(use-feature so-long
+  :demand t
+  :config
+  (global-so-long-mode +1))
+
 (use-package haskell-mode)
 (use-package lsp-haskell
   :demand t)
