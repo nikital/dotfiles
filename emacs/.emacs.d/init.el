@@ -630,7 +630,8 @@ directory as a fall back."
 
 (use-feature dired
   :config
-  (setq dired-dwim-target t))
+  (setq dired-dwim-target t)
+  (setq dired-kill-when-opening-new-dired-buffer t))
 
 (use-package helpful
   :general
