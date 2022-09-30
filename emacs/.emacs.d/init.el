@@ -763,7 +763,7 @@ directory as a fall back."
 ;; Don't split vertically
 (setq split-height-threshold nil)
 
-(defalias 'yes-or-no-p 'y-or-n-p)
+(setq use-short-answers t)
 
 (server-start)
 
