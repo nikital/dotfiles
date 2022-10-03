@@ -86,6 +86,51 @@
                      ".patch")))
         (find-file-existing patch)))))
 
+(defun nik/ifdef-above ()
+  (interactive)
+  (save-excursion
+    (beginning-of-line)
+    (open-line 1)
+    (insert "#if XXX")))
+(defun nik/ifdef-below ()
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (open-line 1)
+    (forward-line)
+    (insert "#endif")))
+
+(defun nik/island-copyright ()
+  (interactive)
+  (insert
+   "bla " (format-time-string "%Y") " bla\n"))
+
+(defun nik/island-header-guard ()
+  (interactive)
+  (let* ((root "XXX")
+         (file (file-relative-name (buffer-file-name) root))
+         (upcased-file (upcase file))
+         (replaced-file (replace-regexp-in-string "\\.\\|/" "_" upcased-file))
+         (guard (concat replaced-file "_")))
+    (nik/island-copyright)
+    (insert
+     "\n"
+     "#ifndef " guard "\n"
+     "#define " guard "\n"
+     "\n"
+     "#endif  // " guard)
+    (previous-line)))
+
+(defun nik/island-include ()
+  (interactive)
+  (let* ((root "XXX")
+         (file (file-relative-name (buffer-file-name) root))
+         (header (file-name-with-extension file ".h")))
+    (nik/island-copyright)
+    (insert
+     "\n"
+     "#include \"" header "\"\n")))
+
 (general-define-key
  :keymaps 'nik/spc
  :prefix "i"
