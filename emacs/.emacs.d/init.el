@@ -248,6 +248,10 @@ NAME and ARGS are as in `use-package'."
   (global-company-mode +1)
   (company-tng-mode +1))
 
+(use-package company-statistics
+  :config
+  (company-statistics-mode))
+
 ;;; formatting
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 80)

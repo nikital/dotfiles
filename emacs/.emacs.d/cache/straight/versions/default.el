@@ -2,6 +2,7 @@
  ("anzu" . "5abb37455ea44fa401d5f4c1bdc58adb2448db67")
  ("avy" . "955c8dedd68c74f3cf692c1249513f048518c4c9")
  ("company-mode" . "48fea7a905b3bcc6d97609316beced666da89b1f")
+ ("company-statistics" . "e62157d43b2c874d2edbd547c3bdfb05d0a7ae5c")
  ("compat" . "056e3ccffc716990dcb7b33273453d5fce0402de")
  ("consult" . "3226c1a01e0a2a4352b2c885b8f4eb22610d99af")
  ("consult-lsp" . "58b541476203fa68e9e7682531f2a10e11780857")
