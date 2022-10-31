@@ -250,6 +250,7 @@ NAME and ARGS are as in `use-package'."
 
 ;;; formatting
 (setq-default indent-tabs-mode nil)
+(setq-default fill-column 80)
 
 (use-package lsp-mode
   :general
