@@ -4,6 +4,12 @@ alias l='exa -lga'
 alias lb='l -B'
 alias ll='echo "Use l"'
 
+mcd() {
+  mkdir -p "$1"
+  cd "$1"
+}
+compdef mcd=cd
+
 # emacs
 alias vi=$EDITOR
 alias em='emacsclient -n'
