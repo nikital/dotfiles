@@ -639,6 +639,20 @@ directory as a fall back."
   (setq dired-dwim-target t)
   (setq dired-kill-when-opening-new-dired-buffer t))
 
+(use-feature tab-bar
+  :general
+  ("C-<next>" #'nik/tab-bar-next-tab-or-create
+   "C-<prior>" #'tab-bar-switch-to-prev-tab)
+  :config
+  (defun nik/tab-bar-next-tab-or-create ()
+    (interactive)
+    (let* ((tabs (funcall tab-bar-tabs-function))
+           (index (or (tab-bar--current-tab-index tabs) 0))
+           (current-tab-last-p (= index (1- (length tabs)))))
+      (if current-tab-last-p
+          (tab-bar-new-tab)
+        (tab-bar-switch-to-next-tab)))))
+
 (use-package helpful
   :general
   ([remap describe-function] #'helpful-callable
