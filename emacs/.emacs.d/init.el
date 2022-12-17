@@ -140,6 +140,7 @@ NAME and ARGS are as in `use-package'."
  "e" #'switch-to-buffer
  "E" #'switch-to-buffer-other-window
  "h" help-map
+ "DEL" #'evil-ex-nohighlight
  )
 
 (defun nik/find-init ()
