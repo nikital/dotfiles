@@ -52,7 +52,6 @@ git_prompt_info() {
   fi
 }
 export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%2~%{$reset_color%}] '
-export RPS1='%D{%T}'
 
 ##### HISTORY #####
 
