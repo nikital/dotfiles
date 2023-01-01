@@ -349,7 +349,9 @@ run the attached function (if exists) and enable lsp"
 
 (use-package lsp-pyright)
 
-(use-package flycheck)
+(use-package flycheck
+  :config
+  (add-to-list 'flycheck-check-syntax-automatically 'idle-buffer-switch))
 
 (use-package yasnippet
   ;; Needed for typescript mode because language server doesn't
