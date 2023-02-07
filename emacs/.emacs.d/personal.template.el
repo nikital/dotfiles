@@ -1,10 +1,12 @@
+;; -*- mode: lisp-interaction; lexical-binding: t; -*-
+
 (defun nik/find-XXXXXX ()
   (interactive)
-  (consult-fd "path"))
+  (consult-fd "XXXXXX"))
 
 (defun nik/grep-XXXXXX ()
   (interactive)
-  (consult-ripgrep "path"))
+  (consult-ripgrep "XXXXXX"))
 
 (general-define-key
  :keymaps 'nik/spc
@@ -14,7 +16,7 @@
  ">" #'nik/find-XXXXXX
  )
 
-(load-file "XXX/src/tools/emacs/gn.el")
+(load-file "XXXX/gn.el")
 
 (defun nik/--gn-refs--get-target (f)
   (let ((dir (string-trim-right (file-name-directory f) "/"))
@@ -30,9 +32,13 @@
   (interactive)
   (async-shell-command
    (concat
-    "cd XXXX && gn refs XXXX '"
+    "cd XXXXX && gn refs XXXXXXXX '"
     (nik/--gn-refs--get-target (buffer-file-name))
     "'")) )
+
+(defun nik/XXXXXX-status ()
+  (interactive)
+  (magit-status "XXXXXX"))
 
 (defun nik/--close-process-on-success (process event)
   (when (and
@@ -45,7 +51,42 @@
   (let ((process (start-process-shell-command
                   "gclient sync"
                   "*gclient sync*"
-                  "cd XXXXX && gclient sync")))
+                  "cd XXXXXX && XXXXXX/nikitools/is-gclient-synced || gclient sync")))
+    (with-current-buffer (process-buffer process)
+      (display-buffer (current-buffer))
+      (shell-mode)
+      (set-process-filter process 'comint-output-filter))
+    (set-process-sentinel process #'nik/--close-process-on-success)))
+
+(defun nik/XXXXXX-export-patches ()
+  (interactive)
+  (let ((process (start-process-shell-command
+                  "export patches"
+                  "*export patches*"
+                  "cd XXXXX && git commit -am . && XXXXXX/script/patches_export_all.py --repo-dir . --patch-dir XXXXXX/patches")))
+    (with-current-buffer (process-buffer process)
+      (display-buffer (current-buffer))
+      (shell-mode)
+      (set-process-filter process 'comint-output-filter))
+    (set-process-sentinel process #'nik/--close-process-on-success)))
+
+(defun nik/XXXXXX-reapply-by-commit ()
+  (interactive)
+  (let ((process (start-process-shell-command
+                  "reapply patches"
+                  "*reapply patches*"
+                  "cd XXXXXX && XXXXXXX/nikitools/patches_reapply_by_commit_experimental.py --repo-dir .. --patch-dir patches")))
+    (with-current-buffer (process-buffer process)
+      (display-buffer (current-buffer))
+      (shell-mode)
+      (set-process-filter process 'comint-output-filter))
+    (set-process-sentinel process #'nik/--close-process-on-success)))
+(defun nik/XXXXXX-reexport-by-commit ()
+  (interactive)
+  (let ((process (start-process-shell-command
+                  "reexport patches"
+                  "*reexport patches*"
+                  "cd XXXXXX && XXXX/nikitools/patches_reexport_by_commit_experimental.py --repo-dir .. --patch-dir patches")))
     (with-current-buffer (process-buffer process)
       (display-buffer (current-buffer))
       (shell-mode)
@@ -69,7 +110,7 @@
 
 (defun nik/goto-patch-dwim ()
   (interactive)
-  (let ((root "XXX"))
+  (let ((root "XXXXXXXX/src"))
     (if (equal "patch" (file-name-extension (buffer-file-name)))
         (let ((filename (concat root (nik/--extract-filename-from-patch)))
               (line (nik/--extract-line-from-patch)))
@@ -81,38 +122,25 @@
       (let* ((file (file-relative-name (buffer-file-name) root))
              (patch (concat
                      root
-                     "/XXXX/"
+                     "/XXXXXX/patches/"
                      (replace-regexp-in-string "/" "-" file)
                      ".patch")))
         (find-file-existing patch)))))
 
-(defun nik/ifdef-above ()
+(defun nik/XXXXXX-copyright ()
   (interactive)
-  (save-excursion
-    (beginning-of-line)
-    (open-line 1)
-    (insert "#if XXX")))
-(defun nik/ifdef-below ()
-  (interactive)
-  (save-excursion
-    (end-of-line)
-    (open-line 1)
-    (forward-line)
-    (insert "#endif")))
+  (insert 
+   "// Copyright " (format-time-string "%Y") " bla\n"
+   ))
 
-(defun nik/island-copyright ()
+(defun nik/XXXXXX-header-guard ()
   (interactive)
-  (insert
-   "bla " (format-time-string "%Y") " bla\n"))
-
-(defun nik/island-header-guard ()
-  (interactive)
-  (let* ((root "XXX")
+  (let* ((root "XXXXXX/XXXXXX_src")
          (file (file-relative-name (buffer-file-name) root))
          (upcased-file (upcase file))
          (replaced-file (replace-regexp-in-string "\\.\\|/" "_" upcased-file))
          (guard (concat replaced-file "_")))
-    (nik/island-copyright)
+    (nik/XXXXXX-copyright)
     (insert
      "\n"
      "#ifndef " guard "\n"
@@ -121,19 +149,43 @@
      "#endif  // " guard)
     (previous-line)))
 
-(defun nik/island-include ()
+(defun nik/XXXXXX-include ()
   (interactive)
-  (let* ((root "XXX")
+  (let* ((root "XXXXX/src/")
          (file (file-relative-name (buffer-file-name) root))
          (header (file-name-with-extension file ".h")))
-    (nik/island-copyright)
+    (nik/XXXXXX-copyright)
     (insert
      "\n"
      "#include \"" header "\"\n")))
+
+(defun nik/ifdef-above ()
+  (interactive)
+  (save-excursion
+    (beginning-of-line)
+    (open-line 1)
+    (insert "#if !BUILDFLAG(XXXX)")))
+(defun nik/ifdef-below ()
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (open-line 1)
+    (forward-line)
+    (insert "#endif")))
 
 (general-define-key
  :keymaps 'nik/spc
  :prefix "i"
  "r" #'nik/gn-refs
+ "g" #'nik/XXXXXX-status
+ "c" #'nik/XXXXXX-status
  "p" #'nik/goto-patch-dwim
+ "S" #'nik/gclient-sync
+ "E" #'nik/XXXXXX-export-patches
+
+ "k" #'nik/ifdef-above
+ "j" #'nik/ifdef-below
+
+ "<" #'nik/XXXXXX-reapply-by-commit
+ ">" #'nik/XXXXXX-reexport-by-commit
  )
