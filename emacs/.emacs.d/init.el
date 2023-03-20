@@ -467,7 +467,9 @@ run the attached function (if exists) and enable lsp"
   :init
   (with-eval-after-load 'lisp-mode
     (add-to-list 'lisp-imenu-generic-expression
-		 (list "Packages" "^;;;\\s-*\\(.*\\)" 1))))
+		 (list "Packages" "^;;;\\s-*\\(.*\\)" 1)))
+  :config
+  (setq imenu-max-item-length nil))
 
 (use-package vertico
   :straight (:files (:defaults "extensions/*.el"))
