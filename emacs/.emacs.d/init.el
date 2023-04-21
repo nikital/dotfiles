@@ -815,6 +815,7 @@ directory as a fall back."
 
 ;;; Enable disabled commands
 (put 'narrow-to-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
 
 ;;; personal settings
 (load (concat (file-name-directory load-file-name) "personal.el") t)
