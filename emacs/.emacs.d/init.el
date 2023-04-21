@@ -521,7 +521,7 @@ run the attached function (if exists) and enable lsp"
    "*" #'nik/consult-line-symbol-at-point)
   :config
   (setq consult-narrow-key ">"
-	consult-preview-key (kbd "C-;"))
+	consult-preview-key "C-;")
 
   (defun nik/consult-line-symbol-at-point ()
     (interactive)
