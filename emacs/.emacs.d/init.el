@@ -521,7 +521,7 @@ run the attached function (if exists) and enable lsp"
    "*" #'nik/consult-line-symbol-at-point)
   :config
   (setq consult-narrow-key ">"
-	consult-preview-key "C-;")
+        consult-preview-key "C-;")
 
   (defun nik/consult-line-symbol-at-point ()
     (interactive)
@@ -566,7 +566,7 @@ run the attached function (if exists) and enable lsp"
   (setq project-switch-commands
         '((consult-find "Find file" ?f)
           (consult-ripgrep "Grep dir" ?d)
-	  (magit-status "Git" ?g)))
+          (magit-status "Git" ?g)))
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
   )
