@@ -551,18 +551,18 @@ run the attached function (if exists) and enable lsp"
                  (`(,re . ,hl) (funcall consult--regexp-compiler
                                         arg 'extended t)))
       (when re
-        (list :command (append
-                        (list consult--fd-command
-                              "--color=never" "-i" "-p" "-H" "-t" "f"
-                              (consult--join-regexps re 'extended))
-                        opts)
-              :highlight hl))))
+        (cons (append
+               (list consult--fd-command
+                     "--color=never" "--full-path"
+                     (consult--join-regexps re 'extended))
+               opts)
+              hl))))
 
   (defun consult-fd (&optional dir initial)
     (interactive "P")
-    (let* ((prompt-dir (consult--directory-prompt "Fd" dir))
-	   (default-directory (cdr prompt-dir)))
-      (find-file (consult--find (car prompt-dir) #'consult--fd-builder initial))))
+    (pcase-let* ((`(,prompt ,paths ,dir) (consult--directory-prompt "Fd" dir))
+                 (default-directory dir))
+      (find-file (consult--find prompt #'consult--fd-builder initial))))
   (setq project-switch-commands
         '((consult-find "Find file" ?f)
           (consult-ripgrep "Grep dir" ?d)
