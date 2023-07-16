@@ -43,6 +43,7 @@
  ("lsp-pyright" . "54a2acddfdd7c3d31cb804a042305a3c6e60cf81")
  ("lsp-ui" . "295d8984da06a745b0a36c56e28ce915bc389adb")
  ("magit" . "a103d11a8a8b4361cf7d5f45f1ac0156c7870b43")
+ ("magit-tbdiff" . "ff416b87a77a2f7cea234d9063ff629fc0e4c6c8")
  ("marginalia" . "4c7b852b183e10dc437c7e41a7ef37cf3ccd8db1")
  ("markdown-mode" . "5d98592fe516748034d8baf92d7c0ba045e1f87a")
  ("melpa" . "989fc42a867d37e12d35ac38423e1d8828b9be59")

@@ -391,6 +391,9 @@ run the attached function (if exists) and enable lsp"
 	magit-bind-magit-project-status nil)
   (delete #'magit-blame-maybe-update-revision-buffer magit-blame-goto-chunk-hook))
 
+(use-package magit-tbdiff
+  :after magit)
+
 (use-package git-link
   :general
   (:keymaps 'nik/spc
