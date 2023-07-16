@@ -21,7 +21,7 @@ g() {
   if [[ $# > 0 ]]; then
     git $@
   else
-    git status -sb
+    git status
   fi
 }
 # Complete g like git
