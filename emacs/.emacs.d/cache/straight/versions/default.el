@@ -6,6 +6,7 @@
  ("compat" . "2748abd7c7135fe5d873020061b2d58a66b8d505")
  ("consult" . "38af775c837ab09d9d2a77059386eb09c4254a4e")
  ("consult-lsp" . "f8db3252c0daa41225ba4ed1c0d178b281cd3e90")
+ ("csharp-mode" . "02c61c219b2c22491eff9b7315fed661fab423d4")
  ("dash.el" . "b6eef1a24dfbe57ba72d5eb1613fc05ff92e8e92")
  ("el-get" . "22c83206bab10100fdee03cb2d5b97c8c24eff0e")
  ("el-patch" . "7dfbd374f9de256de03516d777146e7f8aba1cef")

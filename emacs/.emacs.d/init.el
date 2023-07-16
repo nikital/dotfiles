@@ -779,6 +779,8 @@ directory as a fall back."
 
 (use-package jenkinsfile-mode)
 
+(use-package csharp-mode)
+
 ;;; mojom
 (add-to-list 'auto-mode-alist '("\\.mojom$" . java-mode))
 
