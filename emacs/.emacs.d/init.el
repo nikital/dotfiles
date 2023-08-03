@@ -769,6 +769,13 @@ directory as a fall back."
 (use-package lsp-haskell
   :demand t)
 
+(use-package markdown-mode
+  :general
+  (:keymaps 'markdown-mode-map
+   :states 'normal
+   "RET" nil)
+  )
+
 (use-package yaml-mode)
 
 (use-package json-mode)
