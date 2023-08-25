@@ -244,13 +244,20 @@ NAME and ARGS are as in `use-package'."
   :demand t
   :general
   (:keymaps 'company-active-map
+   "<right>" #'company-complete-selection
+   "C-l" #'company-complete-selection
+   "TAB" nil
+   "<tab>" nil
+   "RET" nil
+   "<return>" nil
    "C-w" nil
    "C-d" nil)
   :config
   (setq company-dabbrev-downcase nil
         company-dabbrev-ignore-case t)
-  (global-company-mode +1)
-  (company-tng-mode +1))
+  (setq company-frontends '(company-pseudo-tooltip-frontend
+                            company-echo-metadata-frontend))
+  (global-company-mode +1))
 
 (use-package company-statistics
   :config
