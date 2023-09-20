@@ -51,7 +51,7 @@
  ("minions" . "f7c4767f259bcee0ed39a1846de1818913b274d7")
  ("nongnu-elpa" . "7be7879e3ea01401ff51a515da882e79148392ea")
  ("orderless" . "6936fe46ef07df168a423f04efeda130b4e69753")
- ("org" . "72bbf89282612ff06860420037bd4c77777fe037")
+ ("org" . "f81ba451a793febd8c734422c4081badbf9ad17f")
  ("org-roam" . "5c06471c3a11348342719fd9011486455adeb701")
  ("pkg-info" . "76ba7415480687d05a4353b27fea2ae02b8d9d61")
  ("project" . "ce140cdb70138a4938c999d4606a52dbeced4676")
