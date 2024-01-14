@@ -42,7 +42,7 @@
                       "\\s-+\\("))
            (or (bound-and-true-p lisp-mode-symbol-regexp)
                "\\(?:\\sw\\|\\s_\\|\\\\.\\)+") "\\)")
-  "Sexp providing regexp for finding use-package forms in user files.
+  "Sexp providing regexp for finding `use-package' forms in user files.
 This is used by `use-package-jump-to-package-form' and
 `use-package-enable-imenu-support'."
   :type 'sexp
@@ -621,19 +621,6 @@ run the attached function (if exists) and enable lsp"
    "d" #'project-dired
    "k" #'project-kill-buffers
    "p" #'project-switch-project)
-  :config/el-patch
-  (defun project-try-vc (dir)
-    (let* ((backend (ignore-errors (vc-responsible-backend dir)))
-           (root
-            (pcase backend
-              ('Git
-               ;; Don't stop at submodule boundary.
-               (or (vc-file-getprop dir 'project-git-root)
-                   (vc-file-setprop dir 'project-git-root
-                                    (vc-find-root dir (el-patch-swap ".git/" ".git")))))
-              ('nil nil)
-              (_ (ignore-errors (vc-call-backend backend 'root dir))))))
-      (and root (cons 'vc root))))
   :config
   (defun nik/project-save ()
     "Save the current project to the persistent project list."
