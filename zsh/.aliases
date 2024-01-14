@@ -1,6 +1,6 @@
 # Unix
 alias mkdir='mkdir -p'
-alias l='exa -lga'
+alias l='eza -lga'
 alias lb='l -B'
 alias ll='echo "Use l"'
 
