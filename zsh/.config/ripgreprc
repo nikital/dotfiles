@@ -1,2 +1,4 @@
 --type-add
 mojom:*.mojom
+--type-add
+idl:*.idl
