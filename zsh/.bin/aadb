@@ -1,0 +1,54 @@
+#!/bin/bash
+
+set -e
+
+URL="https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_universal.apk"
+APK="$HOME/Downloads/termux-v0.118.0.apk"
+SHA256="3141295849db07a1f4c919ee67a261df723a8ff751b990b87d663a6457b81a2c"
+
+adb shell pm path com.termux >/dev/null || {
+    echo "$SHA256" "$APK" | sha256sum --check --status - || {
+         rm -f "$APK"
+         curl "$URL" -L -o "$APK"
+         echo "$SHA256" "$APK" | sha256sum --check -
+    }
+
+    adb install "$APK"
+    adb shell am start -n com.termux/.app.TermuxActivity
+    while adb shell run-as com.termux [ ! -f /data/data/com.termux/files/usr/bin/pkg ]; do
+        sleep 0.1;
+    done
+    adb shell run-as com.termux files/usr/bin/bash "-c 'PATH=/data/data/com.termux/files/usr/bin:$PATH LD_PRELOAD=/data/data/com.termux/files/usr/lib/libtermux-exec.so exec pkg install -y vim ripgrep fd'"
+}
+
+adb shell "cat > /data/local/tmp/.bashrc" <<EOF
+unsudo () {
+    args=( "\$@" )
+    quoted_args=\$(printf " %q" "\${args[@]}")
+    run-as com.termux files/usr/bin/bash -c "PATH=/data/data/com.termux/files/usr/bin:\$PATH LD_PRELOAD=/data/data/com.termux/files/usr/lib/libtermux-exec.so exec \$quoted_args"
+}
+pkg () {
+    unsudo pkg "\$@"
+}
+apt () {
+    unsudo apt "\$@"
+}
+alias l="ls -lha"
+stty werase undef
+bind '\\C-w:unix-filename-rubout'
+EOF
+
+expect /proc/self/fd/4 4<<EOF
+spawn adb shell
+expect "\\\\\$"
+send "exec su\r"
+expect "#"
+send "export HOME=/data/local/tmp\r"
+expect "#"
+send "export PATH=\"/data/data/com.termux/files/usr/bin:\\\$PATH\"\r"
+expect "#"
+send "export LD_PRELOAD=/data/data/com.termux/files/usr/lib/libtermux-exec.so\r"
+expect "#"
+send "exec bash\r"
+interact
+EOF
