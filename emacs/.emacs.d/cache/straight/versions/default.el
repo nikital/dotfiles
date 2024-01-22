@@ -56,6 +56,7 @@
  ("pkg-info" . "76ba7415480687d05a4353b27fea2ae02b8d9d61")
  ("project" . "ec953b0737a4c6c05cd02bd848af504528ee0674")
  ("queue" . "7ab8f23e770f64f6bd28a44c46c8becfc1af03d8")
+ ("rust-mode" . "9c26dc1195ec05309ee15c014631fb9abd6cf5d2")
  ("s.el" . "dda84d38fffdaf0c9b12837b504b402af910d01d")
  ("seq" . "4355cde01767911660f761cf874edb412d06bd7a")
  ("spinner" . "67681b8f1580a7cd7a1aa49d78eaa30d11f7c178")

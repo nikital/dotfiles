@@ -294,6 +294,7 @@ NAME and ARGS are as in `use-package'."
                                   haskell-mode
                                   haskell-literate-mode
                                   go-mode
+                                  rust-mode
                                   csharp-mode
                                   ;; java-mode
                                   (python-mode (lambda () (require 'lsp-pyright)))
@@ -779,6 +780,8 @@ directory as a fall back."
 (use-package jenkinsfile-mode)
 
 (use-package csharp-mode)
+
+(use-package rust-mode)
 
 ;;; mojom
 (add-to-list 'auto-mode-alist '("\\.mojom$" . java-mode))
