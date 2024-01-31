@@ -575,7 +575,7 @@ run the attached function (if exists) and enable lsp"
   (setq project-switch-commands
         '((consult-find "Find file" ?f)
           (consult-ripgrep "Grep dir" ?d)
-          (magit-status "Git" ?g)))
+          (magit-project-status "Git" ?g)))
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
   )
@@ -598,7 +598,7 @@ run the attached function (if exists) and enable lsp"
    "g" #'nik/embark-magit-status)
   :config
   (defun nik/embark-magit-status (file)
-    "Run `magit-status` on repo containing the embark target."
+    "Run `magit-status' on repo containing the embark target."
     (interactive "GFile: ")
     (magit-status (locate-dominating-file file ".git")))
   ;; Hide the mode line of the Embark live/completions buffers
