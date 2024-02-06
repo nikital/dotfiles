@@ -782,7 +782,10 @@ directory as a fall back."
 
 (use-package csharp-mode)
 
-(use-package rust-mode)
+(use-package rust-mode
+  :config
+  (setq lsp-rust-analyzer-lens-run-enable nil
+        lsp-rust-analyzer-lens-debug-enable nil))
 
 ;;; mojom
 (add-to-list 'auto-mode-alist '("\\.mojom$" . java-mode))
