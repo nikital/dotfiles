@@ -394,7 +394,8 @@ run the attached function (if exists) and enable lsp"
   (setq magit-diff-refine-hunk nil
 	;; Buggy implementation in magit-extras. Check later if it's fixed.
 	magit-bind-magit-project-status nil
-        magit-diff-extra-stat-arguments '("--stat-width" "1000"))
+        magit-diff-extra-stat-arguments '("--stat-width" "1000")
+        magit-log-margin-show-committer-date t)
   (delete #'magit-blame-maybe-update-revision-buffer magit-blame-goto-chunk-hook))
 
 (use-package magit-tbdiff
