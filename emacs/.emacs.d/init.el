@@ -735,7 +735,7 @@ directory as a fall back."
 (use-feature display-line-numbers
   :demand t
   :config
-  (setq display-line-numbers-type 'relative
+  (setq display-line-numbers-type 'visual
 	display-line-numbers-current-absolute nil)
   (global-display-line-numbers-mode +1))
 
