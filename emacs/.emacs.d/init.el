@@ -788,6 +788,8 @@ directory as a fall back."
   (setq lsp-rust-analyzer-lens-run-enable nil
         lsp-rust-analyzer-lens-debug-enable nil))
 
+(use-package ahk-mode)
+
 ;;; mojom
 (add-to-list 'auto-mode-alist '("\\.mojom$" . java-mode))
 
