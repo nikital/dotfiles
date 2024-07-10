@@ -677,6 +677,7 @@ directory as a fall back."
   (:keymaps 'org-mode-map
    :states 'normal
    "TAB" #'org-cycle)
+  :hook (org-mode . turn-on-auto-fill)
   :config
   (require 'org-tempo)
   (setq org-startup-indented t)
