@@ -708,9 +708,10 @@ directory as a fall back."
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  ;; Set brighter comments
   (setq doom-gruvbox-brighter-comments t)
-  (load-theme 'doom-gruvbox t)
+  (if (string= "brick" (system-name))
+      (load-theme 'doom-gruvbox-light t)
+    (load-theme 'doom-gruvbox t))
   (set-face-attribute
    'tab-bar-tab nil
    :foreground "#fbf1c7" :background "#66542a"
