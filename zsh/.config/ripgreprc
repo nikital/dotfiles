@@ -2,3 +2,9 @@
 mojom:*.mojom
 --type-add
 idl:*.idl
+--type-add
+grd:*.grd
+--type-add
+grd:*.grdp
+--type-add
+grd:*.xtb
