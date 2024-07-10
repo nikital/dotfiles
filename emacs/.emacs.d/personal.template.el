@@ -16,7 +16,7 @@
  ">" #'nik/find-XXXXXX
  )
 
-(load-file "XXXX/gn.el")
+(load-file "XXXX/src/tools/emacs/gn.el")
 
 (defun nik/--gn-refs--get-target (f)
   (let ((dir (string-trim-right (file-name-directory f) "/"))
@@ -32,7 +32,7 @@
   (interactive)
   (async-shell-command
    (concat
-    "cd XXXXX && gn refs XXXXXXXX '"
+    "cd XXXXX && gn refs out/ '"
     (nik/--gn-refs--get-target (buffer-file-name))
     "'")) )
 
@@ -58,12 +58,24 @@
       (set-process-filter process 'comint-output-filter))
     (set-process-sentinel process #'nik/--close-process-on-success)))
 
+(defun nik/gclient-sync-light ()
+  (interactive)
+  (let ((process (start-process-shell-command
+                  "gclient sync"
+                  "*gclient sync*"
+                  "cd XXXX && XXXX/light_checkout.py")))
+    (with-current-buffer (process-buffer process)
+      (display-buffer (current-buffer))
+      (shell-mode)
+      (set-process-filter process 'comint-output-filter))
+    (set-process-sentinel process #'nik/--close-process-on-success)))
+
 (defun nik/XXXXXX-export-patches ()
   (interactive)
   (let ((process (start-process-shell-command
                   "export patches"
                   "*export patches*"
-                  "cd XXXXX && git commit -am . && XXXXXX/script/patches_export_all.py --repo-dir . --patch-dir XXXXXX/patches")))
+                  "cd XXXX && git commit --allow-empty -am . && XXXX/patches_export_all.py")))
     (with-current-buffer (process-buffer process)
       (display-buffer (current-buffer))
       (shell-mode)
@@ -173,14 +185,30 @@
     (forward-line)
     (insert "#endif")))
 
+(defun nik/insert-commit-info ()
+  (interactive)
+  (let ((commit (current-word)))
+    (beginning-of-line)
+    (insert "https://crrev.com/")
+    (beginning-of-line)
+    (open-line 1)
+    (insert
+     (shell-command-to-string
+      (format "cd XXXXXX && git show -s --format=reference %s" commit)))
+    (previous-line)
+    (fill-paragraph)
+    ))
+
 (general-define-key
  :keymaps 'nik/spc
  :prefix "i"
  "r" #'nik/gn-refs
+ "a" #'nik/gn-refs-XXXX
  "g" #'nik/XXXXXX-status
  "c" #'nik/XXXXXX-status
  "p" #'nik/goto-patch-dwim
  "S" #'nik/gclient-sync
+ "L" #'nik/gclient-sync-light
  "E" #'nik/XXXXXX-export-patches
 
  "k" #'nik/ifdef-above
