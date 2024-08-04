@@ -795,7 +795,9 @@ directory as a fall back."
 
 (use-package json-mode)
 
-(use-package typescript-mode)
+(use-package typescript-mode
+  :config
+  (setq typescript-indent-level 2))
 
 (use-package svelte-mode)
 
