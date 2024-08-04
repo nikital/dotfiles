@@ -288,7 +288,9 @@ NAME and ARGS are as in `use-package'."
    "R" #'lsp-workspace-restart
    "o" #'lsp-clangd-find-other-file)
   (:keymaps 'nik/spc
-   "\"" #'lsp-find-implementation)
+   "\"" #'lsp-find-implementation
+   "'" #'lsp-find-type-definition
+   )
   :init
   ;; Set a high read output max value for handling large language server responses
   (setq read-process-output-max (* 10 1024 1024))
