@@ -267,6 +267,15 @@ NAME and ARGS are as in `use-package'."
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 80)
 
+(defun nik/plist-set-path (plist props val)
+  (let ((prop (car props))
+        (rest (cdr props)))
+    (if rest
+        (plist-put
+         plist prop (nik/plist-set-path
+                     (plist-get plist prop) rest val))
+      (plist-put plist prop val))))
+
 (use-package lsp-mode
   :general
   ;; Set the lsp prefix key
@@ -333,6 +342,14 @@ run the attached function (if exists) and enable lsp"
   (setq lsp-clients-clangd-args '("--header-insertion-decorators=0"
                                   "--completion-style=detailed"))
   (setq lsp-auto-execute-action nil)
+
+  (advice-add
+   #'lsp-rust-analyzer--make-init-options
+   :filter-return
+   (lambda (init-options)
+     (nik/plist-set-path
+      init-options '(:hover :memoryLayout :enable) :json-false)))
+
   :hook
   ;; Postpone lsp load for after dir local vars are read
   ;; Do not load lsp if dir local vars are not enabled (e.g. on preview)
