@@ -728,6 +728,7 @@ directory as a fall back."
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
   (setq doom-gruvbox-brighter-comments t)
+  (setq doom-gruvbox-light-brighter-comments t)
   (if (string= "brick" (system-name))
       (load-theme 'doom-gruvbox-light t)
     (load-theme 'doom-gruvbox t))
