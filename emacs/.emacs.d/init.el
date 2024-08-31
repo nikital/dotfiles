@@ -805,8 +805,8 @@ directory as a fall back."
 
 (use-package rust-mode
   :config
-  (setq lsp-rust-analyzer-lens-run-enable nil
-        lsp-rust-analyzer-lens-debug-enable nil))
+  (setq lsp-rust-analyzer-lens-enable nil
+        ))
 
 (use-package ahk-mode)
 
