@@ -646,6 +646,7 @@ run the attached function (if exists) and enable lsp"
    :prefix "p"
    "w" #'nik/project-save
    "d" #'project-dired
+   "f" #'project-find-file
    "k" #'project-kill-buffers
    "p" #'project-switch-project)
   :config
