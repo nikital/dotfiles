@@ -563,6 +563,13 @@ run the attached function (if exists) and enable lsp"
   (setq consult-ripgrep-args
         (concat consult-ripgrep-args " --hidden"))
 
+  ;; Use aggressive async refresh
+  (setq consult-async-min-input 1
+        consult-async-input-debounce 0.02
+        consult-async-input-throttle 0.02
+        consult-async-refresh-delay 0.02
+        )
+
   (setq consult-narrow-key ">"
         consult-preview-key "C-;")
 
