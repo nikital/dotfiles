@@ -659,6 +659,29 @@ directory as a fall back."
   (setq dired-dwim-target t)
   (setq dired-kill-when-opening-new-dired-buffer t))
 
+(use-feature files
+  :init
+  (defvar nik/external-local-variables '())
+
+  :config
+  (defun nik/add-external-local-variables ()
+    (let ((file-name (or (buffer-file-name)
+                         (expand-file-name default-directory))))
+      (dolist (elem nik/external-local-variables)
+        (let ((prefix (car elem))
+              (vars-per-mode (cdr elem)))
+          (when (string-prefix-p prefix file-name)
+            (dolist (elem vars-per-mode)
+              (let ((mode (car elem))
+                    (vars (cdr elem)))
+                (when (or (not mode)
+                          (derived-mode-p mode))
+                  (dolist (elem vars)
+                    (push elem file-local-variables-alist))))))))))
+
+  (advice-add 'hack-local-variables-apply
+           :before #'nik/add-external-local-variables))
+
 (use-feature tab-bar
   :general
   ("C-<next>" #'nik/tab-bar-next-tab-or-create
