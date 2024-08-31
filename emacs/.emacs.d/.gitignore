@@ -1,9 +1,8 @@
-/cache/*
+/.cache/*
 
-!/cache/straight
-/cache/straight/*
-!/cache/straight/versions/
+!/.cache/straight
+/.cache/straight/*
+!/.cache/straight/versions/
 
-/.cache/
 /eln-cache/
 /personal.el

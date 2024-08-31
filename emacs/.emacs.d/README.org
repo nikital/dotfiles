@@ -1,6 +1,6 @@
 * Cool Emacsen
+- [[https://github.com/manzaltu/modus-emacs/][Modus Emacs]]
 - [[https://github.com/hlissner/doom-emacs/][Doom Emacs]]
 - [[https://github.com/raxod502/radian/tree/develop/emacs][Radian]]
 - [[https://coldnew.github.io/coldnew-emacs/init.el.html][Coldnew]]
-- [[https://github.com/manzaltu/modus-emacs/][Modus Emacs]]
 - [[https://github.com/bbatsov/prelude][Prelude]]

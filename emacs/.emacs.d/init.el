@@ -1,7 +1,7 @@
 ;; init.el -*- mode: lisp-interaction; lexical-binding: t; -*-
 
 (defvar nik/cache
-  (expand-file-name "cache" user-emacs-directory))
+  (expand-file-name ".cache" user-emacs-directory))
 (defun nik/cache (path)
   (concat (file-name-as-directory nik/cache) path))
 
