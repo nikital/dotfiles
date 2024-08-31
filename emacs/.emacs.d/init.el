@@ -5,6 +5,12 @@
 (defun nik/cache (path)
   (concat (file-name-as-directory nik/cache) path))
 
+;;; personal settings pre
+(defvar nik/light-mode nil)
+(load (concat
+       (file-name-directory (file-truename load-file-name))
+       "../../private/emacs/personal-pre.el") t)
+
 ;; Don't create backup, autosave and lock files
 (setq make-backup-files nil
       auto-save-default nil
@@ -729,7 +735,7 @@ directory as a fall back."
         doom-themes-enable-italic t)
   (setq doom-gruvbox-brighter-comments t)
   (setq doom-gruvbox-light-brighter-comments t)
-  (if (string= "brick" (system-name))
+  (if nik/light-mode
       (load-theme 'doom-gruvbox-light t)
     (load-theme 'doom-gruvbox t))
   (set-face-attribute
@@ -854,8 +860,10 @@ directory as a fall back."
 (put 'narrow-to-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-;;; personal settings
-(load (concat (file-name-directory load-file-name) "personal.el") t)
+;;; personal settings post
+(load (concat
+       (file-name-directory (file-truename load-file-name))
+       "../../private/emacs/personal-post.el") t)
 
 ;; Should be last
 (use-package gcmh
