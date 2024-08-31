@@ -560,6 +560,9 @@ run the attached function (if exists) and enable lsp"
         '((if (executable-find "fdfind" 'remote) "fdfind" "fd")
           "--color=never --hidden --type file"))
 
+  (setq consult-ripgrep-args
+        (concat consult-ripgrep-args " --hidden"))
+
   (setq consult-narrow-key ">"
         consult-preview-key "C-;")
 
