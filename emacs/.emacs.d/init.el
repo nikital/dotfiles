@@ -801,6 +801,19 @@ directory as a fall back."
   :config
   (global-so-long-mode +1))
 
+(use-feature compile
+  :general
+  (:keymaps 'global
+   "<f4>" #'nik/recompile)
+  :config
+  (evil-define-command nik/recompile ()
+    :repeat nil
+    (interactive)
+    (evil-normal-state)
+    (save-some-buffers 'no-confirm)
+    (recompile))
+  )
+
 (use-package haskell-mode)
 (use-package lsp-haskell
   :demand t)
