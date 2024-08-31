@@ -554,7 +554,12 @@ run the attached function (if exists) and enable lsp"
    "F" (lambda () (interactive) (consult-fd t)))
   (:keymaps 'nik/spc
    "*" #'nik/consult-line-symbol-at-point)
+
   :config
+  (setq consult-fd-args
+        '((if (executable-find "fdfind" 'remote) "fdfind" "fd")
+          "--color=never --hidden --type file"))
+
   (setq consult-narrow-key ">"
         consult-preview-key "C-;")
 
@@ -573,33 +578,8 @@ run the attached function (if exists) and enable lsp"
           (when-let (project (project-current))
             (car (project-roots project)))))
 
-  ;; Based on code from consult wiki:
-  ;; https://github.com/minad/consult/wiki#find-files-using-fd
-  (defvar consult--fd-command nil)
-  (defun consult--fd-builder (input)
-    (unless consult--fd-command
-      (setq consult--fd-command
-            (if (eq 0 (call-process-shell-command "fdfind"))
-                "fdfind"
-              "fd")))
-    (pcase-let* ((`(,arg . ,opts) (consult--command-split input))
-                 (`(,re . ,hl) (funcall consult--regexp-compiler
-                                        arg 'extended t)))
-      (when re
-        (cons (append
-               (list consult--fd-command
-                     "--color=never" "--full-path"
-                     (consult--join-regexps re 'extended))
-               opts)
-              hl))))
-
-  (defun consult-fd (&optional dir initial)
-    (interactive "P")
-    (pcase-let* ((`(,prompt ,paths ,dir) (consult--directory-prompt "Fd" dir))
-                 (default-directory dir))
-      (find-file (consult--find prompt #'consult--fd-builder initial))))
   (setq project-switch-commands
-        '((consult-find "Find file" ?f)
+        '((consult-fd "Find file" ?f)
           (consult-ripgrep "Grep dir" ?d)
           (magit-project-status "Git" ?g)))
   (setq xref-show-xrefs-function #'consult-xref
