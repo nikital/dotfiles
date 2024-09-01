@@ -250,8 +250,9 @@ NAME and ARGS are as in `use-package'."
   :demand t
   :general
   (:keymaps 'company-active-map
-   "<right>" #'company-complete-selection
    "C-l" #'company-complete-selection
+   "<down>" nil
+   "<up>" nil
    "TAB" nil
    "<tab>" nil
    "RET" nil
