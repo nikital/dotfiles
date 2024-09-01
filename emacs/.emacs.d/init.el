@@ -555,10 +555,36 @@ run the attached function (if exists) and enable lsp"
   (:keymaps 'nik/spc
    "*" #'nik/consult-line-symbol-at-point)
 
+  :config/el-patch
+  ;; Work around fd searching full path: https://github.com/sharkdp/fd/issues/839
+  (defun consult--fd-make-builder (paths)
+    "Build find command line, finding across PATHS."
+    (let ((cmd (consult--build-args consult-fd-args)))
+      (lambda (input)
+        (pcase-let* ((`(,arg . ,opts) (consult--command-split input))
+                     (flags (append cmd opts))
+                     (ignore-case
+                      (and (not (or (member "-s" flags) (member "--case-sensitive" flags)))
+                           (or (member "-i" flags) (member "--ignore-case" flags)
+                               (let (case-fold-search)
+                                 ;; Case insensitive if there are no uppercase letters
+                                 (not (string-match-p "[[:upper:]]" arg)))))))
+          (if (or (member "-F" flags) (member "--fixed-strings" flags))
+              (cons (append cmd (list arg) opts paths)
+                    (apply-partially #'consult--highlight-regexps
+                                     (list (regexp-quote arg)) ignore-case))
+            (pcase-let ((`(,re . ,hl) (funcall consult--regexp-compiler arg 'pcre ignore-case)))
+              (when re
+                (cons (append cmd
+                              (mapcan (lambda (x) `("--and" (el-patch-swap ,x ,(concat default-directory ".*" x)))) re)
+                              opts
+                              (mapcan (lambda (x) `("--search-path" ,x)) paths))
+                      hl))))))))
+
   :config
   (setq consult-fd-args
         '((if (executable-find "fdfind" 'remote) "fdfind" "fd")
-          "--color=never --hidden --type file"))
+          "--full-path --color=never --hidden --type file"))
 
   (setq consult-ripgrep-args
         (concat consult-ripgrep-args " --hidden"))
