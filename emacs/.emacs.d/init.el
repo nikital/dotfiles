@@ -873,6 +873,8 @@ directory as a fall back."
 
 (use-package ahk-mode)
 
+(use-package masm-mode)
+
 ;;; mojom
 (add-to-list 'auto-mode-alist '("\\.mojom$" . java-mode))
 
