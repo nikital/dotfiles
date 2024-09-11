@@ -155,12 +155,15 @@ NAME and ARGS are as in `use-package'."
    (expand-file-name "init.el" user-emacs-directory))
   (consult-imenu))
 
+(defun nik/copy-file-path-maybe-make-relative (filepath) ;; Override in private config
+  filepath)
+
 (defun nik/copy-file-path ()
   "Copy the full path of the current buffer's file."
   (interactive)
-  (let ((filepath (if (equal major-mode 'dired-mode)
-                      default-directory
-                    (buffer-file-name))))
+  (let* ((filepath (or (buffer-file-name)
+                       (expand-file-name default-directory)))
+         (filepath (nik/copy-file-path-maybe-make-relative filepath)))
     (when filepath
       (kill-new filepath)
       (message "%s" filepath))))
@@ -168,9 +171,9 @@ NAME and ARGS are as in `use-package'."
 (defun nik/copy-file-path-and-line ()
   "Copy the full path of the current buffer's file."
   (interactive)
-  (let* ((filepath (if (equal major-mode 'dired-mode)
-		       default-directory
-		     (buffer-file-name)))
+  (let* ((filepath (or (buffer-file-name)
+                       (expand-file-name default-directory)))
+         (filepath (nik/copy-file-path-maybe-make-relative filepath))
 	 (line (number-to-string (line-number-at-pos)))
 	 (out (concat filepath ":" line)))
     (when filepath
