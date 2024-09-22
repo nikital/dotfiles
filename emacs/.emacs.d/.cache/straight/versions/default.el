@@ -7,7 +7,6 @@
  ("compat" . "99d74e635b76c3fa0b8403391e9d2efbd29f9901")
  ("consult" . "0c3f53916ea0db0c472c0a0c620a85cc1b00caf2")
  ("consult-lsp" . "68583913168bf66fd4d542b2517a2dcab19c447c")
- ("csharp-mode" . "02c61c219b2c22491eff9b7315fed661fab423d4")
  ("dash.el" . "1de9dcb83eacfb162b6d9a118a4770b1281bcd84")
  ("el-get" . "a8a4d96bbad931da37d8b98692b549032593f133")
  ("el-patch" . "92803e7ea6e07cd56667ed7ea0dfacfc1f37f6d9")

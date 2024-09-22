@@ -867,8 +867,6 @@ directory as a fall back."
 
 (use-package jenkinsfile-mode)
 
-(use-package csharp-mode)
-
 (use-package rust-mode
   :config
   (setq lsp-rust-analyzer-lens-enable nil
