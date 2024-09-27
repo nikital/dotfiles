@@ -241,10 +241,7 @@ NAME and ARGS are as in `use-package'."
 
 (use-package avy
   :general
-  (:states 'motion
-           "C-;" #'avy-goto-char-timer
-           "s" #'avy-goto-char-timer)
-  (:states 'normal
+  (:states '(normal, visual)
            "s" #'avy-goto-char-timer)
   :config
   (setq avy-timeout-seconds 0.3))
