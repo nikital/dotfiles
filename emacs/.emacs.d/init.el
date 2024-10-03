@@ -723,6 +723,10 @@ directory as a fall back."
           (tab-bar-new-tab)
         (tab-bar-switch-to-next-tab)))))
 
+(use-feature help
+  :config
+  (setq help-window-select t))
+
 (use-package helpful
   :general
   ([remap describe-function] #'helpful-callable
