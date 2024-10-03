@@ -134,6 +134,9 @@ NAME and ARGS are as in `use-package'."
         ;; End/beginning of line is not an error
         evil-kbd-macro-suppress-motion-error t
         evil-want-visual-char-semi-exclusive t
+        evil-lookup-func (lambda ()
+                           (interactive)
+                           (call-interactively #'man))
         )
   (defalias #'forward-evil-word #'forward-evil-symbol)
   (evil-mode +1))
@@ -736,6 +739,10 @@ directory as a fall back."
   (:keymaps 'nik/spc
    :prefix "h"
    "h" #'helpful-at-point))
+
+(use-feature man
+  :config
+  (setq Man-notify-method 'aggressive))
 
 (use-package org
   :general
