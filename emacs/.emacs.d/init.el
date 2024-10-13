@@ -295,6 +295,7 @@ NAME and ARGS are as in `use-package'."
    :prefix "c"
    "a" #'lsp-execute-code-action
    "r" #'lsp-rename
+   "h" #'lsp-describe-thing-at-point
    "R" #'lsp-workspace-restart
    "o" #'lsp-clangd-find-other-file)
   (:keymaps 'nik/spc
