@@ -261,7 +261,10 @@ NAME and ARGS are as in `use-package'."
    "RET" nil
    "<return>" nil
    "C-w" nil
-   "C-d" nil)
+   "C-d" nil
+   "C-n" #'company-abort)
+  (:states 'insert
+           "C-n" #'company-manual-begin)
   :config
   (setq company-dabbrev-downcase nil
         company-dabbrev-ignore-case t)
