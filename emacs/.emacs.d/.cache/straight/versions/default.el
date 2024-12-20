@@ -66,7 +66,7 @@
  ("transient" . "dbe18e3f5e0812b8d086f92ca776935e41fafc75")
  ("typescript.el" . "dd10f702d4946ddb2e1c2863bf02bf241bce5fc8")
  ("undo-tree" . "d8f72bbe7d3c3a2808986febd3bb1a46d4da7f51")
- ("use-package" . "fc8449bb593de8fce0a8bdd4ee2cb78219cf8c76")
+ ("use-package" . "a6e856418d2ebd053b34e0ab2fda328abeba731c")
  ("vertico" . "d2cc65ee37557d9d23300b238b60aeae4a975229")
  ("with-editor" . "ca902ae02972bdd6919a902be2593d8cb6bd991b")
  ("xref" . "94f822daa667510b08c764aa520aaf41cde432e7")
