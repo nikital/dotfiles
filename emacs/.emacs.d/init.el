@@ -17,6 +17,8 @@
       auto-save-list-file-prefix nil
       create-lockfiles nil)
 
+(setq byte-compile-warnings nil)
+
 ;;; straight
 (setq straight-base-dir nik/cache)
 (defvar bootstrap-version)
