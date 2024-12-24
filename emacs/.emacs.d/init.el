@@ -239,6 +239,18 @@ NAME and ARGS are as in `use-package'."
   :general
   (:states '(normal, visual) "gc" #'evilnc-comment-operator))
 
+(use-package evil-args
+  :after evil
+  :general
+  (:keymaps 'evil-inner-text-objects-map
+            "a" #'evil-inner-arg)
+  (:keymaps 'evil-outer-text-objects-map
+            "a" #'evil-outer-arg)
+  (:keymaps 'evil-motion-state-map
+            "H" #'evil-backward-arg
+            "L" #'evil-forward-arg)
+  )
+
 (use-feature elec-pair
   :demand t
   :config
