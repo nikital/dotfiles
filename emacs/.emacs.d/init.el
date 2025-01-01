@@ -475,7 +475,8 @@ run the attached function (if exists) and enable lsp"
 ;; Use "dnf install libvterm-devel"
 (use-package vterm
   :general
-  ("<f8>" #'nik/vterm-project)
+  ("<f8>" #'nik/vterm-project
+   "S-<f8>" #'vterm)
   :init
   ;; Set a low response delay
   (setq vterm-timer-delay 0.07)
