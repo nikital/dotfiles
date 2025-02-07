@@ -6,6 +6,7 @@
  ("company-mode" . "0ae7c293112248a0c36377d6859a95d216ae5e96")
  ("company-statistics" . "e62157d43b2c874d2edbd547c3bdfb05d0a7ae5c")
  ("compat" . "6926fcc1c891d4ff677515c0eaadf84d3ab364b1")
+ ("compile-multi" . "19d16d8871b5f19f5625e1a66c1dc46a7c3f6a3a")
  ("consult" . "9560552b3dcd25141e82e8dbb80465de026fc7eb")
  ("consult-lsp" . "68583913168bf66fd4d542b2517a2dcab19c447c")
  ("dash.el" . "1de9dcb83eacfb162b6d9a118a4770b1281bcd84")

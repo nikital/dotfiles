@@ -712,6 +712,11 @@ directory as a fall back."
   :init
   (defvar nik/external-local-variables '())
 
+  :general
+  (:keymaps 'nik/spc
+   :prefix "b"
+   "v" #'nik/reload-local-variables)
+
   :config
   (defun nik/add-external-local-variables ()
     (let ((file-name (or (buffer-file-name)
@@ -729,7 +734,15 @@ directory as a fall back."
                     (push elem file-local-variables-alist))))))))))
 
   (advice-add 'hack-local-variables-apply
-           :before #'nik/add-external-local-variables))
+              :before #'nik/add-external-local-variables)
+
+  (defun nik/reload-local-variables ()
+    (interactive)
+    (save-window-excursion
+      (dolist (buffer (buffer-list))
+        (with-current-buffer buffer
+          (hack-local-variables)))))
+  )
 
 (use-feature tab-bar
   :general
@@ -868,7 +881,14 @@ directory as a fall back."
     (interactive)
     (evil-normal-state)
     (save-some-buffers 'no-confirm)
-    (recompile))
+    (compile compile-command))
+  )
+
+(use-package compile-multi
+  :demand t
+  :general
+  (:keymaps 'global
+   "<f3>" #'compile-multi)
   )
 
 (use-package haskell-mode)
