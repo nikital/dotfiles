@@ -881,7 +881,8 @@ directory as a fall back."
     (interactive)
     (evil-normal-state)
     (save-some-buffers 'no-confirm)
-    (compile compile-command))
+    (let ((default-directory compilation-directory))
+      (compile compile-command)))
   )
 
 (use-package compile-multi
@@ -889,6 +890,8 @@ directory as a fall back."
   :general
   (:keymaps 'global
    "<f3>" #'compile-multi)
+  :config
+  (setq compile-multi-default-directory (lambda () compilation-directory))
   )
 
 (use-package haskell-mode)
