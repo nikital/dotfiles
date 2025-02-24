@@ -516,7 +516,7 @@ run the attached function (if exists) and enable lsp"
 
 ;;; Nicer scrolling
 (setq scroll-step 1
-      scroll-conservatively 0)
+      scroll-conservatively 101)
 
 ;;; Disable bell
 (setq ring-bell-function #'ignore)

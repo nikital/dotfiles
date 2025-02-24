@@ -4,6 +4,7 @@
 - [[https://github.com/raxod502/radian/tree/develop/emacs][Radian]]
 - [[https://coldnew.github.io/coldnew-emacs/init.el.html][Coldnew]]
 - [[https://github.com/bbatsov/prelude][Prelude]]
+- [[https://github.com/DevelopmentCool2449/visual-emacs][visual-emacs]]
 
 * TODO DAP
 
