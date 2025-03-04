@@ -334,7 +334,7 @@ NAME and ARGS are as in `use-package'."
                                   haskell-literate-mode
                                   go-mode
                                   rust-mode
-                                  csharp-mode
+                                  ;; csharp-mode
                                   ;; java-mode
                                   (python-mode (lambda () (require 'lsp-pyright)))
                                   js2-mode
