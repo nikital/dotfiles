@@ -883,6 +883,25 @@ directory as a fall back."
     (save-some-buffers 'no-confirm)
     (let ((default-directory compilation-directory))
       (compile compile-command)))
+
+  (defun nik/compilation-find-file-replace-backslash (args)
+    (let ((marker (nth 0 args))
+          (filename (nth 1 args))
+          (directory (nth 2 args))
+          (formats (nthcdr 3 args)))
+      (setq filename (replace-regexp-in-string "\\\\" "/" filename))
+      (append (list marker filename directory) formats)))
+
+  (advice-add
+   #'compilation-find-file
+   :filter-args
+   #'nik/compilation-find-file-replace-backslash)
+
+  (setq compilation-error-regexp-alist-alist
+        (assoc-delete-all 'gcov-called-line compilation-error-regexp-alist-alist))
+  (setq compilation-error-regexp-alist-alist
+        (assoc-delete-all 'guile-line compilation-error-regexp-alist-alist))
+
   )
 
 (use-package compile-multi
