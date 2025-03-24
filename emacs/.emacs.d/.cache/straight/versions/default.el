@@ -1,6 +1,7 @@
 (("ahk-mode" . "729007b5f22a49f5187ff47fca18c0d674e73047")
  ("annalist.el" . "e1ef5dad75fa502d761f70d9ddf1aeb1c423f41d")
  ("anzu" . "21cb5ab2295614372cb9f1a21429381e49a6255f")
+ ("apheleia" . "2c8e8229cbe26c7fd264c2ffe3fbeb9435dad3ae")
  ("avy" . "933d1f36cca0f71e4acb5fac707e9ae26c536264")
  ("bind-key" . "ae3197044f47f6a83897dd70762cb58c6efcffa1")
  ("company-mode" . "0ae7c293112248a0c36377d6859a95d216ae5e96")

@@ -294,6 +294,20 @@ NAME and ARGS are as in `use-package'."
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 80)
 
+;; For code formatting
+(use-package apheleia
+  :demand t
+  :commands apheleia-global-mode
+  :defines apheleia-mode-alist
+  :general
+  (:keymaps 'nik/spc
+    :prefix "c"
+    "f" #'apheleia-mode
+    "F" #'apheleia-format-buffer)
+  :config
+  (add-to-list 'apheleia-mode-alist '(lisp-data-mode . lisp-indent))
+  (apheleia-global-mode +1))
+
 (defun nik/plist-set-path (plist props val)
   (let ((prop (car props))
         (rest (cdr props)))
