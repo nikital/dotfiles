@@ -104,12 +104,12 @@ NAME and ARGS are as in `use-package'."
 
   :general
   (:states 'normal
-   "RET" #'nik/save)
+           "RET" #'nik/save)
   (:states 'motion
-   "C-j" #'nik/evil-scroll-down
-   "C-k" #'nik/evil-scroll-up)
+           "C-j" #'nik/evil-scroll-down
+           "C-k" #'nik/evil-scroll-up)
   (:states 'insert
-   "C-e" #'end-of-line)
+           "C-e" #'end-of-line)
 
   :config
   (evil-define-command nik/save ()
@@ -206,7 +206,7 @@ NAME and ARGS are as in `use-package'."
 (use-package xref
   :general
   (:states 'normal
-   "M-]" #'xref-find-references)
+           "M-]" #'xref-find-references)
   :commands (xref-find-definitions)
   :config
   (setq xref-prompt-for-identifier nil)
@@ -227,10 +227,10 @@ NAME and ARGS are as in `use-package'."
 (use-package evil-surround
   :general
   (:states 'visual
-   "s" #'evil-surround-region)
+           "s" #'evil-surround-region)
   ;; Specify operator as well to support lazy loading
   (:states 'operator
-   "s" #'evil-surround-edit)
+           "s" #'evil-surround-edit)
   :config
   (global-evil-surround-mode +1))
 
@@ -267,16 +267,16 @@ NAME and ARGS are as in `use-package'."
   :demand t
   :general
   (:keymaps 'company-active-map
-   "C-l" #'company-complete-selection
-   "<down>" nil
-   "<up>" nil
-   "TAB" nil
-   "<tab>" nil
-   "RET" nil
-   "<return>" nil
-   "C-w" nil
-   "C-d" nil
-   "C-n" #'company-abort)
+            "C-l" #'company-complete-selection
+            "<down>" nil
+            "<up>" nil
+            "TAB" nil
+            "<tab>" nil
+            "RET" nil
+            "<return>" nil
+            "C-w" nil
+            "C-d" nil
+            "C-n" #'company-abort)
   (:states 'insert
            "C-n" #'company-manual-begin)
   :config
@@ -301,9 +301,9 @@ NAME and ARGS are as in `use-package'."
   :defines apheleia-mode-alist
   :general
   (:keymaps 'nik/spc
-    :prefix "c"
-    "f" #'apheleia-mode
-    "F" #'apheleia-format-buffer)
+            :prefix "c"
+            "f" #'apheleia-mode
+            "F" #'apheleia-format-buffer)
   :config
   (add-to-list 'apheleia-mode-alist '(lisp-data-mode . lisp-indent))
   (apheleia-global-mode +1))
@@ -321,18 +321,18 @@ NAME and ARGS are as in `use-package'."
   :general
   ;; Set the lsp prefix key
   (:keymaps 'lsp-mode-map
-   "C-c l" '(:keymap lsp-command-map :which-key "lsp"))
+            "C-c l" '(:keymap lsp-command-map :which-key "lsp"))
   (:keymaps 'nik/spc
-   :prefix "c"
-   "a" #'lsp-execute-code-action
-   "r" #'lsp-rename
-   "h" #'lsp-describe-thing-at-point
-   "R" #'lsp-workspace-restart
-   "o" #'lsp-clangd-find-other-file)
+            :prefix "c"
+            "a" #'lsp-execute-code-action
+            "r" #'lsp-rename
+            "h" #'lsp-describe-thing-at-point
+            "R" #'lsp-workspace-restart
+            "o" #'lsp-clangd-find-other-file)
   (:keymaps 'nik/spc
-   "\"" #'lsp-find-implementation
-   "'" #'lsp-find-type-definition
-   )
+            "\"" #'lsp-find-implementation
+            "'" #'lsp-find-type-definition
+            )
   :init
   ;; Set a high read output max value for handling large language server responses
   (setq read-process-output-max (* 10 1024 1024))
@@ -342,26 +342,26 @@ NAME and ARGS are as in `use-package'."
   (setq lsp-keymap-prefix "C-c l")
   ;; Enable for the following modes
   (setq nik/lsp-enable-for-modes '(c-mode
-                                  c++-mode
-                                  objc-mode
-                                  haskell-mode
-                                  haskell-literate-mode
-                                  go-mode
-                                  rust-mode
-                                  ;; csharp-mode
-                                  ;; java-mode
-                                  (python-mode (lambda () (require 'lsp-pyright)))
-                                  js2-mode
-                                  typescript-mode
-                                  svelte-mode
-                                  groovy-mode
-                                  web-mode
-                                  json-mode
-                                  yaml-mode
-                                  dockerfile-mode
-                                  terraform-mode
-                                  cmake-mode
-                                  sh-mode))
+                                   c++-mode
+                                   objc-mode
+                                   haskell-mode
+                                   haskell-literate-mode
+                                   go-mode
+                                   rust-mode
+                                   ;; csharp-mode
+                                   ;; java-mode
+                                   (python-mode (lambda () (require 'lsp-pyright)))
+                                   js2-mode
+                                   typescript-mode
+                                   svelte-mode
+                                   groovy-mode
+                                   web-mode
+                                   json-mode
+                                   yaml-mode
+                                   dockerfile-mode
+                                   terraform-mode
+                                   cmake-mode
+                                   sh-mode))
 
   (defun nik/maybe-enable-lsp (lsp-config)
     "If mode in LSP-CONFIG is equal to the current major-mode,
@@ -409,9 +409,9 @@ run the attached function (if exists) and enable lsp"
 (use-package lsp-ui
   :general
   (:keymaps 'nik/spc
-   :prefix "c"
-   "I" #'lsp-ui-imenu
-   "d" #'lsp-ui-doc-show)
+            :prefix "c"
+            "I" #'lsp-ui-imenu
+            "d" #'lsp-ui-doc-show)
   :config
   (setq lsp-ui-doc-show-with-mouse nil)
   (setq lsp-ui-doc-position 'at-point)
@@ -442,13 +442,13 @@ run the attached function (if exists) and enable lsp"
 (use-package magit
   :general
   (:keymaps 'nik/spc
-   :prefix "g"
-   "g" #'magit-status
-   "d" #'magit-dispatch
-   "b" #'magit-blame-addition
-   "f" #'magit-file-dispatch)
+            :prefix "g"
+            "g" #'magit-status
+            "d" #'magit-dispatch
+            "b" #'magit-blame-addition
+            "f" #'magit-file-dispatch)
   (:keymaps 'magit-diff-section-base-map
-   "C-<return>" #'magit-diff-visit-worktree-file-other-window)
+            "C-<return>" #'magit-diff-visit-worktree-file-other-window)
   :init
   (setq magit-define-global-key-bindings nil)
   :config
@@ -465,8 +465,8 @@ run the attached function (if exists) and enable lsp"
 (use-package git-link
   :general
   (:keymaps 'nik/spc
-   :prefix "g"
-   "l" #'git-link)
+            :prefix "g"
+            "l" #'git-link)
   :config
   (defun nik/git-link-chromium (hostname dirname filename branch commit start end)
     (format "https://source.chromium.org/chromium/chromium/src/+/main:%s;l=%s"
@@ -548,11 +548,11 @@ run the attached function (if exists) and enable lsp"
   :demand t
   :general
   (:keymaps 'vertico-map
-   "C-h" #'vertico-directory-delete-word
-   "C-j" #'vertico-next
-   "C-k" #'vertico-previous
-   "C-l" #'vertico-insert
-   "M-h" help-map)
+            "C-h" #'vertico-directory-delete-word
+            "C-j" #'vertico-next
+            "C-k" #'vertico-previous
+            "C-l" #'vertico-insert
+            "M-h" help-map)
   :config
   (setq vertico-count 20)
   (vertico-mode +1))
@@ -584,13 +584,13 @@ run the attached function (if exists) and enable lsp"
    [remap yank-pop]                      #'consult-yank-pop
    [remap isearch-forward]               #'consult-line)
   (:keymaps 'nik/spc
-   :prefix "s"
-   "d" #'consult-ripgrep
-   "D" (lambda () (interactive) (consult-ripgrep t))
-   "f" #'consult-fd
-   "F" (lambda () (interactive) (consult-fd t)))
+            :prefix "s"
+            "d" #'consult-ripgrep
+            "D" (lambda () (interactive) (consult-ripgrep t))
+            "f" #'consult-fd
+            "F" (lambda () (interactive) (consult-fd t)))
   (:keymaps 'nik/spc
-   "*" #'nik/consult-line-symbol-at-point)
+            "*" #'nik/consult-line-symbol-at-point)
 
   :config/el-patch
   ;; Work around fd searching full path: https://github.com/sharkdp/fd/issues/839
@@ -662,8 +662,8 @@ run the attached function (if exists) and enable lsp"
 (use-package consult-lsp
   :general
   (:keymaps 'nik/spc
-   :prefix "c"
-   "s" #'consult-lsp-symbols))
+            :prefix "c"
+            "s" #'consult-lsp-symbols))
 
 (use-package marginalia
   :demand t
@@ -674,7 +674,7 @@ run the attached function (if exists) and enable lsp"
   :general
   ("M-z" #'embark-act)
   (:keymaps 'embark-file-map
-   "g" #'nik/embark-magit-status)
+            "g" #'nik/embark-magit-status)
   :config
   (defun nik/embark-magit-status (file)
     "Run `magit-status' on repo containing the embark target."
@@ -696,12 +696,12 @@ run the attached function (if exists) and enable lsp"
   :demand t
   :general
   (:keymaps 'nik/spc
-   :prefix "p"
-   "w" #'nik/project-save
-   "d" #'project-dired
-   "f" #'project-find-file
-   "k" #'project-kill-buffers
-   "p" #'project-switch-project)
+            :prefix "p"
+            "w" #'nik/project-save
+            "d" #'project-dired
+            "f" #'project-find-file
+            "k" #'project-kill-buffers
+            "p" #'project-switch-project)
   :config
   (defun nik/project-save ()
     "Save the current project to the persistent project list."
@@ -728,8 +728,8 @@ directory as a fall back."
 
   :general
   (:keymaps 'nik/spc
-   :prefix "b"
-   "v" #'nik/reload-local-variables)
+            :prefix "b"
+            "v" #'nik/reload-local-variables)
 
   :config
   (defun nik/add-external-local-variables ()
@@ -783,8 +783,8 @@ directory as a fall back."
    [remap describe-key]      #'helpful-key
    [remap describe-symbol]   #'helpful-symbol)
   (:keymaps 'nik/spc
-   :prefix "h"
-   "h" #'helpful-at-point))
+            :prefix "h"
+            "h" #'helpful-at-point))
 
 (use-feature man
   :config
@@ -793,13 +793,13 @@ directory as a fall back."
 (use-package org
   :general
   (:keymaps 'nik/spc
-   :prefix "n"
-   "l" #'org-store-link
-   "o" #'org-open-at-point
-   "a" #'org-agenda)
+            :prefix "n"
+            "l" #'org-store-link
+            "o" #'org-open-at-point
+            "a" #'org-agenda)
   (:keymaps 'org-mode-map
-   :states 'normal
-   "TAB" #'org-cycle)
+            :states 'normal
+            "TAB" #'org-cycle)
   :hook (org-mode . turn-on-auto-fill)
   :config
   (require 'org-tempo)
@@ -811,12 +811,12 @@ directory as a fall back."
 (use-package org-roam
   :general
   (:keymaps 'nik/spc
-   :prefix "n"
-   "b" #'org-roam-buffer-toggle
-   "g" #'org-roam-graph
-   "i" #'org-roam-node-insert
-   "n" #'org-roam-node-find
-   "t" #'org-roam-tag-add)
+            :prefix "n"
+            "b" #'org-roam-buffer-toggle
+            "g" #'org-roam-graph
+            "i" #'org-roam-node-insert
+            "n" #'org-roam-node-find
+            "t" #'org-roam-tag-add)
   :custom
   (org-roam-directory
    (concat (file-name-as-directory org-directory) "org-roam"))
@@ -888,7 +888,7 @@ directory as a fall back."
 (use-feature compile
   :general
   (:keymaps 'global
-   "<f4>" #'nik/recompile)
+            "<f4>" #'nik/recompile)
   :config
   (evil-define-command nik/recompile ()
     :repeat nil
@@ -922,7 +922,7 @@ directory as a fall back."
   :demand t
   :general
   (:keymaps 'global
-   "<f3>" #'compile-multi)
+            "<f3>" #'compile-multi)
   :config
   (setq compile-multi-default-directory (lambda () compilation-directory))
   )
@@ -934,8 +934,8 @@ directory as a fall back."
 (use-package markdown-mode
   :general
   (:keymaps 'markdown-mode-map
-   :states 'normal
-   "RET" nil)
+            :states 'normal
+            "RET" nil)
   )
 
 (use-package yaml-mode)
