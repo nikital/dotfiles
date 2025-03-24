@@ -961,6 +961,8 @@ directory as a fall back."
 
 ;;; mojom
 (add-to-list 'auto-mode-alist '("\\.mojom$" . java-mode))
+;;; proto
+(add-to-list 'auto-mode-alist '("\\.proto$" . java-mode))
 
 ;;; frame config
 
