@@ -951,6 +951,10 @@ directory as a fall back."
 (use-package jenkinsfile-mode)
 
 (use-package rust-mode
+  :general
+  (:keymaps 'rust-mode-map
+            "C-c C-f" nil
+            )
   :config
   (setq lsp-rust-analyzer-lens-enable nil
         ))
