@@ -624,7 +624,9 @@ run the attached function (if exists) and enable lsp"
           "--full-path --color=never --hidden --type file"))
 
   (setq consult-ripgrep-args
-        (concat consult-ripgrep-args " --hidden"))
+        (concat consult-ripgrep-args " --hidden -g=!.git"))
+  (setq consult-ripgrep-args
+        (replace-regexp-in-string " --search-zip" "" consult-ripgrep-args))
 
   ;; Use aggressive async refresh
   (setq consult-async-min-input 1
