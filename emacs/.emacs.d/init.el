@@ -972,6 +972,8 @@ directory as a fall back."
 
 (use-package masm-mode)
 
+(use-package bazel)
+
 ;;; mojom
 (add-to-list 'auto-mode-alist '("\\.mojom$" . java-mode))
 ;;; proto
