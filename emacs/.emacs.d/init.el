@@ -462,6 +462,13 @@ run the attached function (if exists) and enable lsp"
 (use-package magit-tbdiff
   :after magit)
 
+(use-feature ediff
+  :config
+  ;; Open ediff window in the current frame
+  (setq ediff-window-setup-function #'ediff-setup-windows-plain)
+  (setq ediff-split-window-function #'split-window-horizontally)
+  )
+
 (use-package git-link
   :general
   (:keymaps 'nik/spc
