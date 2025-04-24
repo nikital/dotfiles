@@ -15,7 +15,7 @@
  ("el-patch" . "92803e7ea6e07cd56667ed7ea0dfacfc1f37f6d9")
  ("eldoc" . "45d4879d23ce8a45b086fd19fa57d51ee978e151")
  ("elisp-refs" . "541a064c3ce27867872cf708354a65d83baf2a6d")
- ("emacs-libvterm" . "fd50624723200f4ac261f122f6332f57796c782f")
+ ("emacs-libvterm" . "056ad74653704bc353d8ec8ab52ac75267b7d373")
  ("emacs-which-key" . "38d4308d1143b61e4004b6e7a940686784e51500")
  ("emacsmirror-mirror" . "216a0bdaa7a0c5c43a797d0c8fece1c9af220300")
  ("emacsql" . "d6529f010a0573630122b826230e72157ab8fa88")
