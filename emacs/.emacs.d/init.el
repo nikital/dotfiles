@@ -160,6 +160,22 @@ NAME and ARGS are as in `use-package'."
    (expand-file-name "init.el" user-emacs-directory))
   (consult-imenu))
 
+(defun nik/find-init-post ()
+  (interactive)
+  (find-file
+   (concat
+       (file-name-directory (file-truename
+                             (expand-file-name "init.el" user-emacs-directory)))
+       "../../private/emacs/personal-post.el")))
+
+(defun nik/find-init-pre ()
+  (interactive)
+  (find-file
+   (concat
+       (file-name-directory (file-truename
+                             (expand-file-name "init.el" user-emacs-directory)))
+       "../../private/emacs/personal-pre.el")))
+
 (defun nik/copy-file-path-maybe-make-relative (filepath) ;; Override in private config
   filepath)
 
@@ -192,6 +208,8 @@ NAME and ARGS are as in `use-package'."
  "c" #'nik/copy-file-path
  "l" #'nik/copy-file-path-and-line
  "i" #'nik/find-init
+ "p" #'nik/find-init-post
+ "P" #'nik/find-init-pre
  "k" #'kill-buffer
  )
 
