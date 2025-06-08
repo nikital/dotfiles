@@ -890,6 +890,14 @@ directory as a fall back."
 	display-line-numbers-current-absolute nil)
   (global-display-line-numbers-mode +1))
 
+(use-feature hl-line
+  :demand t
+  :config
+  ; Funny nunace: highlighting faces ediff-odd/even-* in ediff depends on
+  ; hl-line face in doom-themes. So if this is isn't enabled we won't have a
+  ; nice diff.
+  (global-hl-line-mode +1))
+
 (use-feature savehist
   :demand t
   :config
