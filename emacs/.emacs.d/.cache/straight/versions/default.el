@@ -66,7 +66,7 @@
  ("straight.el" . "33fb4695066781c634ff1c3c81ba96e880deccf7")
  ("styleguide" . "8f97e24da04753c7a15eda6b02114a01ec3146f5")
  ("svelte-mode" . "5b136e224e01b0358dd0dca68c57b0d0c93099b5")
- ("themes" . "3c03f525d5c0ac0859f31231778f97e10a705e0d")
+ ("themes" . "729ad034631cba41602ad9191275ece472c21941")
  ("transient" . "69202c123205f396fefd35acdbc66fe8d0dfad12")
  ("typescript.el" . "dd10f702d4946ddb2e1c2863bf02bf241bce5fc8")
  ("undo-tree" . "d8f72bbe7d3c3a2808986febd3bb1a46d4da7f51")
