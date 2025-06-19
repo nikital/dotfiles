@@ -691,7 +691,8 @@ run the attached function (if exists) and enable lsp"
   :general
   (:keymaps 'nik/spc
             :prefix "c"
-            "s" #'consult-lsp-symbols))
+            "s" #'consult-lsp-symbols
+            "j" #'consult-lsp-diagnostics))
 
 (use-package marginalia
   :demand t
