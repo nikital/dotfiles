@@ -6,6 +6,7 @@
   (concat (file-name-as-directory nik/cache) path))
 
 (defvar nik/gtd "gtd")
+(defvar nik/cook "cook")
 (load (concat
        (file-name-directory (file-truename load-file-name))
        "../../private/emacs/android-pre.el") t)
@@ -28,6 +29,12 @@
                          (find-file nik/gtd)
                          (org-show-todo-tree nil))
 	              "Open GTD")
+               "\n")
+        (:face (variable-pitch font-lock-comment-face)
+               :link ("Cooking"
+	              ,(lambda (_button)
+                         (find-file nik/cook))
+	              "Open Cooking")
                "\n")))
 
 (tool-bar-add-item "help" #'org-cycle 'org-cycle)
