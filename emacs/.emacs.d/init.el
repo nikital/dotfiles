@@ -164,17 +164,17 @@ NAME and ARGS are as in `use-package'."
   (interactive)
   (find-file
    (concat
-       (file-name-directory (file-truename
-                             (expand-file-name "init.el" user-emacs-directory)))
-       "../../private/emacs/personal-post.el")))
+    (file-name-directory (file-truename
+                          (expand-file-name "init.el" user-emacs-directory)))
+    "../../private/emacs/personal-post.el")))
 
 (defun nik/find-init-pre ()
   (interactive)
   (find-file
    (concat
-       (file-name-directory (file-truename
-                             (expand-file-name "init.el" user-emacs-directory)))
-       "../../private/emacs/personal-pre.el")))
+    (file-name-directory (file-truename
+                          (expand-file-name "init.el" user-emacs-directory)))
+    "../../private/emacs/personal-pre.el")))
 
 (defun nik/copy-file-path-maybe-make-relative (filepath) ;; Override in private config
   filepath)
@@ -316,7 +316,6 @@ NAME and ARGS are as in `use-package'."
 (use-package apheleia
   :demand t
   :commands apheleia-global-mode
-  :defines apheleia-mode-alist
   :general
   (:keymaps 'nik/spc
             :prefix "c"
@@ -324,6 +323,10 @@ NAME and ARGS are as in `use-package'."
             "F" #'apheleia-format-buffer)
   :config
   (add-to-list 'apheleia-mode-alist '(lisp-data-mode . lisp-indent))
+  (setcdr
+   (last (alist-get 'rustfmt apheleia-formatters))
+   '("--edition" (or (bound-and-true-p rust-edition) "2024")))
+
   (apheleia-global-mode +1))
 
 (defun nik/plist-set-path (plist props val)
@@ -895,9 +898,9 @@ directory as a fall back."
 (use-feature hl-line
   :demand t
   :config
-  ; Funny nunace: highlighting faces ediff-odd/even-* in ediff depends on
-  ; hl-line face in doom-themes. So if this is isn't enabled we won't have a
-  ; nice diff.
+  ;; Funny nunace: highlighting faces ediff-odd/even-* in ediff depends on
+  ;; hl-line face in doom-themes. So if this is isn't enabled we won't have a
+  ;; nice diff.
   (global-hl-line-mode +1))
 
 (use-feature savehist
@@ -993,8 +996,38 @@ directory as a fall back."
             "C-c C-f" nil
             )
   :config
-  (setq lsp-rust-analyzer-lens-enable nil
-        ))
+  (setq lsp-rust-analyzer-lens-enable nil)
+
+  ;; https://github.com/radian-software/apheleia/issues/278
+  (defun nik/get-rust-edition ()
+    (when-let*
+        ((cratedir
+          (locate-dominating-file default-directory
+                                  "Cargo.toml"))
+         (manifest-path
+          (expand-file-name "Cargo.toml" cratedir)))
+      (with-temp-buffer
+        (let ((ret
+               (process-file
+                rust-cargo-bin nil (list (current-buffer) nil) nil
+                "metadata" "--format-version" "1" "--no-deps" "--frozen")))
+          (when (/= ret 0)
+            (error "Cargo metadata returned %s: %s"
+                   retcode (buffer-string)))
+          (goto-char 0)
+          (let ((metadata (json-parse-buffer
+                           :object-type 'alist
+                           :array-type 'list)))
+            (cdr (assq 'edition
+                       (--first (string= (cdr (assq 'manifest_path it)) manifest-path)
+                                (cdr (assq 'packages metadata)))))))))
+    )
+
+  (add-hook 'rust-mode-hook
+            (lambda ()
+              ;; For apheleia
+              (setq-local rust-edition (nik/get-rust-edition))))
+  )
 
 (use-package ahk-mode)
 
