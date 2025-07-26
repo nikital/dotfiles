@@ -437,6 +437,7 @@ run the attached function (if exists) and enable lsp"
   (setq lsp-ui-doc-show-with-mouse nil)
   (setq lsp-ui-doc-position 'at-point)
   (setq lsp-ui-sideline-show-code-actions t)
+  ;; (setq lsp-ui-sideline-show-diagnostics nil)
   (setq lsp-imenu-index-function #'lsp-imenu-create-categorized-index)
   )
 
