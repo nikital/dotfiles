@@ -960,7 +960,6 @@ directory as a fall back."
   )
 
 (use-package compile-multi
-  :demand t
   :general
   (:keymaps 'global
             "<f3>" #'compile-multi)
