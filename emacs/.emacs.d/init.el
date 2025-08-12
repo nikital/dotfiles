@@ -483,7 +483,41 @@ run the attached function (if exists) and enable lsp"
   (delete #'magit-blame-maybe-update-revision-buffer magit-blame-goto-chunk-hook))
 
 (use-package magit-tbdiff
-  :after magit)
+  :after magit
+  :config
+
+  (defun nik/magit-tbdiff-cr ()
+    (interactive)
+    (let* ((current-branch (magit-get-current-branch))
+           (cr-match (string-match "\\(.*\\)-cr\\([0-9]+\\)$" current-branch)))
+      (when (not cr-match)
+        (user-error "Current branch '%s' doesn't follow CR naming convention (prefix-crN)" current-branch))
+      (let* ((prefix (match-string 1 current-branch))
+             (cr-num (string-to-number (match-string 2 current-branch)))
+             (prev-cr-num (1- cr-num))
+             (prev-branch (format "%s-cr%d" prefix prev-cr-num)))
+        (when (< prev-cr-num 1)
+          (user-error "Cannot compare cr1 branch - no previous CR branch exists"))
+        (magit-tbdiff-revs-with-base prev-branch current-branch "origin/main"))))
+
+  (transient-append-suffix 'magit-tbdiff "i"
+    '("c" "Compare CR branches" nik/magit-tbdiff-cr))
+
+  (defun nik/magit-branch-cr (remote-branch)
+    (interactive (list (magit-read-other-branch-or-commit "Create CR branch from")))
+    (let* ((base-name (replace-regexp-in-string "^origin/" "" remote-branch))
+           (branches (magit-list-local-branch-names))
+           (cr-numbers (seq-keep (lambda (branch)
+                                   (when (string-match (format "^%s-cr\\([0-9]+\\)$" (regexp-quote base-name)) branch)
+                                     (string-to-number (match-string 1 branch))))
+                                 branches))
+           (next-cr-number (if cr-numbers (1+ (apply #'max cr-numbers)) 1))
+           (new-branch (format "%s-cr%d" base-name next-cr-number)))
+      (magit-branch-and-checkout new-branch remote-branch)))
+
+  (transient-append-suffix 'magit-branch "c"
+    '("r" "new CR branch" nik/magit-branch-cr))
+  )
 
 (use-feature ediff
   :config
