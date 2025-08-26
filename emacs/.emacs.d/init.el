@@ -496,6 +496,25 @@ run the attached function (if exists) and enable lsp"
 
   (transient-append-suffix 'magit-branch "c"
     '("r" "new CR branch" nik/magit-branch-cr))
+
+  (defun nik/magit-show-commit-ext-diff ()
+    (interactive)
+    (let* ((mcommit (magit-section-value-if 'module-commit))
+           (atpoint (or mcommit
+                        (magit-thing-at-point 'git-revision t)
+                        (magit-branch-or-commit-at-point))))
+      (if atpoint
+          (let* ((default-directory (magit-toplevel))
+                 (short-name (substring atpoint 0 (min 8 (length atpoint))))
+                 (buffer-name (format "*ext-diff: %s*" short-name)))
+            (vterm buffer-name)
+            (with-current-buffer buffer-name
+              (vterm-send-string (format "DFT_PARSE_ERROR_LIMIT=100 git show --ext-diff %s" atpoint))
+              (vterm-send-return)))
+        (message "No commit found at point"))))
+
+  (transient-append-suffix 'magit-diff "c"
+    '("C" "Show commit ext-diff" nik/magit-show-commit-ext-diff))
   )
 
 (use-package magit-tbdiff
