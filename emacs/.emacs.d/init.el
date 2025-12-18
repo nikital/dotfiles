@@ -480,7 +480,7 @@ run the attached function (if exists) and enable lsp"
         magit-diff-extra-stat-arguments '("--stat-width" "1000")
         magit-log-margin-show-committer-date t
         magit-branch-adjust-remote-upstream-alist '(("origin/main" . "")))
-  (delete #'magit-blame-maybe-update-revision-buffer magit-blame-goto-chunk-hook)
+  (remove-hook 'magit-blame-goto-chunk-hook #'magit-blame-maybe-update-revision-buffer)
 
   (defun nik/magit-branch-cr (remote-branch)
     (interactive (list (magit-read-other-branch-or-commit "Create CR branch from")))
