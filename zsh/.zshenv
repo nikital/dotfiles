@@ -1,5 +1,6 @@
 path=(
     "$HOME/.bin"
+    "$HOME/.local/bin"
     $path
 )
 

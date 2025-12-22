@@ -51,7 +51,12 @@ git_prompt_info() {
     echo "[%{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}]"
   fi
 }
-export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%2~%{$reset_color%}] '
+toolbox_prompt() {
+  if [[ -f /run/.toolboxenv ]]; then
+    echo "(Toolbx) "
+  fi
+}
+export PS1='$(toolbox_prompt)$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%2~%{$reset_color%}] '
 
 ##### HISTORY #####
 
