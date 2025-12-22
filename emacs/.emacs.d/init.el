@@ -361,6 +361,7 @@ NAME and ARGS are as in `use-package'."
   (setq lsp-idle-delay 0.2)
   ;; Enable which-key help on the lsp prefix key
   (setq lsp-keymap-prefix "C-c l")
+  (setq lsp-enable-suggest-server-download nil)
   ;; Enable for the following modes
   (setq nik/lsp-enable-for-modes '(c-mode
                                    c++-mode
