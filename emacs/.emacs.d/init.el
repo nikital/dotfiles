@@ -1094,10 +1094,6 @@ directory as a fall back."
   (setq compile-multi-default-directory (lambda () compilation-directory))
   )
 
-(use-package haskell-mode)
-(use-package lsp-haskell
-  :demand t)
-
 (use-package markdown-mode
   :general
   (:keymaps 'markdown-mode-map
@@ -1112,8 +1108,6 @@ directory as a fall back."
 (use-package typescript-mode
   :config
   (setq typescript-indent-level 2))
-
-(use-package svelte-mode)
 
 (use-package jenkinsfile-mode)
 
@@ -1162,9 +1156,9 @@ directory as a fall back."
 
 (use-package bazel)
 
-;;; mojom
+;;; mojom mode
 (add-to-list 'auto-mode-alist '("\\.mojom$" . java-mode))
-;;; proto
+;;; proto modo
 (add-to-list 'auto-mode-alist '("\\.proto$" . java-mode))
 
 ;;; frame config
