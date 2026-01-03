@@ -394,10 +394,12 @@ run the attached function (if exists) and enable lsp"
 
   ;; Kill language server after the last associated buffer was closed
   (setq lsp-keep-workspace-alive nil)
+  (setq lsp-enable-on-type-formatting nil)
   (setq lsp-session-file (nik/cache "lsp-session-v1"))
   (setq lsp-eslint-library-choices-file (nik/cache ".lsp-eslint-choices"))
   ;; Force lsp mode to forget the workspace folders for multi root servers
   ;; so the folders are added on demand
+  ;; https://emacs-lsp.github.io/lsp-mode/page/faq/#how-do-i-force-lsp-mode-to-forget-the-workspace-folders-for-multi-root-servers-so-the-workspace-folders-are-added-on-demand
   (advice-add 'lsp :before
               (lambda (&rest _args)
                 (eval
