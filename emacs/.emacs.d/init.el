@@ -545,6 +545,12 @@ run the attached function (if exists) and enable lsp"
   ;; Open ediff window in the current frame
   (setq ediff-window-setup-function #'ediff-setup-windows-plain)
   (setq ediff-split-window-function #'split-window-horizontally)
+
+  (defun nik/disable-y-or-n-p (orig-fun &rest args)
+    (cl-letf (((symbol-function 'y-or-n-p) (lambda (prompt) t)))
+      (apply orig-fun args)))
+
+  (advice-add 'ediff-quit :around #'nik/disable-y-or-n-p)
   )
 
 (use-package git-link
