@@ -33,6 +33,11 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+(defun nik/straight-no-pull (&rest r)
+  (user-error "Don't pull. Fetch, check, merge."))
+(advice-add #'straight-pull-all :override #'nik/straight-no-pull)
+(advice-add #'straight-pull-package :override #'nik/straight-no-pull)
+(advice-add #'straight-pull-package-and-deps :override #'nik/straight-no-pull)
 
 ;;; el-patch
 (straight-use-package 'el-patch)
