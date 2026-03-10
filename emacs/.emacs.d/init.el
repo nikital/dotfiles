@@ -534,7 +534,8 @@ run the attached function (if exists) and enable lsp"
              (prev-branch (format "%s-cr%d" prefix prev-cr-num)))
         (when (< prev-cr-num 1)
           (user-error "Cannot compare cr1 branch - no previous CR branch exists"))
-        (magit-tbdiff-revs-with-base prev-branch current-branch "origin/main"))))
+        (magit-tbdiff-revs-with-base prev-branch current-branch "origin/main"
+                                    (transient-args 'magit-tbdiff)))))
 
   (transient-append-suffix 'magit-tbdiff "i"
     '("c" "Compare CR branches" nik/magit-tbdiff-cr))
