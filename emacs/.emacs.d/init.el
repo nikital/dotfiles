@@ -535,7 +535,7 @@ run the attached function (if exists) and enable lsp"
         (when (< prev-cr-num 1)
           (user-error "Cannot compare cr1 branch - no previous CR branch exists"))
         (magit-tbdiff-revs-with-base prev-branch current-branch "origin/main"
-                                    (transient-args 'magit-tbdiff)))))
+                                     (transient-args 'magit-tbdiff)))))
 
   (transient-append-suffix 'magit-tbdiff "i"
     '("c" "Compare CR branches" nik/magit-tbdiff-cr))
@@ -552,6 +552,71 @@ run the attached function (if exists) and enable lsp"
       (apply orig-fun args)))
 
   (advice-add 'ediff-quit :around #'nik/disable-y-or-n-p)
+
+  ;; Multi-file ediff: review all files in a commit one by one
+  (defvar nik/ediff-multi--files nil "List of files to ediff.")
+  (defvar nik/ediff-multi--index 0 "Current file index.")
+  (defvar nik/ediff-multi--revA nil "Revision A.")
+  (defvar nik/ediff-multi--revB nil "Revision B.")
+  (defvar nik/ediff-multi--active nil "Whether multi-ediff session is active.")
+
+  (defun nik/magit-ediff-show-commit-all (commit)
+    "Ediff all files changed in COMMIT, one by one.
+Quit each ediff session normally to advance to the next file.
+Use `nik/magit-ediff-show-commit-all-stop' to abort early."
+    (interactive (list (magit-read-branch-or-commit "Revision")))
+    (let* ((revA (concat commit "^"))
+           (revB commit)
+           (files (magit-changed-files revA revB)))
+      (unless files
+        (user-error "No changed files in %s" commit))
+      (setq nik/ediff-multi--files files
+            nik/ediff-multi--index 0
+            nik/ediff-multi--revA revA
+            nik/ediff-multi--revB revB
+            nik/ediff-multi--active t)
+      (message "Ediff multi: %d file(s) to review" (length files))
+      (nik/ediff-multi--show-current)))
+
+  (defun nik/ediff-multi--resolve-fileA (fileB revA revB)
+    "Find the name of FILEB in REVA, accounting for renames."
+    (or (car (member fileB (magit-revision-files revA)))
+        (cdr (assoc fileB (magit-renamed-files revB revA)))))
+
+  (defun nik/ediff-multi--show-current ()
+    "Show ediff for the current file in the multi-ediff session."
+    (unless nik/ediff-multi--active
+      (user-error "No active multi-ediff session"))
+    (let* ((fileB (nth nik/ediff-multi--index nik/ediff-multi--files))
+           (revA nik/ediff-multi--revA)
+           (revB nik/ediff-multi--revB)
+           (fileA (nik/ediff-multi--resolve-fileA fileB revA revB)))
+      (message "Ediff multi: [%d/%d] %s"
+               (1+ nik/ediff-multi--index)
+               (length nik/ediff-multi--files)
+               fileB)
+      (magit-ediff-buffers
+       (if fileA
+           (magit-ediff--find-file revA fileA)
+         (generate-new-buffer (format "*empty (%s)*" fileB)))
+       (magit-ediff--find-file revB fileB)
+       nil nil
+       #'nik/ediff-multi--advance)))
+
+  (defun nik/ediff-multi--advance ()
+    "Advance to the next file or finish the multi-ediff session."
+    (cl-incf nik/ediff-multi--index)
+    (if (and nik/ediff-multi--active
+             (< nik/ediff-multi--index (length nik/ediff-multi--files)))
+        (run-at-time 0 nil #'nik/ediff-multi--show-current)
+      (setq nik/ediff-multi--active nil)
+      (message "Ediff multi: done")))
+
+  (defun nik/magit-ediff-show-commit-all-stop ()
+    "Stop the multi-ediff session after quitting the current file."
+    (interactive)
+    (setq nik/ediff-multi--active nil)
+    (message "Ediff multi: will stop after current file"))
   )
 
 (use-package git-link
