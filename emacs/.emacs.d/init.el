@@ -59,7 +59,8 @@
 This is used by `use-package-jump-to-package-form' and
 `use-package-enable-imenu-support'."
   :type 'sexp
-  :group 'use-package)
+  :group 'use-package
+  :version "29.1")
 (straight-use-package 'use-package)
 
 ;; Inspired by github.com/raxod502/radian
@@ -807,15 +808,21 @@ run the attached function (if exists) and enable lsp"
                                (let (case-fold-search)
                                  ;; Case insensitive if there are no uppercase letters
                                  (not (string-match-p "[[:upper:]]" arg)))))))
-          (if (or (member "-F" flags) (member "--fixed-strings" flags))
-              (cons (append cmd (list arg) opts paths)
-                    (apply-partially #'consult--highlight-regexps
-                                     (list (regexp-quote arg)) ignore-case))
-            (pcase-let ((`(,re . ,hl) (funcall consult--regexp-compiler arg 'pcre ignore-case)))
-              (when re
-                (cons (append cmd
-                              (mapcan (lambda (x) `("--and" (el-patch-swap ,x ,(concat default-directory ".*" x)))) re)
-                              opts
+          (if (or (member "-F" flags) (member "--fixed-strings" flags)
+                  (member "-g" flags) (member "--glob" flags))
+              (when-let* ((args (consult--split-escaped arg)))
+                (cons (append cmd opts
+                              (mapcan (lambda (x) `("--and" (el-patch-swap ,x ,(concat default-directory ".*" x))))
+                                      (if (or (member "-g" flags) (member "--glob" flags))
+                                          (mapcar (lambda (x) (concat "**/" x)) args)
+                                        args))
+                              (mapcan (lambda (x) `("--search-path" ,x)) paths))
+                      (apply-partially #'consult--highlight-regexps
+                                       (mapcar #'regexp-quote args) ignore-case)))
+            (pcase-let ((`(,re . ,hl) (consult--compile-regexp arg 'pcre ignore-case)))
+              (when (or re opts) ;; Either option or regexp must be provided
+                (cons (append cmd opts
+                              (mapcan (lambda (x) `("--and" ,x)) re)
                               (mapcan (lambda (x) `("--search-path" ,x)) paths))
                       hl))))))))
 
