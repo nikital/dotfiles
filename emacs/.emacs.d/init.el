@@ -1126,8 +1126,7 @@ directory as a fall back."
   (defun nik/get-rust-edition ()
     (when-let*
         ((cratedir
-          (locate-dominating-file default-directory
-                                  "Cargo.toml"))
+          (locate-dominating-file default-directory "Cargo.toml"))
          (manifest-path
           (expand-file-name "Cargo.toml" cratedir)))
       (with-temp-buffer
@@ -1135,17 +1134,14 @@ directory as a fall back."
                (process-file
                 rust-cargo-bin nil (list (current-buffer) nil) nil
                 "metadata" "--format-version" "1" "--no-deps" "--frozen")))
-          (when (/= ret 0)
-            (error "Cargo metadata returned %s: %s"
-                   retcode (buffer-string)))
-          (goto-char 0)
-          (let ((metadata (json-parse-buffer
-                           :object-type 'alist
-                           :array-type 'list)))
-            (cdr (assq 'edition
-                       (--first (string= (cdr (assq 'manifest_path it)) manifest-path)
-                                (cdr (assq 'packages metadata)))))))))
-    )
+          (when (= ret 0)
+            (goto-char (point-min))
+            (let ((metadata (json-parse-buffer
+                             :object-type 'alist
+                             :array-type 'list)))
+              (cdr (assq 'edition
+                         (--first (string= (cdr (assq 'manifest_path it)) manifest-path)
+                                  (cdr (assq 'packages metadata)))))))))))
 
   (add-hook 'rust-mode-hook
             (lambda ()
