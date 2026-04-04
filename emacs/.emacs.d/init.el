@@ -240,6 +240,7 @@ NAME and ARGS are as in `use-package'."
   :after evil
   :config
   (delete 'diff-mode evil-collection-mode-list)
+  (delete 'markdown-mode evil-collection-mode-list)
   (evil-collection-init))
 
 (use-package undo-tree
@@ -1101,12 +1102,7 @@ directory as a fall back."
   (setq compile-multi-default-directory (lambda () compilation-directory))
   )
 
-(use-package markdown-mode
-  :general
-  (:keymaps 'markdown-mode-map
-            :states 'normal
-            "RET" nil)
-  )
+(use-package markdown-mode)
 
 (use-package yaml-mode)
 
