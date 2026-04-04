@@ -361,48 +361,64 @@ NAME and ARGS are as in `use-package'."
             "'" #'lsp-find-type-definition
             )
   :init
+  (setq lsp-enable-suggest-server-download nil)
+  ;; Enable for the following modes
+  (setq nik/lsp-enable-for-modes '(c-mode
+                                   c++-mode
+                                   objc-mode
+                                   rust-mode
+                                   (python-mode (lambda () (require 'lsp-pyright)))
+                                   typescript-mode
+                                   yaml-mode))
+  (setq nik/lsp-allowed nil)
+
+  (defun nik/maybe-enable-lsp (lsp-config)
+    "If mode in LSP-CONFIG is equal to the current major-mode,
+run the attached function (if exists) and enable lsp"
+    (when nik/lsp-allowed
+      (pcase lsp-config
+        (`(,(pred (equal major-mode)) ,func) (funcall func) (lsp) t)
+        ((pred (equal major-mode)) (lsp) t))))
+
+  (setq lsp-enabled-clients '(nik/nothing))
+
+  (progn
+    (setq lsp-clients-clangd-executable "~/.config/nbox/bin/nbox-clangd")
+    (setq lsp-clients-clangd-args '("--header-insertion-decorators=0"
+                                    "--completion-style=detailed"))
+    (add-to-list 'lsp-enabled-clients 'clangd)
+    )
+
+  (progn
+    (setq lsp-pyright-langserver-command "~/.config/nbox/bin/nbox-pyright")
+    (add-to-list 'lsp-enabled-clients 'pyright)
+    )
+
+  (progn
+    (setq lsp-rust-analyzer-server-command '("~/.config/nbox/bin/nbox-rust-analyzer"))
+    (add-to-list 'lsp-enabled-clients 'rust-analyzer)
+    )
+
+  ;; Don't pass processId in initialize requests, some LSP kill themselves when
+  ;; run in another PID namespace.
+  (advice-add #'lsp-request-async
+              :filter-args
+              (lambda (args)
+                (pcase args
+                  (`("initialize" ,params . ,rest)
+                   `("initialize" ,(plist-put params :processId nil) . ,rest))
+                  (_ args))))
+
+  ;; Kill language server after the last associated buffer was closed
+  (setq lsp-keep-workspace-alive nil)
   ;; Set a high read output max value for handling large language server responses
   (setq read-process-output-max (* 10 1024 1024))
   ;; Set a short delay for refreshing state after moving the cursor
   (setq lsp-idle-delay 0.2)
   ;; Enable which-key help on the lsp prefix key
   (setq lsp-keymap-prefix "C-c l")
-  (setq lsp-enable-suggest-server-download nil)
-  ;; Enable for the following modes
-  (setq nik/lsp-enable-for-modes '(c-mode
-                                   c++-mode
-                                   objc-mode
-                                   haskell-mode
-                                   haskell-literate-mode
-                                   go-mode
-                                   rust-mode
-                                   ;; csharp-mode
-                                   ;; java-mode
-                                   (python-mode (lambda () (require 'lsp-pyright)))
-                                   js2-mode
-                                   typescript-mode
-                                   svelte-mode
-                                   groovy-mode
-                                   web-mode
-                                   json-mode
-                                   yaml-mode
-                                   dockerfile-mode
-                                   terraform-mode
-                                   cmake-mode
-                                   sh-mode))
-
-  (defun nik/maybe-enable-lsp (lsp-config)
-    "If mode in LSP-CONFIG is equal to the current major-mode,
-run the attached function (if exists) and enable lsp"
-    (pcase lsp-config
-      (`(,(pred (equal major-mode)) ,func) (funcall func) (lsp) t)
-      ((pred (equal major-mode)) (lsp) t)))
-
-  ;; Kill language server after the last associated buffer was closed
-  (setq lsp-keep-workspace-alive nil)
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-session-file (nik/cache "lsp-session-v1"))
-  (setq lsp-eslint-library-choices-file (nik/cache ".lsp-eslint-choices"))
   ;; Force lsp mode to forget the workspace folders for multi root servers
   ;; so the folders are added on demand
   ;; https://emacs-lsp.github.io/lsp-mode/page/faq/#how-do-i-force-lsp-mode-to-forget-the-workspace-folders-for-multi-root-servers-so-the-workspace-folders-are-added-on-demand
@@ -412,9 +428,6 @@ run the attached function (if exists) and enable lsp"
                  '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
   ;; Enable semantic token highlighting
   (setq lsp-semantic-tokens-enable t)
-  ;; Set clangd default parameters
-  (setq lsp-clients-clangd-args '("--header-insertion-decorators=0"
-                                  "--completion-style=detailed"))
   (setq lsp-auto-execute-action nil)
 
   (advice-add
@@ -1119,6 +1132,8 @@ directory as a fall back."
   (:keymaps 'rust-mode-map
             "C-c C-f" nil
             )
+  :init
+  (setq rust-cargo-bin "~/.config/nbox/bin/nbox-cargo")
   :config
   (setq lsp-rust-analyzer-lens-enable nil)
 
