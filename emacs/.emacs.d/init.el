@@ -1143,6 +1143,7 @@ directory as a fall back."
 (use-package jenkinsfile-mode)
 
 (use-package rust-mode
+  :after dash
   :general
   (:keymaps 'rust-mode-map
             "C-c C-f" nil
