@@ -406,13 +406,11 @@ run the attached function (if exists) and enable lsp"
 
   ;; Don't pass processId in initialize requests, some LSP kill themselves when
   ;; run in another PID namespace.
-  (advice-add #'lsp-request-async
-              :filter-args
-              (lambda (args)
-                (pcase args
-                  (`("initialize" ,params . ,rest)
-                   `("initialize" ,(plist-put params :processId nil) . ,rest))
-                  (_ args))))
+  (define-advice lsp-request-async (:filter-args (args) nik/strip-process-id)
+    (pcase args
+      (`("initialize" ,params . ,rest)
+       `("initialize" ,(plist-put params :processId nil) . ,rest))
+      (_ args)))
 
   ;; Kill language server after the last associated buffer was closed
   (setq lsp-keep-workspace-alive nil)
@@ -427,20 +425,16 @@ run the attached function (if exists) and enable lsp"
   ;; Force lsp mode to forget the workspace folders for multi root servers
   ;; so the folders are added on demand
   ;; https://emacs-lsp.github.io/lsp-mode/page/faq/#how-do-i-force-lsp-mode-to-forget-the-workspace-folders-for-multi-root-servers-so-the-workspace-folders-are-added-on-demand
-  (advice-add 'lsp :before
-              (lambda (&rest _args)
-                (eval
-                 '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
+  (define-advice lsp (:before (&rest _args) nik/forget-workspace-folders)
+    (eval
+     '(setf (lsp-session-server-id->folders (lsp-session)) (ht))))
   ;; Enable semantic token highlighting
   (setq lsp-semantic-tokens-enable t)
   (setq lsp-auto-execute-action nil)
 
-  (advice-add
-   #'lsp-rust-analyzer--make-init-options
-   :filter-return
-   (lambda (init-options)
-     (nik/plist-set-path
-      init-options '(:hover :memoryLayout :enable) :json-false)))
+  (define-advice lsp-rust-analyzer--make-init-options (:filter-return (init-options) nik/disable-memory-layout)
+    (nik/plist-set-path
+     init-options '(:hover :memoryLayout :enable) :json-false))
 
   :hook
   ;; Postpone lsp load for after dir local vars are read
