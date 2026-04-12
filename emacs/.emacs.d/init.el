@@ -906,6 +906,11 @@ directory as a fall back."
 (use-feature files
   :init
   (defvar nik/external-local-variables '())
+  (defvar nik/tagged-dirs
+    `(
+      (,(expand-file-name "~/ai/") . "<AI>")
+      ))
+
 
   :general
   (:keymaps 'nik/spc
@@ -937,6 +942,16 @@ directory as a fall back."
       (dolist (buffer (buffer-list))
         (with-current-buffer buffer
           (hack-local-variables)))))
+
+  (defun nik/tag-buffer-by-directory ()
+    (when buffer-file-name
+      (pcase-dolist (`(,prefix . ,tag) nik/tagged-dirs)
+        (when (string-prefix-p prefix buffer-file-name)
+          (rename-buffer
+           (concat (file-name-nondirectory buffer-file-name) tag)
+           t)))))
+
+  (add-hook 'find-file-hook #'nik/tag-buffer-by-directory)
   )
 
 (use-feature tab-bar
