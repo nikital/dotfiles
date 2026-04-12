@@ -371,6 +371,7 @@ NAME and ARGS are as in `use-package'."
                                    typescript-mode
                                    yaml-mode))
   (setq nik/lsp-allowed nil)
+  (setq nik/lsp-nbox-enabled t)
 
   (defun nik/maybe-enable-lsp (lsp-config)
     "If mode in LSP-CONFIG is equal to the current major-mode,
@@ -390,7 +391,11 @@ run the attached function (if exists) and enable lsp"
     )
 
   (progn
-    (setq lsp-pyright-langserver-command "~/.config/nbox/bin/nbox-pyright")
+    (setq lsp-pyright-multi-root nil)
+    (define-advice lsp-package-path (:around (orig-fn package) nik/nbox-pyright-path)
+      (if (and (eq package 'pyright) nik/lsp-nbox-enabled)
+          "~/.config/nbox/bin/nbox-pyright-langserver"
+        (funcall orig-fn package)))
     (add-to-list 'lsp-enabled-clients 'pyright)
     )
 
