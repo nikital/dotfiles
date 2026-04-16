@@ -1192,7 +1192,7 @@ directory as a fall back."
 
 ;;; frame config
 
-(add-to-list 'default-frame-alist '(font . "M PLUS 1 Code-11:weight=normal"))
+(add-to-list 'default-frame-alist '(font . "Pragmasevka-12"))
 (add-to-list 'default-frame-alist '(undecorated . t))
 (setq frame-title-format
       '(multiple-frames
