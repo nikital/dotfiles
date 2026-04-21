@@ -582,8 +582,8 @@ run the attached function (if exists) and enable lsp"
 
   (defun nik/magit-ediff-show-commit-all (commit)
     "Ediff all files changed in COMMIT, one by one.
-Quit each ediff session normally to advance to the next file.
-Use `nik/magit-ediff-show-commit-all-stop' to abort early."
+    Quit each ediff session normally to advance to the next file.
+    Use `nik/magit-ediff-show-commit-all-stop' to abort early."
     (interactive (list (magit-read-branch-or-commit "Revision")))
     (let* ((revA (concat commit "^"))
            (revB commit)
