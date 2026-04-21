@@ -370,8 +370,8 @@ NAME and ARGS are as in `use-package'."
                                    (python-mode (lambda () (require 'lsp-pyright)))
                                    typescript-mode
                                    yaml-mode))
-  (setq nik/lsp-allowed nil)
-  (setq nik/lsp-nbox-enabled t)
+  (defvar nik/lsp-allowed nil)
+  (defvar nik/lsp-nbox-enabled t)
 
   (defun nik/maybe-enable-lsp (lsp-config)
     "If mode in LSP-CONFIG is equal to the current major-mode,
