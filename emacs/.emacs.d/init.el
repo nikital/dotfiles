@@ -333,6 +333,15 @@ NAME and ARGS are as in `use-package'."
    (last (alist-get 'rustfmt apheleia-formatters))
    '("--edition" (or (bound-and-true-p rust-edition) "2024")))
 
+  (defvar nik/apheleia-nbox-enabled t)
+  (define-advice apheleia--run-formatter-process (:filter-args (args) nik/apheleia-run)
+    (pcase-let ((`(,command . ,args-tail) args)
+                (`(,cmd-head . ,cmd-tail) (car args)))
+      (if (and nik/apheleia-nbox-enabled
+               (equal cmd-head "apheleia-npx"))
+          (cons (cons "nbox" cmd-tail) args-tail)
+        args)))
+
   (apheleia-global-mode +1))
 
 (defun nik/plist-set-path (plist props val)
