@@ -404,6 +404,17 @@ run the attached function (if exists) and enable lsp"
     (add-to-list 'lsp-enabled-clients 'rust-analyzer)
     )
 
+  (progn
+    (define-advice lsp-package-path (:around (orig-fn package) nik/nbox-ts-ls-path)
+      (or
+       (when nik/lsp-nbox-enabled
+         (pcase package
+           ('typescript-language-server "~/.config/nbox/bin/nbox-typescript-language-server")
+           ('typescript "~/.config/nbox/bin/nbox-typescript")))
+       (funcall orig-fn package)))
+    (add-to-list 'lsp-enabled-clients 'ts-ls)
+    )
+
   ;; Don't pass processId in initialize requests, some LSP kill themselves when
   ;; run in another PID namespace.
   (define-advice lsp-request-async (:filter-args (args) nik/strip-process-id)
