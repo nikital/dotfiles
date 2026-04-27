@@ -1005,6 +1005,10 @@ directory as a fall back."
   :config
   (setq Man-notify-method 'aggressive))
 
+(use-feature ispell
+  :config
+  (setq ispell-dictionary "en_US"))
+
 (use-package org
   :general
   (:keymaps 'nik/spc
