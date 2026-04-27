@@ -1,0 +1,10 @@
+ARG USER
+FROM localhost/fedora-claude:nbox-${USER}
+ARG USER
+ARG HOME
+
+USER root
+RUN dnf install -y npm uv cargo clangd && \
+    dnf clean all
+RUN npm install -g typescript typescript-language-server prettier pyright
+USER ${USER}
