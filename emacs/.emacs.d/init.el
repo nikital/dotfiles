@@ -335,12 +335,16 @@ NAME and ARGS are as in `use-package'."
 
   (defvar nik/apheleia-nbox-enabled t)
   (define-advice apheleia--run-formatter-process (:filter-args (args) nik/apheleia-run)
-    (pcase-let ((`(,command . ,args-tail) args)
-                (`(,cmd-head . ,cmd-tail) (car args)))
-      (if (and nik/apheleia-nbox-enabled
-               (equal cmd-head "apheleia-npx"))
-          (cons (cons "nbox" cmd-tail) args-tail)
-        args)))
+    (if (not nik/apheleia-nbox-enabled)
+        args
+      (pcase-let ((`(,command . ,args-tail) args)
+                  (`(,command-head . ,command-tail) (car args)))
+        (pcase command-head
+          ;; Replace
+          ("apheleia-npx" (cons (cons "nbox" command-tail) args-tail))
+          ;; Prepend
+          (_ (cons (cons "nbox" command) args-tail)))
+        )))
 
   (apheleia-global-mode +1))
 
