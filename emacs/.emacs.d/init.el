@@ -1227,7 +1227,7 @@ directory as a fall back."
 
 ;;; frame config
 
-(add-to-list 'default-frame-alist '(font . "Pragmasevka-12"))
+(add-to-list 'default-frame-alist '(font . "PragmataPro-12"))
 (add-to-list 'default-frame-alist '(undecorated . t))
 (setq frame-title-format
       '(multiple-frames
