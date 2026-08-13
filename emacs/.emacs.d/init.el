@@ -383,7 +383,8 @@ NAME and ARGS are as in `use-package'."
                                    rust-mode
                                    (python-mode (lambda () (require 'lsp-pyright)))
                                    typescript-mode
-                                   yaml-mode))
+                                   yaml-mode
+                                   go-mode))
   (defvar nik/lsp-allowed nil)
   (defvar nik/lsp-nbox-enabled t)
 
@@ -427,6 +428,15 @@ run the attached function (if exists) and enable lsp"
            ('typescript "~/.config/nbox/bin/nbox-typescript")))
        (funcall orig-fn package)))
     (add-to-list 'lsp-enabled-clients 'ts-ls)
+    )
+
+  (progn
+    (defun nik/lsp-go-server-wrapper-function (args)
+      (if nik/lsp-nbox-enabled
+          (error "nbox support not integrated yet")
+        args))
+    (setq lsp-go-server-wrapper-function #'nik/lsp-go-server-wrapper-function)
+    (add-to-list 'lsp-enabled-clients 'gopls)
     )
 
   ;; Don't pass processId in initialize requests, some LSP kill themselves when
@@ -1213,6 +1223,8 @@ directory as a fall back."
               ;; For apheleia
               (setq-local rust-edition (nik/get-rust-edition))))
   )
+
+(use-package go-mode)
 
 (use-package ahk-mode)
 

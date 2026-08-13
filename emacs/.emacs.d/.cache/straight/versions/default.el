@@ -8,6 +8,7 @@
  ("company-statistics" . "120e982f47e01945c044e0762ba376741c41b76c")
  ("compat" . "6c11d1ce2c6cae75cd281d142ee7edd2781cf112")
  ("compile-multi" . "d111f99303ceb0354e37e2a5cd7f504d19f105f7")
+ ("cond-let" . "8bf87d45e169ebc091103b2aae325aece3aa804d")
  ("consult" . "d1d39d52151a10f7ca29aa291886e99534cc94db")
  ("consult-lsp" . "d11102c9db33c4ca7817296a2edafc3e26a61117")
  ("dash.el" . "d3a84021dbe48dba63b52ef7665651e0cf02e915")
@@ -33,6 +34,7 @@
  ("general.el" . "a48768f85a655fe77b5f45c2880b420da1b1b9c3")
  ("git-link" . "d9b375f79e6071a9926bf73bba64111adfc93bf5")
  ("gnu-elpa-mirror" . "211fb40463633dd462775f5add7e83e407eadbfc")
+ ("go-mode.el" . "3a71d28ab47df685e54ca6046a7a3dd3e28b682c")
  ("goto-chg" . "72f556524b88e9d30dc7fc5b0dc32078c166fda7")
  ("groovy-emacs-modes" . "7b8520b2e2d3ab1d62b35c426e17ac25ed0120bb")
  ("helpful" . "03756fa6ad4dcca5e0920622b1ee3f70abfc4e39")
@@ -42,7 +44,6 @@
  ("json-mode" . "466d5b563721bbeffac3f610aefaac15a39d90a9")
  ("json-snatcher" . "b28d1c0670636da6db508d03872d96ffddbc10f2")
  ("llama" . "de61773fc378d40f478f8daf67543a51889ecded")
- ("lsp-haskell" . "871a0ef2e98b3a749d0b69d958698000ca5640d3")
  ("lsp-mode" . "3e55ca80712d66f2fc38bad514b5e2521751433d")
  ("lsp-pyright" . "21b8f487855feb08f7df669b8884fbd5861dca25")
  ("lsp-ui" . "ff349658ed69086bd18c336c8a071ba15f7fd574")
@@ -75,4 +76,4 @@
  ("xref" . "7afae701da9c4fe7b5a6ffeff33a4a4f14a12aa2")
  ("yaml-mode" . "d91f878729312a6beed77e6637c60497c5786efa")
  ("yasnippet" . "c1e6ff23e9af16b856c88dfaab9d3ad7b746ad37"))
-:gamma
+:epsilon
