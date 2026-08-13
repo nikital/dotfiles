@@ -540,7 +540,7 @@ run the attached function (if exists) and enable lsp"
 
   (defun nik/magit-branch-cr (remote-branch)
     (interactive (list (magit-read-other-branch-or-commit "Create CR branch from")))
-    (let* ((base-name (replace-regexp-in-string "^origin/" "" remote-branch))
+    (let* ((base-name (replace-regexp-in-string "^\\(origin\\|ai\\)/" "" remote-branch))
            (branches (magit-list-local-branch-names))
            (cr-numbers (seq-keep (lambda (branch)
                                    (when (string-match (format "^%s-cr\\([0-9]+\\)$" (regexp-quote base-name)) branch)
