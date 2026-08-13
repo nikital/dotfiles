@@ -535,7 +535,8 @@ run the attached function (if exists) and enable lsp"
 	magit-bind-magit-project-status nil
         magit-diff-extra-stat-arguments '("--stat-width" "1000")
         magit-log-margin-show-committer-date t
-        magit-branch-adjust-remote-upstream-alist '(("origin/main" . "")))
+        magit-branch-adjust-remote-upstream-alist '(("origin/main" . ""))
+        magit-commit-squash-confirm nil)
   (remove-hook 'magit-blame-goto-chunk-hook #'magit-blame-maybe-update-revision-buffer)
 
   (defun nik/magit-branch-cr (remote-branch)
