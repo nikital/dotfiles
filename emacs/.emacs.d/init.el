@@ -597,6 +597,85 @@ run the attached function (if exists) and enable lsp"
     '("c" "Compare CR branches" nik/magit-tbdiff-cr))
   )
 
+;;; review-requests
+
+(defvar nik/review-requests-script "~/.emacs.d/bin/review-requests.py")
+
+(defvar nik/review-requests-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "q") #'nik/review-requests-quit)
+    (define-key map (kbd "g") #'nik/review-requests)
+    map))
+
+(define-minor-mode nik/review-requests-mode
+  "Review Requests"
+  :lighter " PRs"
+  :keymap nik/review-requests-mode-map
+  (when nik/review-requests-mode
+    (read-only-mode 1)))
+
+(with-eval-after-load 'evil
+  (evil-define-key '(normal motion) nik/review-requests-mode-map
+    (kbd "q") #'nik/review-requests-quit
+    (kbd "g r") #'nik/review-requests))
+
+(with-eval-after-load 'org
+  (defun nik/org-copy (text &optional _arg)
+    (kill-new text)
+    (message "Copied: %s" text))
+
+  ;; [[copy:foo][foo]] shows as `foo' and copies it when clicked
+  (org-link-set-parameters "copy"
+                           :follow #'nik/org-copy
+                           :face 'org-verbatim
+                           :help-echo "Click to copy"))
+
+(defun nik/review-requests-quit ()
+  (interactive)
+  (quit-window t))
+
+(defun nik/review-requests--show (output)
+  (let ((buf (get-buffer-create "*review-requests*")))
+    (with-current-buffer buf
+      (let ((inhibit-read-only t))
+        (erase-buffer)
+        (insert output)
+        (goto-char (point-min)))
+      ;; Re-run org-mode so the #+TODO line is picked up and drawers fold.
+      (org-mode)
+      (if (fboundp 'org-fold-show-all)
+          (org-fold-show-all '(headings))
+        (org-show-all '(headings)))
+      (org-cycle-hide-drawers 'all)
+      (nik/review-requests-mode 1)
+      (set-buffer-modified-p nil))
+    (pop-to-buffer buf)))
+
+(defun nik/review-requests ()
+  (interactive)
+  (let ((out (generate-new-buffer " *review-requests-out*")))
+    (message "Fetching PRs from GitHub...")
+    (make-process
+     :name "review-requests"
+     :buffer out
+     :command (list nik/review-requests-script)
+     :noquery t
+     :connection-type 'pipe
+     :stderr nil
+     :sentinel
+     (lambda (proc _event)
+       (when (memq (process-status proc) '(exit signal))
+         (let ((output (with-current-buffer out (buffer-string))))
+           (kill-buffer out)
+           (if (zerop (process-exit-status proc))
+               (progn (message "") (nik/review-requests--show output))
+             (message "review-requests failed (%d): %s"
+                      (process-exit-status proc) (string-trim output)))))))))
+
+(general-define-key
+ :keymaps 'nik/spc
+ "g h" #'nik/review-requests)
+
 (use-feature ediff
   :config
   ;; Open ediff window in the current frame
