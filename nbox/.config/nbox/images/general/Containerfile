@@ -1,10 +1,12 @@
-ARG USER
-FROM localhost/fedora-claude:nbox-${USER}
+FROM localhost/fedora-toolbox:nbox
 ARG USER
 ARG HOME
 
 USER root
-RUN dnf install -y npm uv clangd cargo rust-analyzer rustfmt && \
+RUN dnf install -y npm uv clangd cargo rust-analyzer rustfmt ripgrep fd-find && \
     dnf clean all
-RUN npm install -g typescript typescript-language-server prettier pyright
+RUN npm install -g typescript typescript-language-server prettier pyright @earendil-works/pi-coding-agent
 USER ${USER}
+ENV PATH="${HOME}/.local/bin:${PATH}"
+RUN curl -fsSL https://claude.ai/install.sh | bash
+COPY ./settings.json $HOME/.claude/settings.json
