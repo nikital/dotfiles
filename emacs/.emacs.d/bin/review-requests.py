@@ -16,7 +16,8 @@ SECTIONS = [
      "is:pr is:open archived:false user-review-requested:@me"),
     ("Reviewed by me, waiting on others", "WAITING",
      "is:pr is:open archived:false reviewed-by:@me -user-review-requested:@me -author:@me"),
-    ("My open PRs", "WAITING",
+    # None: keyword is picked per PR by my_pr_keyword().
+    ("My open PRs", None,
      "is:pr is:open archived:false author:@me"),
 ]
 
@@ -30,6 +31,8 @@ query($q: String!, $me: String!, $endCursor: String) {
         repository { nameWithOwner }
         author { login }
         reviews(author: $me, last: 1) { nodes { state } }
+        allReviews: reviews { totalCount }
+        reviewRequests { totalCount }
       }
     }
   }
@@ -50,6 +53,8 @@ class PullRequest:
     author: str
     my_review: str | None        # APPROVED / CHANGES_REQUESTED / COMMENTED / PENDING
     review_decision: str | None  # APPROVED / CHANGES_REQUESTED / REVIEW_REQUIRED
+    review_count: int
+    review_requests: int         # reviewers still pending
 
 
 def gh(*args: str) -> str:
@@ -81,6 +86,8 @@ def parse(node: dict) -> PullRequest:
         author=(node.get("author") or {}).get("login", "ghost"),
         my_review=reviews[0]["state"] if reviews else None,
         review_decision=node.get("reviewDecision"),
+        review_count=node["allReviews"]["totalCount"],
+        review_requests=node["reviewRequests"]["totalCount"],
     )
 
 # ---------------------------------------------------------------------------
@@ -108,9 +115,14 @@ def entry(pr: PullRequest, keyword: str) -> str:
     return "\n".join(lines)
 
 
-def section(title: str, keyword: str, prs: list[PullRequest]) -> str:
+def my_pr_keyword(pr: PullRequest) -> str:
+    # Re-requesting a review puts the reviewer back into reviewRequests.
+    return "TODO" if pr.review_count and not pr.review_requests else "WAITING"
+
+
+def section(title: str, keyword: str | None, prs: list[PullRequest]) -> str:
     heading = f"* {title} ({len(prs)})"
-    body = "\n".join(entry(pr, keyword) for pr in prs) if prs else "/none/"
+    body = "\n".join(entry(pr, keyword or my_pr_keyword(pr)) for pr in prs) if prs else "/none/"
     return heading + "\n" + body
 
 # ---------------------------------------------------------------------------
