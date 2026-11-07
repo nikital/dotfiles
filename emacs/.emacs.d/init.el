@@ -676,6 +676,64 @@ run the attached function (if exists) and enable lsp"
  :keymaps 'nik/spc
  "g h" #'nik/review-requests)
 
+;;; local-review
+
+(defun nik/local-review--magit-location (beg)
+  "Return (FILE LINE REV) for the magit diff at BEG."
+  (save-excursion
+    (goto-char beg)
+    ;; No file at point (e.g. the commit message): FILE and LINE are nil.
+    (list (magit-file-at-point)
+          (and (magit-section-match 'hunk)
+               (ignore-errors (magit-diff-hunk-line (magit-current-section) nil)))
+          (if (derived-mode-p 'magit-revision-mode)
+              (magit-rev-format "%h %s" magit-buffer-revision)
+            (symbol-name (or (magit-diff-type) 'worktree))))))
+
+(defun nik/local-review-capture ()
+  "Capture the selected lines (or the current line) as a review comment."
+  (interactive)
+  (let* ((root (or (when-let ((project (project-current)))
+                     (project-root project))
+                   default-directory))
+         (beg (save-excursion (goto-char (or (use-region-beginning) (point)))
+                              (line-beginning-position)))
+         ;; A region ending at column 0 doesn't include that line.
+         (end (save-excursion (goto-char (or (use-region-end) (point)))
+                              (if (and (bolp) (> (point) beg)) (1- (point)) (line-end-position))))
+         (magit (derived-mode-p 'magit-mode))
+         (loc (if magit
+                  (nik/local-review--magit-location beg)
+                (list (file-relative-name
+                       (or buffer-file-name (user-error "Buffer has no file"))
+                       root)
+                      (line-number-at-pos beg)
+                      nil)))
+         (lang (if magit "diff"
+                 (string-remove-suffix "-mode" (symbol-name major-mode))))
+         ;; Pass the code via %i so org-capture doesn't expand %-escapes in it.
+         (org-capture-initial
+          (org-escape-code-in-string (buffer-substring-no-properties beg end)))
+         (org-capture-templates
+          `(("r" "review" entry (file ,(expand-file-name "local-review.org" root))
+             ,(concat "* TODO %?\n"
+                      (string-join
+                       (delq nil (list (and (nth 0 loc)
+                                            (format "[[file:%s%s]]" (nth 0 loc)
+                                                    (if (nth 1 loc) (format "::%d" (nth 1 loc)) "")))
+                                       (and (nth 2 loc) (format "@ %s" (nth 2 loc)))))
+                       " ")
+                      (format "\n#+begin_src %s\n%%i\n#+end_src" lang))
+             :empty-lines 1))))
+    ;; Otherwise the selection is still active when the capture closes.
+    (deactivate-mark)
+    (org-capture nil "r")
+    (when (bound-and-true-p evil-local-mode) (evil-insert-state))))
+
+(general-define-key
+ :keymaps 'nik/spc
+ "r" #'nik/local-review-capture)
+
 (use-feature ediff
   :config
   ;; Open ediff window in the current frame
