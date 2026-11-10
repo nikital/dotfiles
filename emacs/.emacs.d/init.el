@@ -687,12 +687,34 @@ run the attached function (if exists) and enable lsp"
           (and (magit-section-match 'hunk)
                (ignore-errors (magit-diff-hunk-line (magit-current-section) nil)))
           (if (derived-mode-p 'magit-revision-mode)
-              (magit-rev-format "%h %s" magit-buffer-revision)
+              (nik/local-review--rev-label magit-buffer-revision)
             (symbol-name (or (magit-diff-type) 'worktree))))))
+
+(defun nik/local-review--rev-label (rev)
+  "Describe REV (a commit, \"{index}\" or \"{worktree}\") for the review entry."
+  (pcase rev
+    ("{index}" "index")
+    ("{worktree}" "worktree")
+    (_ (or (magit-rev-format "%h %s" rev) rev))))
+
+(defun nik/local-review--file-location (root beg)
+  "Return (FILE LINE REV) for the file buffer at BEG, relative to ROOT.
+Also handles magit blob buffers (e.g. the old side of a magit ediff),
+which visit a file at a revision and have no `buffer-file-name'."
+  (let ((rev (and (not buffer-file-name)
+                  (bound-and-true-p magit-buffer-revision))))
+    (list (file-relative-name
+           (or buffer-file-name
+               (bound-and-true-p magit-buffer-file-name)
+               (user-error "Buffer has no file"))
+           root)
+          (line-number-at-pos beg)
+          (and rev (nik/local-review--rev-label rev)))))
 
 (defun nik/local-review-capture ()
   "Capture the selected lines (or the current line) as a review comment."
   (interactive)
+  (require 'org-capture)
   (let* ((root (or (when-let ((project (project-current)))
                      (project-root project))
                    default-directory))
@@ -704,11 +726,7 @@ run the attached function (if exists) and enable lsp"
          (magit (derived-mode-p 'magit-mode))
          (loc (if magit
                   (nik/local-review--magit-location beg)
-                (list (file-relative-name
-                       (or buffer-file-name (user-error "Buffer has no file"))
-                       root)
-                      (line-number-at-pos beg)
-                      nil)))
+                (nik/local-review--file-location root beg)))
          (lang (if magit "diff"
                  (string-remove-suffix "-mode" (symbol-name major-mode))))
          ;; Pass the code via %i so org-capture doesn't expand %-escapes in it.
