@@ -1,10 +1,13 @@
+
 ##### COMPLETION #####
 
 autoload -U compinit
 compinit
 # completion menu style
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
-    'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list \
+       'm:{a-z}={A-Za-z}' \
+       '+r:|[._-]=* r:|=*' \
+       '+l:|=* r:|=*'
 zstyle ':completion:*' menu select
 
 ##### ZSH OPTIONS #####
