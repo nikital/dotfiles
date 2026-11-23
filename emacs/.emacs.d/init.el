@@ -1416,6 +1416,7 @@ directory as a fall back."
 
 ;; Don't split vertically
 (setq split-height-threshold nil)
+(setq split-width-threshold 200)
 
 (setq use-short-answers t)
 
